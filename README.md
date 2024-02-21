@@ -1,32 +1,338 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Task Master
 
-Welcome,
+## About
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+**Task Master, a To-Do-List**
 
-## Reminders
+![screenshot](docs/Mockup.png)  
+[**Live site**](https://xx.com/)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## CONTENTS
 
-## Creating the Heroku app
+* [Introduction](#introduction)
+  *[Demo](#demo)
+  *[Who is the Application For?](#who-is-the-application-for]
+  *[The problem it solves and its intended use](#the-problem-it-solves-and-its-intended-use)
+* [Objectives](#objectives)
+  * [Developer's goal](#developers-goal)
+  * [User's goal](#users-goal)
+* [Features](#features)
+  * [Existing features](#existing-features)
+  * [Future features](#future-features)
+* [Technologies used](#technologies-used)
+  * [Language](#language)
+  * [Toolchain](#tools)
+* [Data Model](#data-model)
+  * [Flowchart](#flowchart)
+  * [Classes & Functions](#classes--functions)
+  * [Imports](#imports)
+* [Testing](#testing)
+* [Deployment](#deployment)
+  * [Installation](#installation)
+  * [Heroku Deployment](#heroku-deployment)
+    * [Essential when creating the Heroku app](#Essentials)
+  * [Local Deployment](#local-deployment)
+  * [Cloning](#cloning)
+  * [Forking](#forking)
+  * [Constraints](#constraints)
+* [Credits](#credits)
+   * [Content](#content)
+   * [Media](#media)
+   * [Acknowledgements](#acknowledgements)
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Introduction
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### Demo
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+* [Live Site on Heroku](https://xx.com/)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Who is the Application For?
 
-Connect your GitHub repository and deploy as normal.
+Task Master is a user-friendly to-do list app designed for casual users, students, and professionals to efficiently manage tasks, priorities, and deadlines. It features Google Sheets integration, intuitive task prioritization, a clean interface, and real-time collaboration, making task management straightforward and customizable.
 
-## Constraints
+### The problem it solves and its intended use
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+This app solves the problem of managing daily responsibilities in a busy world by providing a digital platform for users to note tasks, assign priority levels, set deadlines, and track progress. It helps users focus on important tasks, manage time effectively, and improve productivity by offering a reliable and organized system for task management. Task Master is accessible to anyone seeking to enhance their daily and long-term productivity, acting as a digital assistant to navigate tasks with ease and clarity.
 
 ---
 
-Happy coding!
+### Objectives
+
+#### Developer's goal
+
+1.	*Create a Simple and Intuitive Interface* 
+	- Ensure the application is accessible to users of all skill levels, with clear instructions and feedback.
+
+2.	*Implement Core Functionalities*
+	- Develop the application with functionalities such as adding tasks, prioritizing them, setting due dates, listing tasks, and marking them as done.
+
+3.	*Ensure Data Persistence*
+	- Incorporate Google Sheets for storing and retrieving tasks, providing users with the ability to maintain their task list across sessions and devices.
+
+4.	*Focus on User Experience*
+	- Design the application to handle user inputs gracefully, including validating inputs and providing helpful error messages to guide users.
+
+5.	*Learn and Apply New Skills*
+	- Use the project as an opportunity to learn more about Python programming, Google Sheets API, Cloud (PaaS) deployment, and other relevant technologies or programming concepts.
+
+#### User's goal
+
+The user's primary goal in using this to-do list application is to have a reliable and convenient tool that helps them manage their daily tasks, improve their productivity, and reduce the stress associated with forgetting tasks or missing deadlines.
+
+1.	*Stay Organized*
+	- Keep track of all their tasks in one place, ensuring that nothing important is overlooked.
+	
+2.	*Prioritize Tasks*
+	- Easily identify and focus on high-priority tasks, optimizing their time and efforts on what matters most.
+
+3. *Track Progress* 
+	- Mark tasks as completed, providing a sense of accomplishment and a clear view of what has been achieved versus what remains to be done.
+
+4.	*Enjoy a Hassle-Free Experience*
+	- Interact with an application that is easy to use, free from technical glitches, and provides helpful feedback as needed.
+
+---
+
+## Features 
+
+These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity.  
+
+### Existing features
+
+Here's an overview of its key features:
+
+* **Centralized Task Management**: Effortlessly add, edit, and organize tasks in a centralized Google Worksheet, ensuring your to-do list is always up-to-date and accessible.
+![screenshot](XX)
+
+* **Dynamic Task Addition and Editing**: Easily add new tasks or modify existing ones, including details such as task descriptions, priorities, and due dates, for precise task management.
+
+![screenshot](XX)
+
+* **Prioritization and Deadlines**: Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most..
+
+![screenshot](XX)
+
+* **Efficient Task Listing**: View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease.
+
+![screenshot](XX)
+
+* **Task Completion Tracking**: Mark tasks as done with a simple click, offering a satisfying way to track your progress and maintain motivation.
+
+![screenshot](XX)
+
+* **Error Handling and User Feedback**: Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made.
+
+![screenshot](XX)
+
+* **Flexible Access and Data Persistence**: With tasks stored in Google Sheets, access your task list from any device, ensuring that your data is always there when you need it.
+
+![screenshot](XX)
+
+* **Secure and Easy Exit**: Confidently exit the application, knowing that all your tasks are safely stored in Google Sheets, ready for your next session.
+
+![screenshot](XX)
+
+
+### Future Features
+
+There are a lot one can do to enhance this application, I want to highlight these four (in no specific prioirity order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
+
+#### Integration with Calendar Applications
+- **Description**: Allow users to sync their to-do list items with their preferred calendar applications (e.g., Google Calendar, Microsoft Outlook).
+- **Benefit**: Users can see their tasks alongside their appointments, providing a comprehensive view of their schedules.
+
+#### Collaborative Task Management
+- **Description**: Add features that enable users to share lists with others, assign tasks, and track progress collaboratively.
+- **Benefit**: Facilitates teamwork and shared task management, making the app suitable for both personal and professional use.
+
+#### Natural Language Processing (NLP) for Task Entry
+- **Description**: Utilize NLP to allow users to add tasks in natural language, which the app can then parse into structured task entries.
+- **Benefit**: Simplifies the process of adding new tasks, making the application more intuitive and user-friendly.
+
+#### Analytics and Productivity Insights
+- **Description**: Offer analytics features that give users insights into their task completion patterns, productivity trends, and suggest optimizations.
+- **Benefit**: Helps users understand their productivity habits and make informed adjustments to improve efficiency.
+
+---
+
+## Technologies Used
+
+### Language
+
+[Python](https://www.python.org) used as the back-end programming language.
+
+###Tools
+
+* [Code Institute Python Linter](https://pep8ci.herokuapp.com/): A tool to check Python code against some of the style conventions in [PEP8](https://peps.python.org/pep-0008/).
+* [Draw.io](https://www.drawio.com/): Useful for planning the application's architecture and flowcharts, especially helpful in the design phase to visualize the application flow.
+* [Git](https://git-scm.com) used for version control. (```git add```, ```git commit```, ```git push```)
+* [Visual Studio Code](https://code.visualstudio.com/): A versatile and powerful IDE that supports Python development well, offering debugging tools, extensions for Python, and integrated Git control. While Gitpod provides its own web-based VS Code editor, one might use the desktop version for local development or when offline.
+* [Gitpod](https://gitpod.io) Streamlines your development process by providing a pre-configured, cloud-based development environment that's instantly ready for coding.
+* [GitHub](https://github.com) Essential for version control, allowing you to track changes, collaborate with others (if applicable), and for secure online code storage.
+* [Heroku](https://www.heroku.com): A platform for deploying and hosting web applications. 
+* [Markup Validation Service](https://validator.w3.org/) - Used to check code ensuring that my HTML is error-free and adheres to the latest web standards.
+* [PEP8](https://peps.python.org/pep-0008/): Style Guide for Python Code.
+
+---
+
+## Data model
+
+### Flowchart
+
+To follow best practice, a flowchart was created for the app's logic, and mapped out before coding began using a free version of [Draw.io](https://www.drawio.com/).
+
+![Flowchart](XXXXXX.webp)
+
+### Classes & Functions
+
+The primary functions used on this application are:
+
+* add some text
+
+### Imports
+
+Following Python packages and/or external imported packages was used:
+
+* add some text
+
+---
+
+## Testing
+
+### Results
+Please refer to TESTING.md file for all testing and trouble shooting carried out.
+
+---
+
+## Prerequisites and Deployment  
+
+The game was developed in VS Code, stored in GitHub as the local repository, and deployed on Heroku.
+
+### Prerequisite
+
+* Ensure [Python](https://www.python.org/) is installed on your system.
+* Verify that Python is installed on your system by checking its version. This can be done through a command in the terminal or by running a small piece of Python code that outputs the version information.
+* For installing libraries and modules, use pip or pip3 depending on your Python version
+
+### Deploying on Heroku
+
+1. **Heroku Account:**
+   - Make sure you have a Heroku account. If not, sign up on the Heroku website.
+   
+2. **GitHub Repository:**
+   - Ensure your project is hosted on GitHub.
+   
+3. **Heroku Dashboard:**
+   - Log in to your Heroku account and go to the Heroku Dashboard.
+   
+4. **Create a New App:**
+   - On the dashboard, click `New` and choose `Create new app`.
+   
+5. **App Name:**
+   - Choose a unique name for your app.
+   
+6. **Region & Create App:**
+   - Choose a region closest to you (EU or USA), then Select **Create App**
+   
+7. **New App**
+   - From the new app **Settings**, click **Reveal Config Vars**, and set the value of KEY to `PORT`, and the value to `8000` then select *add*.   
+   
+8. **Cofidential credentials**
+   - If one need to use any private credentials, like CREDS.JSON, you should also add them to the Config Variables section. This is a crucial step for maintaining the security and integrity of your application, especially when it interacts with external services or APIs that require authentication. 
+   
+9. **Add Buildpack**
+   - Scroll further down on page, to support dependencies, select **Add Buildpack**.
+   - It's crucial to arrange the buildpacks correctly! First choose Python and then Node.js. If they're not in this sequence, you can reorder them by dragging.
+   
+10. **Extra files for Heroku deployment**
+   - For successful deployment, Heroku requires two extra files:
+      - requirements.txt
+	  - Procfile
+	  
+	  Purpose: It specifies the dependencies to be installed for your application to function correctly.
+	  Impact on Deployment: Heroku reads this file to understand which packages and versions to install in the deployment environment.Ensures consistency between local and deployed environments, reducing deployment failures and runtime errors.
+	  
+11. **requirements**
+   - To install the necessary requirements for this project (where applicable), use the following command:
+     ```pip3 install -r requirements.txt```
+	 
+12. **Own packages**
+   - If you've installed your own packages, you need to update the requirements file with:
+     ```pip3 freeze --local > requirements.txt```
+	 
+13. **Procfile**
+   - To create the Procfile, use the command below:
+     ```echo web: node index.js > Procfile```
+	 
+14. **Heroku deployment method**
+   - Following these steps to connect your frontend terminal and deploy your application to Heroku!  
+   a. Connect to Heroku:
+      Open your Terminal/CLI and log in to Heroku with: ```heroku login -i```
+	  
+   b. Set Heroku Remote:
+      Configure the Heroku remote using: ```heroku git:remote -a app_name``` (substitute app_name with the name of your app)
+	  
+   c. Git Operations:
+      Execute the usual Git commands: ```add```, ```commit```, and ```push``` to update your repository on GitHub.
+	  
+   d. Deploy to Heroku:
+      To deploy, enter: ```git push heroku main``` in the terminal.
+	  
+   - Alternatively:
+     You can opt for Automatic Deployment directly from the Heroku app interface.
+   
+### Local Deployment
+
+The project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the *requirements.txt* file.
+- ```pip3 install -r requirements.txt```.
+
+If using any confidential credentials, such as `CREDS.json` or `env.py` data, you'll have to manually incorporate these into your new project as well.
+
+### How to Clone
+
+To clone the project repository:
+
+1. Log in (or sign up) to GitHub.
+2. Go to the repository for this project, [JaqiKal/task-master](https://github.com/JaqiKal/task-master)
+3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+4. Open Git Bash or Terminal
+5. Change the current working directory to the location you want to use for the cloned directory.
+6. In your IDE Terminal, type the following command to clone my repository:
+	- `git clone https://github.com/JaqiKal/task-master`
+7. Press Enter to create your local clone.
+
+### Forking
+
+Forking the GitHub Repository allows us to create a duplicate of the original repository in our own GitHub account. This enables us to explore and modify the content without impacting the original repository. To fork this repository, follow these steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/JaqiKal/task-master)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
+### Local VS Deployment
+
+At the time of writing, there is no differance between the local version and the version deployed on Heroku.
+
+---
+
+## Credits
+
+### Content
+
+| Source | Location | Notes |
+| --- | --- | --- |
+
+### Media
+
+For this project no external media was used for creation of this project.
+
+### Acknowledgements 
+
+I would like to thank! 
+
+* My mentor [Jubril Akolade](https://github.com/jubrillionaire/) for all his help and advice throughout the project.
+* The whole team at [Code Institute Slack community](https://code-institute-room.slack.com) for their teaching and support.
+* To all engaged fellow student at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
+* My immediate and extended family, as well as my friends, support and cheer me on!
