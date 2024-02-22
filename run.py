@@ -7,43 +7,27 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-# Google Sheets API setup
+# Google Sheets setup
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("task-master-database")
+worksheet = SHEET.worksheet('test-sheet')
 
-# Access the 'taskdb' worksheet
-taskdb = SHEET.worksheet('taskdb')
 
-# Access the 'test_1' worksheet
-test_1 = SHEET.worksheet('test_1')
+# Function to add a row
+def add_row_to_sheet():
+    task_id = input("Enter Task ID: ")
+    task_name = input("Enter Task Name: ")
+    priority = input("Enter Priority (High/Medium/Low): ")
+    due_date = input("Enter Due Date (YYYY-MM-DD): ")
+    status = input("Enter Status (Completed/Pending): ")
 
-# Access the 'test_2' worksheet
-test_2 = SHEET.worksheet('test_2')
+    # Adding the row to the worksheet
+    row = [task_id, task_name, priority, due_date, status]
+    worksheet.append_row(row)
+    print("Task added successfully.")
 
-# List all worksheets in the spreadsheet
-for worksheet in SHEET.worksheets():
-    print(worksheet.title)
 
-# Fetch the first row of the 'taskdb' worksheet (headers)
-headers = taskdb.row_values(1)
-print("Worksheet headers in 'taskdb':", headers)
-
-# Fetch the first row from 'test_1'
-first_row_test_1 = test_1.row_values(1)
-print("First row in 'test_1':", first_row_test_1)
-
-# Fetch the second row from 'test_1'
-second_row_test_1 = test_1.row_values(2)
-print("Second row in 'test_1':", second_row_test_1)
-
-# Fetch the first row from 'test_2'
-second_row_test_2 = test_2.row_values(2)
-print("Second row in 'test_2':", second_row_test_2)
-
-# Fetch all data from 'test_2'
-all_data_test_2 = test_2.get_all_values()
-print("All data in 'test_2':")
-for row in all_data_test_2:
-    print(row)
+# Calling the function
+add_row_to_sheet()
