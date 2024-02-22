@@ -1,5 +1,5 @@
-import datetime
-import gspread
+import datetime # From www.geeksforgeeks.org/python-datetime-module/
+import gspread  # From love_sandwiches
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -19,8 +19,6 @@ worksheet = SHEET.worksheet('test-sheet')
 
 def get_valid_due_date():
     """
-    Import datetime learning from www.w3schools.com/python/python_datetime.asp
-    and www.geeksforgeeks.org/python-datetime-module/
     Prompt the user for a due date, validate its format and ensure
     it's a future date. This function repeatedly prompts the user to
     enter a due date in the YYYY-MM-DD format.
