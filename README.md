@@ -26,6 +26,7 @@
   * [Flowchart](#flowchart)
   * [Classes & Functions](#classes--functions)
   * [Imports](#imports)
+  * [Programming paradigm](#programming-paradigm)
 * [Testing](#testing)
 * [Deployment](#deployment)
   * [Installation](#installation)
@@ -73,7 +74,7 @@ This app solves the problem of managing daily responsibilities in a busy world b
 	- Design the application to handle user inputs gracefully, including validating inputs and providing helpful error messages to guide users.
 
 5.	*Learn and Apply New Skills*
-	- Use the project as an opportunity to learn more about Python programming, Google Sheets API, Cloud (PaaS) deployment, and other relevant technologies or programming concepts.
+	- Use the project as an opportunity to learn more about Python programming, Google Sheets API, and other relevant technologies or programming concepts.
 
 #### User's goal
 
@@ -153,6 +154,10 @@ There are a lot one can do to enhance this application, I want to highlight thes
 - **Description**: Offer analytics features that give users insights into their task completion patterns, productivity trends, and suggest optimizations.
 - **Benefit**: Helps users understand their productivity habits and make informed adjustments to improve efficiency.
 
+#### Refactoring code to Obejct-Oriented Programming
+- **Description**:  Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviors into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
+- **Benefit**:  By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
+
 ---
 
 ## Technologies Used
@@ -194,6 +199,10 @@ The primary functions used on this application are:
 Following Python packages and/or external imported packages was used:
 
 * add some text
+
+### Programming paradigm
+
+Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward task manager (To-Do-list) application, I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
 
 ---
 
