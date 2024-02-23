@@ -35,39 +35,6 @@ class ExitToMainMenu(Exception):
     pass
 
 
-def list_all_tasks():
-    """
-    Amended from pypi.org/project/prettytable/
-
-    Retrieves and displays all tasks from the worksheet in a formatted table
-    """
-    tasks = worksheet.get_all_records()
-
-    # Create a PrettyTable instance and define the column headers
-    table = PrettyTable(
-        ["Task ID", "To-Do", "Priority", "Due Date", "Status", "Creation Date"]
-    )
-
-    # Iterate over all tasks and add them to the table
-    for task in tasks:
-        table.add_row(
-            [
-                task["Task ID"],
-                task["To-Do"],
-                task["Priority"],
-                task["Due Date"],
-                task["Status"],
-                task["Creation Date"],
-            ]
-        )
-
-    # Check if there are any tasks to list
-    if tasks:
-        print(table)
-    else:
-        print("No tasks found.")
-
-
 def generate_task_id():
     """
     Generates a unique, sequential task ID for new tasks.
@@ -152,9 +119,8 @@ def get_valid_due_date():
         try:
             # Amended from:geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
-                due_date_str, "%Y-%m-%d"
-            ).date()
-
+                due_date_str, "%Y-%m-%d").date(
+            )
             if due_date < datetime.date.today():
                 print("The due date must be in the future. Please try again.")
             else:
@@ -235,25 +201,45 @@ def view_task():
 
 def list_all_tasks():
     """
-    Retrieves and displays all tasks from the worksheet.
+    Amended from pypi.org/project/prettytable/
 
+    Retrieves and displays all tasks from the worksheet in a formatted table.
     Each task is fetched as a dictionary from the Google Sheet, displaying
-    the Task ID, To-Do, Priority, Due Date, and Status for each.
-    If no tasks are found, it notifies the user.
+    the Task ID, To-Do, Priority, Due Date, Status and Creation Date for
+    each in a visually appealing table format. If no tasks are found,
+    it notifies the user.
     """
     # Fetch all tasks as a list of dictionaries
     tasks = worksheet.get_all_records()
 
+    # Create a PrettyTable instance and define the column headers
+    table = PrettyTable()
+    table.field_names = [
+        "Task ID",
+        "To-Do",
+        "Priority",
+        "Due Date",
+        "Status",
+        "Creation Date",
+    ]
+    table.align = "l"
+
+    # Iterate over all tasks and add them to the table
+    for task in tasks:
+        table.add_row(
+            [
+                task["Task ID"],
+                task["To-Do"],
+                task["Priority"],
+                task["Due Date"],
+                task["Status"],
+                task["Creation Date"],
+            ]
+        )
+
     # Check if there are any tasks to list
     if tasks:
-        for task in tasks:
-            print(
-                f"Task ID: {task['Task ID']}, To-Do: {task['To-Do']}, "
-                f"Priority: {task['Priority']}, "
-                f"Due Date: {task['Due Date']}, "
-                f"Status: {task['Status']}, "
-                f"Creation Date: {task['Creation Date']}"
-            )
+        print(table)
     else:
         print("No tasks found.")
 
@@ -276,7 +262,8 @@ def main_menu():
             print("3. View Task")
             print("4. Exit application\n")
             choice = get_user_input(
-                "Enter choice -> (or type 'back' to return to menu): \n")
+                "Enter choice -> (or type 'back' to return to menu): \n"
+            )
             # Visual separator
             print("--------------------------------------------------------")
             if choice == "1":
