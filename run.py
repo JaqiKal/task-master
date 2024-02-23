@@ -1,11 +1,18 @@
-import datetime  # From www.geeksforgeeks.org/python-datetime-module/
-import gspread  # From love_sandwiches
+# Amended from www.geeksforgeeks.org/python-datetime-module/
+import datetime
+
+# Amended from Code Institute project love_sandwiches
+import gspread
 from google.oauth2.service_account import Credentials
+
+# Amended from pypi.org/project/prettytable/
+from prettytable import PrettyTable
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
+    "https://www.googleapis.com/auth/drive",
 ]
 
 # Google Sheets setup
@@ -14,7 +21,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("task-master-database")
 # worksheet = SHEET.worksheet('taskdb')
-worksheet = SHEET.worksheet('test-sheet')
+worksheet = SHEET.worksheet("test-sheet")
 
 
 class ExitToMainMenu(Exception):
@@ -24,18 +31,52 @@ class ExitToMainMenu(Exception):
 
     Exception used to signal an exit back to the main menu.
     """
+
     pass
+
+
+def list_all_tasks():
+    """
+    Amended from pypi.org/project/prettytable/
+
+    Retrieves and displays all tasks from the worksheet in a formatted table
+    """
+    tasks = worksheet.get_all_records()
+
+    # Create a PrettyTable instance and define the column headers
+    table = PrettyTable(
+        ["Task ID", "To-Do", "Priority", "Due Date", "Status", "Creation Date"]
+    )
+
+    # Iterate over all tasks and add them to the table
+    for task in tasks:
+        table.add_row(
+            [
+                task["Task ID"],
+                task["To-Do"],
+                task["Priority"],
+                task["Due Date"],
+                task["Status"],
+                task["Creation Date"],
+            ]
+        )
+
+    # Check if there are any tasks to list
+    if tasks:
+        print(table)
+    else:
+        print("No tasks found.")
 
 
 def generate_task_id():
     """
     Generates a unique, sequential task ID for new tasks.
-    This function fetches all current tasks from the Google Sheet, 
-    identifies the highest task ID in use, and increments it by 1 to 
+    This function fetches all current tasks from the Google Sheet,
+    identifies the highest task ID in use, and increments it by 1 to
     ensure uniqueness and maintain a sequential order.
-    The ethod is chosen for its simplicity and effectiveness in environments 
-    where task creation occurs at a manageable rate and concurrency issues 
-    are minimal. It leverages the existing data structure without requiring 
+    The ethod is chosen for its simplicity and effectiveness in environments
+    where task creation occurs at a manageable rate and concurrency issues
+    are minimal. It leverages the existing data structure without requiring
     external dependencies or complex ID generation schemes.
     """
     # Fetch all tasks as a list of dictionaries
@@ -46,7 +87,7 @@ def generate_task_id():
         return 1
 
     # Extract Task IDs and convert them to integers
-    task_ids = [int(task['Task ID']) for task in tasks]
+    task_ids = [int(task["Task ID"]) for task in tasks]
 
     # Find the highest task ID and add 1 to generate the next ID
     next_id = max(task_ids) + 1 if task_ids else 1
@@ -57,7 +98,7 @@ def generate_task_id():
 def get_user_input(prompt, normalize=False, allowed_values=None):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
-    Inspo on removing leading or trailing whitespace cahracters is 
+    Inspo on removing leading or trailing whitespace characters is
     found at: www.codeease.net/programming/python/python-input-strip
 
     Prompts the user for input and allows exit to the main menu
@@ -70,10 +111,10 @@ def get_user_input(prompt, normalize=False, allowed_values=None):
     """
     while True:
         user_input = input(prompt).strip()
-        if user_input.lower() == 'back':
+        if user_input.lower() == "back":
             raise ExitToMainMenu
         # Check for empty input
-        if not user_input:  
+        if not user_input:
             print("Input cannot be empty. Please try again.")
             continue
         # Capitalize the first letter and make the rest lowercase
@@ -81,9 +122,11 @@ def get_user_input(prompt, normalize=False, allowed_values=None):
             user_input = user_input.capitalize()
         # Prompt the user to re-enter the input
         if allowed_values and user_input not in allowed_values:
-            print("Invalid input. Please enter one of the following: "
-                  f"{', '.join(allowed_values)}")
-            continue  
+            print(
+                "Invalid input. Please enter one of the following: "
+                f"{', '.join(allowed_values)}"
+            )
+            continue
         return user_input
 
 
@@ -109,7 +152,8 @@ def get_valid_due_date():
         try:
             # Amended from:geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
-                due_date_str, "%Y-%m-%d").date()
+                due_date_str, "%Y-%m-%d"
+            ).date()
 
             if due_date < datetime.date.today():
                 print("The due date must be in the future. Please try again.")
@@ -134,20 +178,23 @@ def add_row_to_sheet():
     """
     # Generate & diplay the Task ID
     task_id = generate_task_id()
-    print(f"Task ID: {task_id}") 
+    print(f"Task ID: {task_id}")
     # User adds task description
     to_do = get_user_input("Enter task description: ")
     # User adds priority
     priority = get_user_input(
         "Enter priority (High/Medium/Low): ",
-        normalize=True, allowed_values=priority_allowed_values
-        )
+        normalize=True,
+        allowed_values=priority_allowed_values,
+    )
     # User adds due_date = input("Enter Due Date (YYYY-MM-DD): ")
     due_date = get_valid_due_date()
     # User adds status
     status = get_user_input(
         "Enter status (Completed/Pending): ",
-        normalize=True, allowed_values=status_allowed_values)
+        normalize=True,
+        allowed_values=status_allowed_values,
+    )
     # Generate the task creation date in YYYY-MM-DD format
     creation_date = datetime.date.today().strftime("%Y-%m-%d")
 
@@ -167,9 +214,9 @@ def view_task():
     task_id = input("Enter Task ID to view: ")
     tasks = worksheet.get_all_records()
 
-     # Find the task by Task ID
+    # Find the task by Task ID
     found_task = next(
-        (task for task in tasks if str(task['Task ID']) == str(task_id)), None
+        (task for task in tasks if str(task["Task ID"]) == str(task_id)), None
     )
 
     if found_task:
@@ -200,12 +247,13 @@ def list_all_tasks():
     # Check if there are any tasks to list
     if tasks:
         for task in tasks:
-            print(f"Task ID: {task['Task ID']}, To-Do: {task['To-Do']}, "
-                  f"Priority: {task['Priority']}, "
-                  f"Due Date: {task['Due Date']}, "
-                  f"Status: {task['Status']}, "
-                  f"Creation Date: {task['Creation Date']}"
-                  )
+            print(
+                f"Task ID: {task['Task ID']}, To-Do: {task['To-Do']}, "
+                f"Priority: {task['Priority']}, "
+                f"Due Date: {task['Due Date']}, "
+                f"Status: {task['Status']}, "
+                f"Creation Date: {task['Creation Date']}"
+            )
     else:
         print("No tasks found.")
 
