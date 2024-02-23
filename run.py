@@ -264,8 +264,7 @@ def main_menu():
             choice = get_user_input(
                 "Enter choice -> (or type 'back' to return to menu): \n"
             )
-            # Visual separator
-            print("--------------------------------------------------------")
+          
             if choice == "1":
                 add_row_to_sheet()
             elif choice == "2":
@@ -283,5 +282,7 @@ def main_menu():
             continue
 
 
-print("\n Welcome to your Task Organizer")
+print("\n Welcome to Your Personal Task Organizer! 🌟")
+
+
 main_menu()
