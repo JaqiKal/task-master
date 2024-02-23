@@ -27,6 +27,33 @@ class ExitToMainMenu(Exception):
     pass
 
 
+def generate_task_id():
+    """
+    Generates a unique, sequential task ID for new tasks.
+    This function fetches all current tasks from the Google Sheet, 
+    identifies the highest task ID in use, and increments it by 1 to 
+    ensure uniqueness and maintain a sequential order.
+    The ethod is chosen for its simplicity and effectiveness in environments 
+    where task creation occurs at a manageable rate and concurrency issues 
+    are minimal. It leverages the existing data structure without requiring 
+    external dependencies or complex ID generation schemes.
+    """
+    # Fetch all tasks as a list of dictionaries
+    tasks = worksheet.get_all_records()
+
+    # If there are no tasks, start with ID 1
+    if not tasks:
+        return 1
+
+    # Extract Task IDs and convert them to integers
+    task_ids = [int(task['Task ID']) for task in tasks]
+
+    # Find the highest task ID and add 1 to generate the next ID
+    next_id = max(task_ids) + 1 if task_ids else 1
+
+    return next_id
+
+
 def get_user_input(prompt, normalize=False, allowed_values=None):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
@@ -105,8 +132,9 @@ def add_row_to_sheet():
     Fields include as listed below Due Date is validated for future
     dates in YYYY-MM-DD format.
     """
-    # Task ID, added by user
-    task_id = get_user_input("Enter Task ID: ")
+    # Generate & diplay the Task ID
+    task_id = generate_task_id()
+    print(f"Task ID: {task_id}") 
     # User adds task description
     to_do = get_user_input("Enter task description: ")
     # User adds priority
@@ -126,7 +154,9 @@ def add_row_to_sheet():
     # Adding the row to the sheet
     row = [task_id, to_do, priority, due_date, status, creation_date]
     worksheet.append_row(row)
-    print("Task added successfully.")
+    # Print an empty line for spacing
+    print()
+    print("Task added successfully with creation date:", creation_date)
 
 
 def view_task():
@@ -137,10 +167,7 @@ def view_task():
     task_id = input("Enter Task ID to view: ")
     tasks = worksheet.get_all_records()
 
-    # Convert task_id to int for comparison, if necessary
-    task_id = int(task_id)
-
-    # Find the task by Task ID
+     # Find the task by Task ID
     found_task = next(
         (task for task in tasks if str(task['Task ID']) == str(task_id)), None
     )
@@ -152,7 +179,8 @@ def view_task():
             f"To-Do: {found_task['To-Do']}\n"
             f"Priority: {found_task['Priority']}\n"
             f"Due Date: {found_task['Due Date']}\n"
-            f"Status: {found_task['Status']}"
+            f"Status: {found_task['Status']}\n"
+            f"Creation Date: {found_task['Creation Date']}"
         )
     else:
         print("Task not found.")
@@ -175,7 +203,9 @@ def list_all_tasks():
             print(f"Task ID: {task['Task ID']}, To-Do: {task['To-Do']}, "
                   f"Priority: {task['Priority']}, "
                   f"Due Date: {task['Due Date']}, "
-                  f"Status: {task['Status']}")
+                  f"Status: {task['Status']}, "
+                  f"Creation Date: {task['Creation Date']}"
+                  )
     else:
         print("No tasks found.")
 

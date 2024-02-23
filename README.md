@@ -109,6 +109,9 @@ Here's an overview of its key features:
 
 ![screenshot](XX)
 
+* **Unique Task ID and UUID**
+Skriv varf´ör valet förll på generate_task_id.
+
 * **Prioritization and Deadlines**: Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most..
 
 ![screenshot](XX)
