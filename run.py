@@ -30,24 +30,33 @@ class ExitToMainMenu(Exception):
 def get_user_input(prompt, normalize=False, allowed_values=None):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
+    Inspo on removing leading or trailing whitespace cahracters is 
+    found at: www.codeease.net/programming/python/python-input-strip
 
     Prompts the user for input and allows exit to the main menu
     upon receiving a specific input. If 'normalize' is True,
     it will capitalize the first letter and make the rest lowercase.
     If 'allowed_values' is provided, it will ensure the user input
     is among the allowed values, prompting re-entry if necessary.
+    Function also reject empty inputs with consistent error feedback.
+
     """
     while True:
-        user_input = input(prompt)
+        user_input = input(prompt).strip()
         if user_input.lower() == 'back':
             raise ExitToMainMenu
+        # Check for empty input
+        if not user_input:  
+            print("Input cannot be empty. Please try again.")
+            continue
+        # Capitalize the first letter and make the rest lowercase
         if normalize:
-            # Capitalize the first letter and make the rest lowercase
             user_input = user_input.capitalize()
+        # Prompt the user to re-enter the input
         if allowed_values and user_input not in allowed_values:
             print("Invalid input. Please enter one of the following: "
                   f"{', '.join(allowed_values)}")
-            continue  # Prompt the user to re-enter the input
+            continue  
         return user_input
 
 
@@ -186,6 +195,8 @@ def main_menu():
             choice = get_user_input(
                 "Enter choice -> (type 'back' to return to this menu): "
             )
+            # Visual separator
+            print("--------------------------------------------------------")
             if choice == "1":
                 add_row_to_sheet()
             elif choice == "2":
