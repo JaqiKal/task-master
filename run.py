@@ -105,21 +105,26 @@ def add_row_to_sheet():
     Fields include as listed below Due Date is validated for future
     dates in YYYY-MM-DD format.
     """
+    # Task ID, added by user
     task_id = get_user_input("Enter Task ID: ")
+    # User adds task description
     to_do = get_user_input("Enter task description: ")
+    # User adds priority
     priority = get_user_input(
         "Enter priority (High/Medium/Low): ",
         normalize=True, allowed_values=priority_allowed_values
         )
-
-    # due_date = input("Enter Due Date (YYYY-MM-DD): ")
+    # User adds due_date = input("Enter Due Date (YYYY-MM-DD): ")
     due_date = get_valid_due_date()
+    # User adds status
     status = get_user_input(
         "Enter status (Completed/Pending): ",
         normalize=True, allowed_values=status_allowed_values)
+    # Generate the task creation date in YYYY-MM-DD format
+    creation_date = datetime.date.today().strftime("%Y-%m-%d")
 
     # Adding the row to the sheet
-    row = [task_id, to_do, priority, due_date, status]
+    row = [task_id, to_do, priority, due_date, status, creation_date]
     worksheet.append_row(row)
     print("Task added successfully.")
 
@@ -191,9 +196,9 @@ def main_menu():
             print("1. Add Task")
             print("2. List All Tasks")
             print("3. View Task")
-            print("4. Exit \n")
+            print("4. Exit application\n")
             choice = get_user_input(
-                "Enter choice -> (type 'back' to return to this menu): "
+                "Enter choice -> (or type 'back' to return to menu): "
             )
             # Visual separator
             print("--------------------------------------------------------")
