@@ -115,7 +115,7 @@ def get_user_input(prompt, normalize=False, allowed_values=None):
             raise ExitToMainMenu
         # Check for empty input
         if not user_input:
-            print("Input cannot be empty. Please try again.")
+            print("Input cannot be empty. Please try again.\n")
             continue
         # Capitalize the first letter and make the rest lowercase
         if normalize:
@@ -123,7 +123,7 @@ def get_user_input(prompt, normalize=False, allowed_values=None):
         # Prompt the user to re-enter the input
         if allowed_values and user_input not in allowed_values:
             print(
-                "Invalid input. Please enter one of the following: "
+                "Invalid input. Please enter one of the following:\n"
                 f"{', '.join(allowed_values)}"
             )
             continue
@@ -148,7 +148,7 @@ def get_valid_due_date():
     date is always correctly formatted and suitable for scheduling tasks.
     """
     while True:
-        due_date_str = input("Enter Due Date (YYYY-MM-DD): ")
+        due_date_str = input("Enter Due Date (YYYY-MM-DD): \n")
         try:
             # Amended from:geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
@@ -180,10 +180,10 @@ def add_row_to_sheet():
     task_id = generate_task_id()
     print(f"Task ID: {task_id}")
     # User adds task description
-    to_do = get_user_input("Enter task description: ")
+    to_do = get_user_input("Enter task description: \n")
     # User adds priority
     priority = get_user_input(
-        "Enter priority (High/Medium/Low): ",
+        "Enter priority (High/Medium/Low): \n",
         normalize=True,
         allowed_values=priority_allowed_values,
     )
@@ -191,7 +191,7 @@ def add_row_to_sheet():
     due_date = get_valid_due_date()
     # User adds status
     status = get_user_input(
-        "Enter status (Completed/Pending): ",
+        "Enter status (Completed/Pending): \n",
         normalize=True,
         allowed_values=status_allowed_values,
     )
@@ -211,7 +211,7 @@ def view_task():
     Prompts the user for a Task ID and displays the details of
     the specified task.
     """
-    task_id = input("Enter Task ID to view: ")
+    task_id = input("Enter Task ID to view: \n")
     tasks = worksheet.get_all_records()
 
     # Find the task by Task ID
@@ -276,8 +276,7 @@ def main_menu():
             print("3. View Task")
             print("4. Exit application\n")
             choice = get_user_input(
-                "Enter choice -> (or type 'back' to return to menu): "
-            )
+                "Enter choice -> (or type 'back' to return to menu): \n")
             # Visual separator
             print("--------------------------------------------------------")
             if choice == "1":
