@@ -62,7 +62,9 @@ def generate_task_id():
     return next_id
 
 
-def get_user_input(prompt, normalize=False, allowed_values=None):
+def get_user_input(
+    prompt, normalize=False, allowed_values=None, allow_skip=False
+):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
     Inspo on removing leading or trailing whitespace characters is
@@ -73,13 +75,18 @@ def get_user_input(prompt, normalize=False, allowed_values=None):
     it will capitalize the first letter and make the rest lowercase.
     If 'allowed_values' is provided, it will ensure the user input
     is among the allowed values, prompting re-entry if necessary.
-    Function also reject empty inputs with consistent error feedback.
-
+    Function also reject empty inputs with consistent error feedback,
+    but enables skipping an action with empty input if 'allow_skip'
+    is set to True.
     """
     while True:
+        # Stripping leading/trailing whitespace
         user_input = input(prompt).strip()
         if user_input.lower() == "back":
             raise ExitToMainMenu
+        # Return empty input to signify skipping
+        if allow_skip and user_input == "":
+            return user_input
         # Check for empty input
         if not user_input:
             print("Input cannot be empty. Please try again.\n")
@@ -244,6 +251,132 @@ def list_all_tasks():
         print("No tasks found.")
 
 
+def view_task_specific(task_id):
+    """
+    Displays the details of a specific task identified by its Task ID.
+    This function fetches the task's details from the Google Sheet
+    and prints them.
+    """
+    # Fetch all tasks as a list of dictionaries
+    tasks = worksheet.get_all_records()
+
+    # Find the task by Task ID
+    found_task = next(
+        (task for task in tasks if str(task["Task ID"]) == task_id), None
+    )
+
+    # If the task is found, display its details
+    if found_task:
+        print(f"Task ID: {found_task['Task ID']}")
+        print(f"To-Do: {found_task['To-Do']}")
+        print(f"Priority: {found_task['Priority']}")
+        print(f"Due Date: {found_task['Due Date']}")
+        print(f"Status: {found_task['Status']}")
+        print(f"Creation Date: {found_task['Creation Date']}")
+    else:
+        print("Task not found.")
+
+
+def update_task():
+    """
+    This function allows user to update an exisiting task in the task
+    organizer. Unlike other functions that require user input for every field,
+    this function allows optional updates:
+    - Empty input for any field (except the Task ID) skips the update for
+      that field, leaving the original value unchanged.
+    - The function validates the Task ID and informs the user if the specified
+      task cannot be found.
+    - For the due date, the function checks for valid date format (YYYY-MM-DD)
+      and skips update if the format is incorrect, without terminating the
+      update process.
+    - Utilizes the `ExitToMainMenu` exception to allow exiting to the main menu
+      at any point by typing a specific command (e.g., 'back')
+    """
+    try:
+        task_id = get_user_input(
+            "Enter the Task ID of the task you want to update: \n",
+            normalize=False
+        )
+        tasks = worksheet.get_all_records()
+        task_index = None
+
+        # Iterates through tasks to find the index of the task with 
+        # the specified Task ID.
+        for index, task in enumerate(tasks):
+            if str(task["Task ID"]) == task_id:
+                # Considering header row and 1-based indexing
+                task_index = index + 2
+                break
+
+        if task_index is None:
+            print(
+                "Task not found."
+                "Please ensure you have entered the correct Task ID."
+            )
+            return
+
+        print("\nCurrent task details:")
+        view_task_specific(task_id)
+
+        # Ask the user for a new description, stripping
+        # leading/trailing whitespace
+        new_description = get_user_input(
+            "Enter new description (or press Enter to skip): \n",
+            normalize=False,
+            allowed_values=None,
+            allow_skip=True,
+        ).strip()
+
+        # If the user entered a new description, update the task's
+        # description in the sheet
+        if new_description:
+            worksheet.update_cell(task_index, 2, new_description)
+
+        # Prompt for a new priority, allowing an empty input to skip
+        # the update
+        new_priority = get_user_input(
+            "Enter new priority (High/Medium/Low) or press Enter to skip: \n",
+            normalize=True,
+            allowed_values=priority_allowed_values + [""],
+            allow_skip=True,
+        )
+
+        # If a new priority is provided, update it in the sheet
+        if new_priority:
+            worksheet.update_cell(task_index, 3, new_priority)
+
+        # Handle invalid date formats gracefully
+        # ask for a new due date, allowing an empty input to skip
+        new_due_date = input(
+            "Enter new Due Date (YYYY-MM-DD) or press Enter to skip: \n"
+        ).strip()
+        if new_due_date:
+            try:
+                # Validate the date format by attempting to convert
+                # the string into a date
+                datetime.datetime.strptime(new_due_date, "%Y-%m-%d")
+                worksheet.update_cell(task_index, 4, new_due_date)
+            except ValueError:
+                # If the date format is invalid, inform user
+                # and skip updating the due date
+                print("Invalid date format. Skipped updating due date.\n")
+
+        # Ask the user for a new status, allowing an empty input
+        # to skip the update
+        new_status = get_user_input(
+            "Enter new status (Completed/Pending) or press Enter to skip: \n",
+            normalize=True,
+            allowed_values=status_allowed_values + [""],
+            allow_skip=True,
+        )
+        if new_status:
+            worksheet.update_cell(task_index, 5, new_status)
+
+        print("\nTask updated successfully.")
+    except ExitToMainMenu:
+        return
+
+
 def main_menu():
     """
     Displays the main menu of the Task Organizer application and provides
@@ -260,11 +393,12 @@ def main_menu():
             print("1. Add Task")
             print("2. List All Tasks")
             print("3. View Task")
-            print("4. Exit application\n")
+            print("4. Update Task")
+            print("5. Exit application\n")
             choice = get_user_input(
                 "Enter choice -> (or type 'back' to return to menu): \n"
             )
-          
+
             if choice == "1":
                 add_row_to_sheet()
             elif choice == "2":
@@ -272,13 +406,15 @@ def main_menu():
             elif choice == "3":
                 view_task()
             elif choice == "4":
+                update_task()
+            elif choice == "5":
                 print("Exiting the Task Organizer. Goodbye!")
                 break
             else:
                 print("Invalid choice. Please try again.")
         except ExitToMainMenu:
             # If "back" is entered at any input prompt,
-            # loop back to the main menu.
+            # loop back to the main menu
             continue
 
 
