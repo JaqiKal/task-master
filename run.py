@@ -193,9 +193,11 @@ def view_task():
     )
 
     if found_task:
+        # Adds a blank line for clearer output separation
+        print()
         print(
-            "Task Details:\n"
-            f"Task ID: {found_task['Task ID']}\n"
+            "Task Details:\n" + "-"*13 +  # Adds a separator line
+            f"\nTask ID: {found_task['Task ID']}\n"
             f"To-Do: {found_task['To-Do']}\n"
             f"Priority: {found_task['Priority']}\n"
             f"Due Date: {found_task['Due Date']}\n"
@@ -316,6 +318,7 @@ def update_task():
             return
 
         print("\nCurrent task details:")
+        print("---------------------") 
         view_task_specific(task_id)
 
         # Ask the user for a new description, stripping
@@ -389,7 +392,8 @@ def main_menu():
     """
     while True:
         try:
-            print("\n Menu To-Do-List \n")
+            print("\n Menu To-Do-List")
+            print("-----------------") 
             print("1. Add Task")
             print("2. List All Tasks")
             print("3. View Task")
@@ -398,7 +402,8 @@ def main_menu():
             choice = get_user_input(
                 "Enter choice -> (or type 'back' to return to menu): \n"
             )
-
+            # Adds a blank line for clearer output separation
+            print()
             if choice == "1":
                 add_row_to_sheet()
             elif choice == "2":
