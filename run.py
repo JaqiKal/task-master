@@ -31,7 +31,6 @@ class ExitToMainMenu(Exception):
 
     Exception used to signal an exit back to the main menu.
     """
-
     pass
 
 
@@ -139,7 +138,7 @@ def get_valid_due_date():
 # Define allowed values for task priority and status
 # to ensure user inputs are standardized and limited to these options.
 priority_allowed_values = ["High", "Medium", "Low"]
-status_allowed_values = ["Completed", "Pending"]
+status_allowed_values = ["New", "Completed", "Pending"]
 
 
 # Function to add a row
@@ -164,7 +163,7 @@ def add_row_to_sheet():
     due_date = get_valid_due_date()
     # User adds status
     status = get_user_input(
-        "Enter status (Completed/Pending): \n",
+        "Enter status (New/Completed/Pending): \n",
         normalize=True,
         allowed_values=status_allowed_values,
     )
@@ -367,7 +366,7 @@ def update_task():
         # Ask the user for a new status, allowing an empty input
         # to skip the update
         new_status = get_user_input(
-            "Enter new status (Completed/Pending) or press Enter to skip: \n",
+            "Enter new status (New/Completed/Pending) or press Enter to skip: \n",
             normalize=True,
             allowed_values=status_allowed_values + [""],
             allow_skip=True,
