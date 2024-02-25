@@ -380,6 +380,58 @@ def update_task():
         return
 
 
+def delete_task():
+    """
+    Allows the user to delete a task from the task organizer.
+    The function prompts the user for the Task ID of the task they 
+    wish to delete. It checks if the task exists, and if so, 
+    deletes it from the Google Sheet. If the task cannot be found, 
+    user is informed accordingly.
+    """
+    try:
+        task_id = get_user_input(
+            "Enter the Task ID of the task you want to delete: \n",
+            normalize=False
+        )
+        tasks = worksheet.get_all_records()
+        task_index = None
+
+        # Iterates through tasks to find the index of the task with 
+        # the specified Task ID.
+        for index, task in enumerate(tasks):
+            if str(task["Task ID"]) == task_id:
+                # Considering header row and 1-based indexing
+                task_index = index + 2
+                break
+
+        if task_index is None:
+            print(
+                "Task not found."
+                "Please ensure you have entered the correct Task ID."
+            )
+            return
+
+        # Confirm deletion with the user before proceeding
+        while True:
+            confirm = input(
+                "Are you sure you want to delete this task?" 
+                " The action is irreversible! (yes/no): ").strip(
+                ).lower(
+            )
+            if confirm == "yes":
+                worksheet.delete_rows(task_index)
+                print("Task deleted successfully.")
+                break
+            elif confirm == "no":
+                print("Task deletion canceled.")
+                break
+            else:
+                print("Invalid input. Please answer 'yes' or 'no'.")
+
+    except ExitToMainMenu:
+        return
+
+
 def main_menu():
     """
     Displays the main menu of the Task Organizer application and provides
@@ -398,7 +450,8 @@ def main_menu():
             print("2. List All Tasks")
             print("3. View Task")
             print("4. Update Task")
-            print("5. Exit application\n")
+            print("5. Delete Task(s)")
+            print("6. Exit application\n")
             choice = get_user_input(
                 "Enter choice -> (or type 'back' to return to menu): \n"
             )
@@ -413,6 +466,8 @@ def main_menu():
             elif choice == "4":
                 update_task()
             elif choice == "5":
+                delete_task()
+            elif choice == "6":
                 print("Exiting the Task Organizer. Goodbye!")
                 break
             else:
@@ -424,6 +479,4 @@ def main_menu():
 
 
 print("\n Welcome to Your Personal Task Organizer! 🌟")
-
-
 main_menu()
