@@ -378,15 +378,17 @@ def update_task():
 
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
-        new_due_date = input(
-            "\nEnter new Due Date (YYYY-MM-DD) or press Enter to skip: \n"
-        ).strip()
+        new_due_date = get_user_input(
+            "\nEnter new Due Date (YYYY-MM-DD) or press Enter to skip: \n", allow_skip=True)
         if new_due_date:
             try:
                 # Validate the date format by attempting to convert
                 # the string into a date
-                datetime.datetime.strptime(new_due_date, "%Y-%m-%d")
-                worksheet.update_cell(task_index, 4, new_due_date)
+                due_date = datetime.datetime.strptime(new_due_date, "%Y-%m-%d").date()
+                if due_date < datetime.date.today():
+                    print("Due date must be in the future. Please try again.")
+                else:
+                    worksheet.update_cell(task_index, 4, new_due_date)
             except ValueError:
                 # If the date format is invalid, inform user
                 # and skip updating the due date
