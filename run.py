@@ -157,7 +157,7 @@ def add_row_to_sheet():
     Fields include as listed below Due Date is validated for future
     dates in YYYY-MM-DD format.
     """
-    # Generate & diplay the Task ID
+    # Generate & display the Task ID
     task_id = generate_task_id()
     print(f"Task ID: {task_id}")
     # User adds task description
@@ -356,15 +356,18 @@ def update_task():
         # Prompt for a new priority, allowing an empty input to skip
         # the update
         new_priority = get_user_input(
-            "Enter new priority (High/Medium/Low) or press Enter to skip: \n",
+            "Enter new priority (High/Medium/Low) or press Enter to skip: ",
             normalize=True,
             allowed_values=priority_allowed_values + [""],
             allow_skip=True,
         )
 
-         # Notify the user if the new priority is the same as the current one.
-        if new_priority and new_priority.lower() == current_task["Priority"].lower():
-            confirm_change = input("The new priority is the same as the current one. Do you still want to change it? (yes/no): \n").strip().lower()
+        # Notify the user if the new priority is the same as the current one.
+        if new_priority and new_priority.lower(
+            ) == current_task["Priority"].lower():
+            confirm_change = input(
+                "The new priority is the same as the current one."
+                "Do you still want to change it? (yes/no): \n").strip().lower()
             if confirm_change == "yes":
                 worksheet.update_cell(task_index, 3, new_priority)
             else:
@@ -399,11 +402,13 @@ def update_task():
             allow_skip=True,
         )
 
-         # Notify the user if the new status is the same as the current one.
+        # Notify the user if the new status is the same as the current one.
         if new_status and new_status.lower() == current_task["Status"].lower():
             # Ask the user if they want to proceed with changing the status
             # even though it's the same as the current one
-            confirm_change_status = input("The new status is the same as the current one. Do you still want to change it? (yes/no): ").strip().lower()
+            confirm_change_status = input(
+                "The new status is the same as the current one."
+                " Do you still want to change it? (yes/no): ").strip().lower()
             if confirm_change_status == "yes":
                 # If the user confirms, proceed with updating the status
                 worksheet.update_cell(task_index, 5, new_status)
@@ -414,8 +419,7 @@ def update_task():
         elif new_status:
             # If the new status is different from the current one, update it
             worksheet.update_cell(task_index, 5, new_status)
-
-        print("\nTask updated successfully.")
+        print("Task updated successfully.")
     except ExitToMainMenu:
         return
 
