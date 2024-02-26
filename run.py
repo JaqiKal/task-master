@@ -31,6 +31,7 @@ class ExitToMainMenu(Exception):
 
     Exception used to signal an exit back to the main menu.
     """
+
     pass
 
 
@@ -62,7 +63,10 @@ def generate_task_id():
 
 
 def get_user_input(
-    prompt, normalize=False, allowed_values=None, allow_skip=False
+    prompt,
+    normalize=False,
+    allowed_values=None,
+    allow_skip=False
 ):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
@@ -110,23 +114,25 @@ def get_valid_due_date():
     enter a due date in the YYYY-MM-DD format.
 
     It performs two key validations:
-    1. This step confirms the input matches the expected YYYY-MM-DD format.
-       If the input does not match the expected format a ValueError is raised,
-       and user is informed of the correct format, prompting them to try again.
-    2. Compares the input date to today's date to ensure the due date is
-       in the future. Dates in the past are not allowed, and the user will
-       be asked to provide a new date if the entered date is not in the future.
+    1. This step confirms the input matches the expected YYYY-MM-DD
+       format. If the input does not match the expected format a
+       ValueError is raised, and user is informed of the correct format,
+       prompting them to try again
+    2. Compares the input date to today's date to ensure the due date
+       is in the future. Dates in the past are not allowed, and the user
+       will be asked to provide a new date if the entered date is not in
+       the future.
 
-    The loop continues until a valid future date is provided, ensuring the due
-    date is always correctly formatted and suitable for scheduling tasks.
+    The loop continues until a valid future date is provided, ensuring
+    the due date is always correctly formatted and suitable for scheduling
+    tasks.
     """
     while True:
         due_date_str = input("Enter Due Date (YYYY-MM-DD): \n")
         try:
             # Amended from:geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
-                due_date_str, "%Y-%m-%d").date(
-            )
+                due_date_str, "%Y-%m-%d").date()
             if due_date < datetime.date.today():
                 print("The due date must be in the future. Please try again.")
             else:
@@ -134,6 +140,8 @@ def get_valid_due_date():
         except ValueError:
             print("Invalid date format. Please use YYYY-MM-DD.")
 
+
+2
 
 # Define allowed values for task priority and status
 # to ensure user inputs are standardized and limited to these options.
@@ -195,8 +203,9 @@ def view_task():
         # Adds a blank line for clearer output separation
         print()
         print(
-            "Task Details:\n" + "-"*13 +  # Adds a separator line
-            f"\nTask ID: {found_task['Task ID']}\n"
+            "Task Details:\n"
+            + "-" * 13
+            + f"\nTask ID: {found_task['Task ID']}\n"  # Adds a separator line
             f"To-Do: {found_task['To-Do']}\n"
             f"Priority: {found_task['Priority']}\n"
             f"Due Date: {found_task['Due Date']}\n"
@@ -263,7 +272,11 @@ def view_task_specific(task_id):
 
     # Find the task by Task ID
     found_task = next(
-        (task for task in tasks if str(task["Task ID"]) == task_id), None
+        (
+            task for task in tasks
+            if str(task["Task ID"]) == task_id
+        ),
+        None
     )
 
     # If the task is found, display its details
@@ -298,10 +311,11 @@ def update_task():
             "Enter the Task ID of the task you want to update: \n",
             normalize=False
         )
+
         tasks = worksheet.get_all_records()
         task_index = None
 
-        # Iterates through tasks to find the index of the task with 
+        # Iterates through tasks to find the index of the task with
         # the specified Task ID.
         for index, task in enumerate(tasks):
             if str(task["Task ID"]) == task_id:
@@ -311,13 +325,13 @@ def update_task():
 
         if task_index is None:
             print(
-                "Task not found."
-                "Please ensure you have entered the correct Task ID."
+                "Task not found." "Please ensure you have entered the"
+                "correct Task ID."
             )
             return
 
         print("\nCurrent task details:")
-        print("---------------------") 
+        print("---------------------")
         view_task_specific(task_id)
 
         # Ask the user for a new description, stripping
@@ -366,7 +380,8 @@ def update_task():
         # Ask the user for a new status, allowing an empty input
         # to skip the update
         new_status = get_user_input(
-            "Enter new status (New/Completed/Pending) or press Enter to skip: \n",
+            "Enter new status (New/Completed/Pending) or press"
+            "Enter to skip: \n",
             normalize=True,
             allowed_values=status_allowed_values + [""],
             allow_skip=True,
@@ -379,53 +394,66 @@ def update_task():
         return
 
 
-def delete_task():
+def delete_tasks():
     """
     Allows the user to delete a task from the task organizer.
-    The function prompts the user for the Task ID of the task they 
-    wish to delete. It checks if the task exists, and if so, 
-    deletes it from the Google Sheet. If the task cannot be found, 
+    The function prompts the user for the Task ID of the task they
+    wish to delete. It checks if the task exists, and if so,
+    deletes it from the Google Sheet. If the task cannot be found,
     user is informed accordingly.
+
+    Allows the user to delete multiple tasks from the task organizer.
+    The function prompts the user for the Task IDs of the tasks they
+    wish to delete, separated by commas. It checks if each task exists,
+    and if so, deletes it from the Google Sheet. If any task cannot be found,
+    the user is informed accordingly.
     """
     try:
-        task_id = get_user_input(
-            "Enter the Task ID of the task you want to delete: \n",
-            normalize=False
+        task_ids_input = get_user_input(
+            "Enter the Task ID(s) of the tasks you want to delete"
+            "(separated by commas): \n",
+            normalize=False,
         )
+        # Split the input into a list of task IDs, trimming whitespace
+        task_ids = [task_id.strip() for task_id in task_ids_input.split(",")]
+
         tasks = worksheet.get_all_records()
-        task_index = None
+        tasks_to_delete = []
 
-        # Iterates through tasks to find the index of the task with 
-        # the specified Task ID.
-        for index, task in enumerate(tasks):
-            if str(task["Task ID"]) == task_id:
-                # Considering header row and 1-based indexing
-                task_index = index + 2
-                break
+        # Collect rows (indexes) to delete
+        for task_id in task_ids:
+            for index, task in enumerate(tasks):
+                if str(task["Task ID"]) == task_id:
+                    # Considering header row and 1-based indexing
+                    tasks_to_delete.append(index + 2)
 
-        if task_index is None:
+        if not tasks_to_delete:
             print(
-                "Task not found."
-                "Please ensure you have entered the correct Task ID."
+                "None of the specified Task IDs were found."
+                " Please ensure you have entered the correct Task IDs."
             )
             return
 
         # Confirm deletion with the user before proceeding
-        while True:
-            confirm = input(
-                "Are you sure you want to delete this task?" 
-                " The action is irreversible! (yes/no): ").strip(
-                ).lower(
+        confirm = (
+            input(
+                "Are you sure you want to delete these tasks?"
+                " The action is irreversible! (yes/no): "
             )
-            if confirm == "yes":
-                worksheet.delete_rows(task_index)
-                print("Task deleted successfully.")
-                break
-            elif confirm == "no":
-                print("Task deletion canceled.")
-                break
-            else:
-                print("Invalid input. Please answer 'yes' or 'no'.")
+            .strip()
+            .lower()
+        )
+
+        if confirm == "yes":
+            # Sort the list in reverse order to avoid messing up the indexes
+            tasks_to_delete.sort(reverse=True)
+            for row in tasks_to_delete:
+                worksheet.delete_rows(row)
+            print("Tasks deleted successfully.")
+        elif confirm == "no":
+            print("Task deletion canceled.")
+        else:
+            print("Invalid input. Please answer 'yes' or 'no'.")
 
     except ExitToMainMenu:
         return
@@ -444,7 +472,7 @@ def main_menu():
     while True:
         try:
             print("\n Menu To-Do-List")
-            print("-----------------") 
+            print("-----------------")
             print("1. Add Task")
             print("2. List All Tasks")
             print("3. View Task")
@@ -465,7 +493,7 @@ def main_menu():
             elif choice == "4":
                 update_task()
             elif choice == "5":
-                delete_task()
+                delete_tasks()
             elif choice == "6":
                 print("Exiting the Task Organizer. Goodbye!")
                 break
