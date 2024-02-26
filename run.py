@@ -190,29 +190,40 @@ def add_row_to_sheet():
 def view_task():
     """
     Prompts the user for a Task ID and displays the details of
-    the specified task.
+    the specified task in a table format with 6 columns, similar to
+    how the list_all_tasks function displays all tasks.
     """
     task_id = input("Enter Task ID to view: \n")
     tasks = worksheet.get_all_records()
 
     # Find the task by Task ID
-    found_task = next(
-        (task for task in tasks if str(task["Task ID"]) == str(task_id)), None
-    )
+    found_task = next((task for task in tasks if str(task["Task ID"]) == str(task_id)), None)
 
     if found_task:
-        # Adds a blank line for clearer output separation
-        print()
-        print(
-            "Task Details:\n"
-            + "-" * 13
-            + f"\nTask ID: {found_task['Task ID']}\n"  # Adds a separator line
-            f"To-Do: {found_task['To-Do']}\n"
-            f"Priority: {found_task['Priority']}\n"
-            f"Due Date: {found_task['Due Date']}\n"
-            f"Status: {found_task['Status']}\n"
-            f"Creation Date: {found_task['Creation Date']}"
-        )
+        # Create a PrettyTable instance and define the column headers
+        task_table = PrettyTable()
+        task_table.field_names = [
+            "Task ID", 
+            "To-Do", 
+            "Priority", 
+            "Due Date", 
+            "Status", 
+            "Creation Date"
+        ]
+        task_table.align = "l"
+
+        # Add the found task to the table
+        task_table.add_row([
+            found_task["Task ID"],
+            found_task["To-Do"],
+            found_task["Priority"],
+            found_task["Due Date"],
+            found_task["Status"],
+            found_task["Creation Date"]
+        ])
+
+        # Print the task details table
+        print(task_table)
     else:
         print("Task not found.")
 
