@@ -20,8 +20,14 @@ CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("task-master-database")
-# worksheet = SHEET.worksheet('taskdb')
-worksheet = SHEET.worksheet("test-sheet")
+# Attempt to open the worksheet
+try:
+    worksheet = SHEET.worksheet("test-sheet")
+    # If the worksheet is found, continue with the program
+except gspread.WorksheetNotFound:
+    # If the worksheet is not found, print an error message and exit
+    print("Error: Worksheet not found")
+    exit()
 
 
 class ExitToMainMenu(Exception):
@@ -140,8 +146,6 @@ def get_valid_due_date():
         except ValueError:
             print("Invalid date format. Please use YYYY-MM-DD.")
 
-
-2
 
 # Define allowed values for task priority and status
 # to ensure user inputs are standardized and limited to these options.
