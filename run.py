@@ -304,6 +304,8 @@ def update_task():
     - For the due date, the function checks for valid date format (YYYY-MM-DD)
       and skips update if the format is incorrect, without terminating the
       update process.
+    - checks to notify the user if the new priority or status is the same
+      as the current one, avoiding unnecessary updates.
     - Utilizes the `ExitToMainMenu` exception to allow exiting to the main menu
       at any point by typing a specific command (e.g., 'back')
     """
@@ -322,9 +324,11 @@ def update_task():
             if str(task["Task ID"]) == task_id:
                 # Considering header row and 1-based indexing
                 task_index = index + 2
+                # Assign the task details to current_task
+                current_task = task
                 break
 
-        if task_index is None:
+        if current_task is None:
             print(
                 "Task not found." "Please ensure you have entered the"
                 "correct Task ID."
@@ -338,7 +342,7 @@ def update_task():
         # Ask the user for a new description, stripping
         # leading/trailing whitespace
         new_description = get_user_input(
-            "Enter new description (or press Enter to skip): \n",
+            "\nEnter new description (or press Enter to skip): \n",
             normalize=False,
             allowed_values=None,
             allow_skip=True,
@@ -358,14 +362,21 @@ def update_task():
             allow_skip=True,
         )
 
-        # If a new priority is provided, update it in the sheet
-        if new_priority:
+         # Notify the user if the new priority is the same as the current one.
+        if new_priority and new_priority.lower() == current_task["Priority"].lower():
+            confirm_change = input("The new priority is the same as the current one. Do you still want to change it? (yes/no): \n").strip().lower()
+            if confirm_change == "yes":
+                worksheet.update_cell(task_index, 3, new_priority)
+            else:
+                print("Priority update skipped.")
+            # If a new priority is provided, update it in the sheet
+        elif new_priority:
             worksheet.update_cell(task_index, 3, new_priority)
 
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
         new_due_date = input(
-            "Enter new Due Date (YYYY-MM-DD) or press Enter to skip: \n"
+            "\nEnter new Due Date (YYYY-MM-DD) or press Enter to skip: \n"
         ).strip()
         if new_due_date:
             try:
@@ -387,7 +398,21 @@ def update_task():
             allowed_values=status_allowed_values + [""],
             allow_skip=True,
         )
-        if new_status:
+
+         # Notify the user if the new status is the same as the current one.
+        if new_status and new_status.lower() == current_task["Status"].lower():
+            # Ask the user if they want to proceed with changing the status
+            # even though it's the same as the current one
+            confirm_change_status = input("The new status is the same as the current one. Do you still want to change it? (yes/no): ").strip().lower()
+            if confirm_change_status == "yes":
+                # If the user confirms, proceed with updating the status
+                worksheet.update_cell(task_index, 5, new_status)
+                print("Status updated successfully.")
+            else:
+                # If the user decides not to change the status, skip this part
+                print("Status update skipped.")
+        elif new_status:
+            # If the new status is different from the current one, update it
             worksheet.update_cell(task_index, 5, new_status)
 
         print("\nTask updated successfully.")
@@ -508,10 +533,9 @@ def main_menu():
 
 print(
     "\nWelcome to Your Personal Task Organizer! 🌟 \n"
-    "Effortlessly manage your tasks with our intuitive task"
-    "organizer."
-    "\nStay organized, focused, and productive by easily "
-    "adding, updating, and tracking your to-dos."
+    "Effortlessly manage your tasks with our intuitive task organizer."
+    "\nStay organized, focused, and productive by easily adding, updating,"
+    "\nand tracking your to-dos."
     "\nGet started now and make task management a breeze!\n"
 )
 
