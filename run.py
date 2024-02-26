@@ -1,13 +1,10 @@
 # Amended from www.geeksforgeeks.org/python-datetime-module/
 import datetime
-
 # Amended from Code Institute project love_sandwiches
 import gspread
 from google.oauth2.service_account import Credentials
-
 # Amended from pypi.org/project/prettytable/
 from prettytable import PrettyTable
-
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -509,5 +506,13 @@ def main_menu():
             continue
 
 
-print("\n Welcome to Your Personal Task Organizer! 🌟")
+print(
+    "\nWelcome to Your Personal Task Organizer! 🌟 \n"
+    "Effortlessly manage your tasks with our intuitive task"
+    "organizer."
+    "\nStay organized, focused, and productive by easily "
+    "adding, updating, and tracking your to-dos."
+    "\nGet started now and make task management a breeze!\n"
+)
+
 main_menu()

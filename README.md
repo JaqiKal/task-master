@@ -7,21 +7,23 @@
 ![screenshot](docs/Mockup.png)  
 [**Live site**](https://xx.com/)
 
-## CONTENTS
+## CONTENT
 
 * [Introduction](#introduction)
-  *[Demo](#demo)
-  *[Who is the Application For?](#who-is-the-application-for]
-  *[The problem it solves and its intended use](#the-problem-it-solves-and-its-intended-use)
+  * [Demo](#demo)
+  * [Who is the application for](#who-is-the-application-for)
+  * [The problem it solves and its intended use](#the-problem-it-solves-and-its-intended-use)
 * [Objectives](#objectives)
   * [Developer's goal](#developers-goal)
   * [User's goal](#users-goal)
+* [User Experience](#user-experience)
+  * [User stories](#user-stories)
 * [Features](#features)
   * [Existing features](#existing-features)
   * [Future features](#future-features)
 * [Technologies used](#technologies-used)
   * [Language](#language)
-  * [Toolchain](#tools)
+  * [Tools](#tools)
 * [Data Model](#data-model)
   * [Flowchart](#flowchart)
   * [Classes & Functions](#classes--functions)
@@ -47,13 +49,15 @@
 
 * [Live Site on Heroku](https://xx.com/)
 
-### Who is the Application For?
+### Who is the Application For
 
 Task Master is a user-friendly to-do list app designed for casual users, students, and professionals to efficiently manage tasks, priorities, and deadlines. It features Google Sheets integration, intuitive task prioritization, a clean interface, and real-time collaboration, making task management straightforward and customizable.
 
 ### The problem it solves and its intended use
 
 This app solves the problem of managing daily responsibilities in a busy world by providing a digital platform for users to note tasks, assign priority levels, set deadlines, and track progress. It helps users focus on important tasks, manage time effectively, and improve productivity by offering a reliable and organized system for task management. Task Master is accessible to anyone seeking to enhance their daily and long-term productivity, acting as a digital assistant to navigate tasks with ease and clarity.
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
 
@@ -92,8 +96,56 @@ The user's primary goal in using this to-do list application is to have a reliab
 4.	*Enjoy a Hassle-Free Experience*
 	- Interact with an application that is easy to use, free from technical glitches, and provides helpful feedback as needed.
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ---
 
+## User Experience
+
+### User stories
+
+#### First Time Visitor Goals
+
+* **User story 1: Understand Purpose**
+
+  * As a first-time visitor, I want to easily understand the purpose of the task organizer app so that I can decide if it meets my needs.
+
+* **Achieved by**
+  
+  *  Providing having a clear and concise description welcome message on the app's landing page.
+
+  **User story 2: Intuitive UI**
+
+  * As a first-time visitor, I want a straightforward and intuitive user interface so that I can quickly navigate the app and perform basic tasks.
+
+* **Achieved by**
+
+  * Having implemented a well-organized menu with clear labels and simple instructions for adding, updating, deleting, and viewing tasks.
+
+#### Returning Visitor Goals
+
+* **User story 2: As a returning visitor**
+
+  * As a returning visitor I want to quickly access and review the details of a specific task that you've previously added to the organizer.
+
+* **Achieved by**
+
+  * Navigating to the "View Task" option on the main menu and entering the Task ID you want yo review. The app will retrieve and display all the details of the specified task, including its description, priority, due date, status, and creation date.
+
+#### Frequent Visitor Goals
+
+* **User story 3: Efficient updating**
+
+  * As a frequent visitor, I want to be able to update existing tasks quickly and efficiently without having to re-enter all the details.
+
+* **How?**
+
+  * This is achieved through a streamlined "Update Task" functionality, allowing users to selectively modify task details while receiving confirmation upon successful updates.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
+---
 ## Features 
 
 These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity.  
@@ -137,6 +189,8 @@ Skriv varf´ör valet förll på generate_task_id.
 ![screenshot](XX)
 
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ### Future Features
 
 There are a lot one can do to enhance this application, I want to highlight these four (in no specific prioirity order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
@@ -161,6 +215,9 @@ There are a lot one can do to enhance this application, I want to highlight thes
 - **Description**:  Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviors into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
 - **Benefit**:  By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
 
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ---
 
 ## Technologies Used
@@ -169,7 +226,7 @@ There are a lot one can do to enhance this application, I want to highlight thes
 
 [Python](https://www.python.org) used as the back-end programming language.
 
-###Tools
+### Tools
 
 * [Code Institute Python Linter](https://pep8ci.herokuapp.com/): A tool to check Python code against some of the style conventions in [PEP8](https://peps.python.org/pep-0008/).
 * [Draw.io](https://www.drawio.com/): Useful for planning the application's architecture and flowcharts, especially helpful in the design phase to visualize the application flow.
@@ -180,6 +237,9 @@ There are a lot one can do to enhance this application, I want to highlight thes
 * [Heroku](https://www.heroku.com): A platform for deploying and hosting web applications. 
 * [Markup Validation Service](https://validator.w3.org/) - Used to check code ensuring that my HTML is error-free and adheres to the latest web standards.
 * [PEP8](https://peps.python.org/pep-0008/): Style Guide for Python Code.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
 
@@ -201,11 +261,18 @@ The primary functions used on this application are:
 
 Following Python packages and/or external imported packages was used:
 
-* add some text
+* [datetime](https://www.geeksforgeeks.org/python-datetime-module/#python-datetime-module) - Basic date and time type. Python Datetime module comes built into Python, so there is no need to install it externally. 
+* [gspread](https://pypi.org/project/gspread/) - Google Spreadsheets Python API
+* [PrettyTable](https://pypi.org/project/prettytable/) -  A simple Python library for easily displaying tabular data in a visually appealing ASCII table format
 
+To install use : ```pip install -name of package-```
+To generate list of installed Python packages use:  ```pip freeze```
 ### Programming paradigm
 
 Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward task manager (To-Do-list) application, I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
 
@@ -213,6 +280,9 @@ Procedural Programming and Object-Oriented Programming (OOP) represent two separ
 
 ### Results
 Please refer to TESTING.md file for all testing and trouble shooting carried out.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
 
@@ -292,7 +362,10 @@ The game was developed in VS Code, stored in GitHub as the local repository, and
 	  
    - Alternatively:
      You can opt for Automatic Deployment directly from the Heroku app interface.
-   
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*   
+
 ### Local Deployment
 
 The project can be cloned or forked in order to make a local copy on your own system.
@@ -301,6 +374,9 @@ For either method, you will need to install any applicable packages found within
 - ```pip3 install -r requirements.txt```.
 
 If using any confidential credentials, such as `CREDS.json` or `env.py` data, you'll have to manually incorporate these into your new project as well.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### How to Clone
 
@@ -315,6 +391,9 @@ To clone the project repository:
 	- `git clone https://github.com/JaqiKal/task-master`
 7. Press Enter to create your local clone.
 
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ### Forking
 
 Forking the GitHub Repository allows us to create a duplicate of the original repository in our own GitHub account. This enables us to explore and modify the content without impacting the original repository. To fork this repository, follow these steps:
@@ -323,9 +402,15 @@ Forking the GitHub Repository allows us to create a duplicate of the original re
 2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ### Local VS Deployment
 
 At the time of writing, there is no differance between the local version and the version deployed on Heroku.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
 
@@ -336,9 +421,15 @@ At the time of writing, there is no differance between the local version and the
 | Source | Location | Notes |
 | --- | --- | --- |
 
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ### Media
 
 For this project no external media was used for creation of this project.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Acknowledgements 
 
@@ -348,3 +439,6 @@ I would like to thank!
 * The whole team at [Code Institute Slack community](https://code-institute-room.slack.com) for their teaching and support.
 * To all engaged fellow student at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
 * My immediate and extended family, as well as my friends, support and cheer me on!
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
