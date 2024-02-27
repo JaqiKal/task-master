@@ -23,6 +23,8 @@ try:
     # If the worksheet is found, continue with the program
 except gspread.WorksheetNotFound:
     # If the worksheet is not found, print an error message and exit
+    # API error handling amended from docs.gspread.org/en/latest/api/exceptions.html
+    # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
     print("Error: Worksheet not found")
     exit()
 
@@ -179,13 +181,16 @@ def add_row_to_sheet():
     # Generate the task creation date in YYYY-MM-DD format
     creation_date = datetime.date.today().strftime("%Y-%m-%d")
 
-    # Adding the row to the sheet
+    # Adding the row to the sheet with API error handling
+    # Amended from docs.gspread.org/en/latest/api/exceptions.html
+    # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
     row = [task_id, to_do, priority, due_date, status, creation_date]
-    worksheet.append_row(row)
-    # Print an empty line for spacing
-    print()
-    print("Task added successfully with creation date:", creation_date)
-
+    try:
+        worksheet.append_row(row)
+        print("\nTask added successfully with creation date:", creation_date)
+    except gspread.exceptions.APIError as e:
+        # Print API error
+        print("Failed to add task due to Google sheets API error:", e)
 
 def list_all_tasks():
     """
