@@ -231,12 +231,14 @@ def list_all_tasks():
 
     try:
         # Ask the user for their preferred sorting criteria
-        print("\nChoose sorting criteria:")
+        print("Choose sorting criteria:")
+        print("------------------------")
         print("1. Task ID (default)")
         print("2. Priority")
         print("3. Status")
         print("4. Due Date (earliest to latest)")
         print("5. Due Date (latest to earliest)\n")
+
         sort_choice = get_user_input(
             "Enter choice (or press Enter for default): ",
             allow_skip=True, numeric=True
@@ -270,10 +272,11 @@ def list_all_tasks():
 
         # Determine if sorting should be reversed based on user choice
         reverse_sort = sort_choice == 5
-
         # Perform the sorting
         sorted_tasks = sorted(tasks, key=sort_key, reverse=reverse_sort)
 
+    except ExitToMainMenu:
+        return  # If 'back' is entered, catch the exception and return immediately
     except Exception as e:
         print(f"An error occurred during sorting: {e}. Sorting by Task ID.")
         # Fallback to default sorting if any error occurs
@@ -314,70 +317,39 @@ def view_task():
     Prompts the user for a Task ID and displays the details of
     the specified task.
     """
+    # Add a space before prompting for Task ID
+    print() 
+
     task_id = get_user_input("Enter Task ID to view: \n", numeric=True)
-    tasks = worksheet.get_all_records()
-
-    # Find the task by Task ID
-    found_task = next(
-        (task for task in tasks if int(task["Task ID"]) == task_id),
-        None)
-
-    if found_task:
-        # Code to display the task details. Create a PrettyTable
-        # instance and define the column headers
-        task_table = PrettyTable()
-        task_table.field_names = [
-            "Task ID",
-            "To-Do",
-            "Priority",
-            "Due Date",
-            "Status",
-            "Creation Date",
-        ]
-        task_table.align = "l"
-
-        # Add the found task to the table
-        task_table.add_row(
-            [
-                found_task["Task ID"],
-                found_task["To-Do"],
-                found_task["Priority"],
-                found_task["Due Date"],
-                found_task["Status"],
-                found_task["Creation Date"],
-            ]
-        )
-
-        # Print the task details table
-        print(task_table)
-    else:
-        # No task was found with the given Task ID
-        print("Task not found.")
-
-
-def view_task_specific(task_id):
-    """
-    Displays the details of a specific task identified by its Task ID.
-    This function fetches the task's details from the Google Sheet
-    and prints them.
-    """
     # Fetch all tasks as a list of dictionaries
     tasks = worksheet.get_all_records()
+    
+    # Convert task_id to int for comparison, handle potential ValueError
+    try:
+        task_id = int(task_id)
+    except ValueError:
+        print("\nInvalid Task ID format. Please enter a numeric value.")
+        return
 
     # Find the task by Task ID
     found_task = next(
-        (task for task in tasks if str(task["Task ID"]) == task_id), None)
-
-    # If the task is found, display its details
+        (task for task in tasks if str(task['Task ID']) == str(task_id)),
+        None
+    )
+    
     if found_task:
-        print(f"Task ID: {found_task['Task ID']}")
-        print(f"To-Do: {found_task['To-Do']}")
-        print(f"Priority: {found_task['Priority']}")
-        print(f"Due Date: {found_task['Due Date']}")
-        print(f"Status: {found_task['Status']}")
-        print(f"Creation Date: {found_task['Creation Date']}")
+        # Add a space before displaying task details
+        print("\nTask Details:")
+        print("-------------")
+        print(
+            f"Task ID: {found_task['Task ID']}\n"
+            f"To-Do: {found_task['To-Do']}\n"
+            f"Priority: {found_task['Priority']}\n"
+            f"Due Date: {found_task['Due Date']}\n"
+            f"Status: {found_task['Status']}"
+        )
     else:
-        print("Task not found.")
+        print("\nTask not found. Please ensure you have entered a valid Task ID.")
 
 
 def update_task():
@@ -627,6 +599,7 @@ def main_menu():
             )
             # Adds a blank line for clearer output separation
             print()
+
             if choice == "1":
                 add_row_to_sheet()
             elif choice == "2":
