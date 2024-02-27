@@ -498,6 +498,8 @@ At the time of writing, there is no differance between the local version and the
 * [API error handling](https://snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError)
 * [class ExitToMainMenu(Exception)](https://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python)
 * [format the time stamp which is in string format to date-time object](https://geeksforgeeks.org/python-datetime-strptime-function/)
+* [Try - Except](https://www.w3schools.com/python/python_try_except.asp)
+* [ColouringPrint Colors in Python Terminal ](https://www.geeksforgeeks.org/print-colors-python-terminal/)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

@@ -8,6 +8,10 @@ from google.oauth2.service_account import Credentials
 # Amended from pypi.org/project/prettytable/
 from prettytable import PrettyTable
 
+# Amended from: www.geeksforgeeks.org/print-colors-python-terminal/
+import colorama 
+from colorama import Fore, Back, Style
+
 # Amended from Code Institute project love_sandwiches
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,6 +27,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("task-master-database")
 
 # Attempt to open the worksheet
+# Amended from: www.w3schools.com/python/python_try_except.asp
 try:
     worksheet = SHEET.worksheet("taskdb")
     # If the worksheet is found, continue with the program
@@ -121,6 +126,7 @@ def get_user_input(
             continue
         # Attempt to convert input to integer, retrying on failure
         if numeric:
+            # Amended from: www.w3schools.com/python/python_try_except.asp
             try:
                 # Convert to integer and return if successful
                 return int(user_input)
@@ -155,8 +161,9 @@ def get_valid_due_date():
     """
     while True:
         due_date_str = input("Enter Due Date (YYYY-MM-DD): \n")
+        # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
-            # Amended from:geeksforgeeks.org/python-datetime-strptime-function/
+            # Amended from: geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
                 due_date_str, "%Y-%m-%d"
             ).date()
@@ -209,6 +216,7 @@ def add_row_to_sheet():
     # Amended from docs.gspread.org/en/latest/api/exceptions.html
     # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
     row = [task_id, to_do, priority, due_date, status, creation_date]
+    # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         worksheet.append_row(row)
         print("\nTask added successfully with creation date:", creation_date)
@@ -228,7 +236,8 @@ def list_all_tasks():
     if not tasks:
         print("No tasks found.")
         return
-
+        
+    # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         # Ask the user for their preferred sorting criteria
         print("Choose sorting criteria:")
@@ -243,9 +252,6 @@ def list_all_tasks():
             "Enter choice (or press Enter for default): ",
             allow_skip=True, numeric=True
         )
-
-        # Add a space after the user makes a selection
-        print()
 
         # Default to sorting by Task ID if no valid choice is made
         # and ensure the sort_choice is correctly interpreted as an integer
@@ -288,12 +294,12 @@ def list_all_tasks():
     # Prepare and display the table
     table = PrettyTable()
     table.field_names = [
-        "Task ID",
+        "ID",
         "To-Do",
-        "Priority",
+        "Prio",
         "Due Date",
         "Status",
-        "Creation Date",
+        "Creation ",
     ]
     table.align = "l"
 
@@ -325,6 +331,7 @@ def view_task():
     tasks = worksheet.get_all_records()
     
     # Convert task_id to int for comparison, handle potential ValueError
+    # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         task_id = int(task_id)
     except ValueError:
@@ -369,6 +376,7 @@ def update_task():
     - Utilizes the `ExitToMainMenu` exception to allow exiting to the main menu
       at any point by typing a specific command (e.g., 'back')
     """
+    # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         task_id = get_user_input(
             "Enter the Task ID of the task you want to update: \n",
@@ -450,6 +458,7 @@ def update_task():
             allow_skip=True,
         )
         if new_due_date:
+            # Amended from: www.w3schools.com/python/python_try_except.asp
             try:
                 # Validate the date format by attempting to convert
                 # the string into a date
@@ -515,6 +524,7 @@ def delete_tasks():
     and if so, deletes it from the Google Sheet. If any task cannot be found,
     the user is informed accordingly.
     """
+    # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         task_ids_input = get_user_input(
             "Enter the Task ID(s) of the tasks you want to delete"
@@ -554,6 +564,7 @@ def delete_tasks():
         if confirm == "yes":
             # Sort the list in reverse order to avoid messing up the indexes
             tasks_to_delete.sort(reverse=True)
+            # Amended from: www.w3schools.com/python/python_try_except.asp
             try:
                 for row in tasks_to_delete:
                     worksheet.delete_rows(row)
@@ -585,6 +596,7 @@ def main_menu():
     request for a valid choice.
     """
     while True:
+        # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
             print("\n Menu To-Do-List")
             print("-----------------")
@@ -621,12 +633,37 @@ def main_menu():
             continue
 
 
+# Amended from: geeksforgeeks.org/print-colors-python-terminal/
+colorama.init(autoreset=True)
+
+# Simplified ASCII art without centering
+ascii_art = [
+    f"{Fore.MAGENTA}{Style.BRIGHT}  _________",
+    f"{Fore.MAGENTA}{Style.BRIGHT} |         |     ___        ______         ____ ",
+    f"{Fore.MAGENTA}{Style.BRIGHT} |__     __|   /   _  \\     |   _   \\     /  _   \\",
+    f"{Fore.MAGENTA}{Style.BRIGHT}    |   |     |  |  |  |    |  | \\   |   |  |  |  |",
+    f"{Fore.MAGENTA}{Style.BRIGHT}    |   |     |  |  |  |    |  |  |  |   |  |  |  |",
+    f"{Fore.MAGENTA}{Style.BRIGHT}    |   |     |  \\__/  |    |  |__/  |   |  \\__/  |",
+    f"{Fore.MAGENTA}{Style.BRIGHT}    |___|      \\_____ /     |________/    \\_____ /",
+    f"{Style.RESET_ALL}"
+]
+
+# Print each line of the ASCII art in magenta color
+for line in ascii_art:
+    print(line)
+
 print(
+    f"{Fore.MAGENTA}{Style.BRIGHT}"
     "\nWelcome to Your Personal Task Organizer! 🌟 \n"
+    f"{Style.RESET_ALL}"
+)
+print(
+    f"{Fore.BLUE}{Style.BRIGHT}"
     "Effortlessly manage your tasks with our intuitive task organizer."
     "\nStay organized, focused, and productive by easily adding, updating,"
     "\nand tracking your to-dos."
     "\nGet started now and make task management a breeze!\n"
+    f"{Style.RESET_ALL}"
 )
 
 main_menu()
