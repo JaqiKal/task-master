@@ -17,6 +17,7 @@ CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("task-master-database")
+
 # Attempt to open the worksheet
 try:
     worksheet = SHEET.worksheet("test-sheet")
@@ -71,7 +72,8 @@ def get_user_input(
     prompt,
     normalize=False,
     allowed_values=None,
-    allow_skip=False
+    allow_skip=False,
+    numeric=False
 ):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
@@ -107,6 +109,15 @@ def get_user_input(
             print(
                 "Invalid input. Please enter one of the following:\n"
                 f"{', '.join(allowed_values)}"
+            )
+            continue
+        # Attempt to convert input to integer, retrying on failure
+        if numeric:
+            try:
+                # Convert to integer and return if successful
+                return int(user_input)
+            except ValueError:
+                print("Invalid input. Please enter a numeric value.\n"
             )
             continue
         return user_input
@@ -152,7 +163,6 @@ priority_allowed_values = ["High", "Medium", "Low"]
 status_allowed_values = ["New", "Completed", "Pending"]
 
 
-# Function to add a row
 def add_row_to_sheet():
     """
     Prompts user for task details and adds a new row to the Google Sheet.
@@ -191,6 +201,7 @@ def add_row_to_sheet():
     except gspread.exceptions.APIError as e:
         # Print API error
         print("Failed to add task due to Google sheets API error:", e)
+
 
 def list_all_tasks():
     """
@@ -242,15 +253,16 @@ def view_task():
     Prompts the user for a Task ID and displays the details of
     the specified task.
     """
-    task_id = input("Enter Task ID to view: \n")
+    task_id = get_user_input("Enter Task ID to view: \n", numeric=True)
     tasks = worksheet.get_all_records()
 
     # Find the task by Task ID
     found_task = next(
-        (task for task in tasks if str(task["Task ID"]) == str(task_id)), None)
+        (task for task in tasks if int(task["Task ID"]) == task_id), None)
 
     if found_task:
-        # Create a PrettyTable instance and define the column headers
+        # Code to display the task details. Create a PrettyTable 
+        # instance and define the column headers
         task_table = PrettyTable()
         task_table.field_names = [
             "Task ID",
@@ -275,6 +287,7 @@ def view_task():
         # Print the task details table
         print(task_table)
     else:
+        # No task was found with the given Task ID
         print("Task not found.")
 
 
