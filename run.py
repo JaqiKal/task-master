@@ -29,7 +29,10 @@ except gspread.WorksheetNotFound:
     # API error handling amended from
     # docs.gspread.org/en/latest/api/exceptions.html
     # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
-    print("Error: Worksheet not found")
+    print(
+        "Error: Worksheet not found."
+        "Please check the worksheet name and try again."
+    )
     exit()
 
 
@@ -40,7 +43,6 @@ class ExitToMainMenu(Exception):
 
     Exception used to signal an exit back to the main menu.
     """
-
     pass
 
 
@@ -50,7 +52,7 @@ def generate_task_id():
     This function fetches all current tasks from the Google Sheet,
     identifies the highest task ID in use, and increments it by 1 to
     ensure uniqueness and maintain a sequential order.
-    The ethod is chosen for its simplicity and effectiveness in environments
+    The method is chosen for its simplicity and effectiveness in environments
     where task creation occurs at a manageable rate and concurrency issues
     are minimal. It leverages the existing data structure without requiring
     external dependencies or complex ID generation schemes.
@@ -102,7 +104,7 @@ def get_user_input(
             return user_input
         # Check for empty input
         if not user_input:
-            print("Input cannot be empty. Please try again.\n")
+            print("Error: Input cannot be empty. Please try again.\n")
             continue
         # Capitalize the first letter and make the rest lowercase
         if normalize:
@@ -110,7 +112,8 @@ def get_user_input(
         # Prompt the user to re-enter the input
         if allowed_values and user_input not in allowed_values:
             print(
-                "Invalid input. Please enter one of the following:\n"
+                "Error: Invalid input"
+                "Please enter one of the following:\n"
                 f"{', '.join(allowed_values)}"
             )
             continue
@@ -120,7 +123,10 @@ def get_user_input(
                 # Convert to integer and return if successful
                 return int(user_input)
             except ValueError:
-                print("Invalid input. Please enter a numeric value.\n")
+                print(
+                    "Error: Invalid input."
+                    "Please enter a numeric value.\n"
+                )
             continue
         return user_input
 
@@ -153,11 +159,14 @@ def get_valid_due_date():
                 due_date_str, "%Y-%m-%d"
             ).date()
             if due_date < datetime.date.today():
-                print("The due date must be in the future. Please try again.")
+                print(
+                    "Error: The due date must be in the future."
+                    "Please try again."
+                )
             else:
                 return due_date_str  # Return the valid due date string
         except ValueError:
-            print("Invalid date format. Please use YYYY-MM-DD.")
+            print("Error: Invalid date format. Please use YYYY-MM-DD.")
 
 
 # Define allowed values for task priority and status
@@ -203,7 +212,7 @@ def add_row_to_sheet():
         print("\nTask added successfully with creation date:", creation_date)
     except gspread.exceptions.APIError as e:
         # Print API error
-        print("Failed to add task due to Google sheets API error:", e)
+        print(f"Error: Failed to add task due to Google sheets API error:", e)
 
 
 def list_all_tasks():
@@ -578,7 +587,8 @@ def delete_tasks():
             except gspread.exceptions.APIError as e:
                 # Print the API error
                 error_message = (
-                    "Failed to delete task due to a Google Sheets API error: "
+                    f"Error: Failed to delete task"
+                    "due to a Google Sheets API error: "
                 )
                 print(error_message, e)
         elif confirm == "no":
@@ -629,7 +639,7 @@ def main_menu():
                 print("Exiting the Task Organizer. Goodbye!")
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("Error: Invalid choice. Please try again.")
         except ExitToMainMenu:
             # If "back" is entered at any input prompt,
             # loop back to the main menu
