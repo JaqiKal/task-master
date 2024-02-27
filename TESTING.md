@@ -97,7 +97,8 @@ No automatic testing apart from using the pep8 validator was perfomed.
 | ERR-01 | Invalid Task ID | For invalid Task ID inputs, the application prevents action and displays an error message. ID.  | Attempt actions with non-existent Task ID. | PASS | |
 | ERR-02 | Update Non-existent Task | Attempting to update a task that does not exist shows an error message indicating the task cannot be found. | Update a task with an ID that doesn't exist. | PASS | |
 | ERR-03 | Delete Non-existent Task | Attempting to delete a task that does not exist shows an error message indicating the task cannot be found. | Delete a task with an ID that doesn't exist. | PASS | |
-| ERR-04 | Add Task | Temporarily change the permissions on the Google Sheet so that the API user does not have write access and attempt to add a task. | This results in an API error (Permission Denied) when attempting to append a row. App terminates. | PASS | |
+| ERR-04 | Add Task | Temporarily change the permissions on the Google Sheet so that the API user does not have write access and attempt to add a task. | This results in an API error (PERMISSION_DENIED) when attempting to append a row. App terminates. | PASS | |
+| ERR-05 | Add Task | Temporarily change the permissions on the Google Sheet so that the API user does not have write access and attempt to delete a task. | This results in an API error (PERMISSION_DENIED) when attempting to remove a row. App terminates. | PASS | |
 
 #### User Interaction Test (UIA)
 

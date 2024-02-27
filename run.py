@@ -497,9 +497,13 @@ def delete_tasks():
         if confirm == "yes":
             # Sort the list in reverse order to avoid messing up the indexes
             tasks_to_delete.sort(reverse=True)
-            for row in tasks_to_delete:
-                worksheet.delete_rows(row)
-            print("Tasks deleted successfully.")
+            try:
+                for row in tasks_to_delete:
+                    worksheet.delete_rows(row)
+                    print("Tasks deleted successfully.")
+            except gspread.exceptions.APIError as e:
+                # Print the API error
+                print("Failed to delete task due to a GOoogle sheet API error:", e)
         elif confirm == "no":
             print("Task deletion canceled.")
         else:
