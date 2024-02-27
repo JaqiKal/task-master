@@ -26,18 +26,18 @@
   * [Tools](#tools)
 * [Data Model](#data-model)
   * [Flowchart](#flowchart)
-  * [Classes & Functions](#classes--functions)
+  * [Functions & Error Handling](#functions--error-handling)
+  * [Error Handling Strategy](#error-handling-strategy)
   * [Imports](#imports)
   * [Programming paradigm](#programming-paradigm)
 * [Testing](#testing)
-* [Deployment](#deployment)
-  * [Installation](#installation)
-  * [Heroku Deployment](#heroku-deployment)
-    * [Essential when creating the Heroku app](#Essentials)
+* [Prerequisites and Deployment](#prerequisites-and-deployment)
+  * [Prerequisite](#prerequisite)
+  * [Deploying on Heroku](#deploying-on-heroku)
+  * [Essential when creating the Heroku app](#Essentials)
   * [Local Deployment](#local-deployment)
-  * [Cloning](#cloning)
+  * [How to Clone](#how-to-clone)
   * [Forking](#forking)
-  * [Constraints](#constraints)
 * [Credits](#credits)
    * [Content](#content)
    * [Media](#media)
@@ -79,6 +79,9 @@ This app solves the problem of managing daily responsibilities in a busy world b
 
 5.	*Learn and Apply New Skills*
 	- Use the project as an opportunity to learn more about Python programming, Google Sheets API, and other relevant technologies or programming concepts.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 #### User's goal
 
@@ -138,56 +141,75 @@ The user's primary goal in using this to-do list application is to have a reliab
 
   * As a frequent visitor, I want to be able to update existing tasks quickly and efficiently without having to re-enter all the details.
 
-* **How?**
+* **Achieved by**
 
-  * This is achieved through a streamlined "Update Task" functionality, allowing users to selectively modify task details while receiving confirmation upon successful updates.
+  * A streamlined "Update Task" functionality, allowing users to selectively modify task details while receiving confirmation upon successful updates.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
-## Features 
+## Features
 
-These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity.  
+These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity.
 
 ### Existing features
 
 Here's an overview of its key features:
 
-* **Centralized Task Management**: Effortlessly add, edit, and organize tasks in a centralized Google Worksheet, ensuring your to-do list is always up-to-date and accessible.
-![screenshot](XX)
+#### Centralized Task Management
 
-* **Dynamic Task Addition and Editing**: Easily add new tasks or modify existing ones, including details such as task descriptions, priorities, and due dates, for precise task management.
-
-![screenshot](XX)
-
-* **Unique Task ID and UUID**
-Skriv varf´ör valet förll på generate_task_id.
-
-* **Prioritization and Deadlines**: Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most..
+Effortlessly add, edit, and organize tasks in a centralized Google Worksheet, ensuring your to-do list is always up-to-date and accessible. 
 
 ![screenshot](XX)
 
-* **Efficient Task Listing**: View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease.
+#### Dynamic Task Addition and Editing
+
+Easily add new tasks or modify existing ones, including details such as task descriptions, priorities, and due dates, for precise task management. 
 
 ![screenshot](XX)
 
-* **Task Completion Tracking**: Mark tasks as done with a simple click, offering a satisfying way to track your progress and maintain motivation.
+#### Unique Task ID Generation
+
+I implemented the `generate_task_id` function to ensure each task is uniquely identifiable. This choice simplifies the management process for updates, views, or deletions, avoids complex ID generation schemes, and integrates seamlessly with the Google Sheets framework. 
 
 ![screenshot](XX)
 
-* **Error Handling and User Feedback**: Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made.
+#### Prioritization and Deadlines
+
+Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most. 
 
 ![screenshot](XX)
 
-* **Flexible Access and Data Persistence**: With tasks stored in Google Sheets, access your task list from any device, ensuring that your data is always there when you need it.
+#### Efficient Task Listing
+
+View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. 
 
 ![screenshot](XX)
 
-* **Secure and Easy Exit**: Confidently exit the application, knowing that all your tasks are safely stored in Google Sheets, ready for your next session.
+#### Task Completion Tracking
+
+Mark tasks as done with a simple click, offering a satisfying way to track your progress and maintain motivation. 
 
 ![screenshot](XX)
 
+#### Error Handling and User Feedback
+
+Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. I plan to include screenshots and GIFs to showcase these mechanisms in action, providing a clearer understanding of the app's ease of use. 
+
+![screenshot](XX)
+
+#### Flexible Access and Data Persistence
+
+With tasks stored in Google Sheets, access your task list from any device, ensuring that your data is always there when you need it. Security and privacy are paramount, and I've taken measures to ensure data security, including the use of secure API keys and restricted spreadsheet access. 
+
+![screenshot](XX)
+
+#### Secure and Easy Exit
+
+Confidently exit the application, knowing that all your tasks are safely stored in Google Sheets, ready for your next session. 
+
+![screenshot](XX)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -251,11 +273,58 @@ To follow best practice, a flowchart was created for the app's logic, and mapped
 
 ![Flowchart](XXXXXX.webp)
 
-### Classes & Functions
+### Functions & Error Handling
 
-The primary functions used on this application are:
+The primary functions used in this application are designed to streamline the task management process, making it intuitive and efficient for users to interact with their tasks. 
 
-* add some text
+The application is built with a focus on procedural programming, leveraging a series of functions to handle the core logic and interactions with the Google Sheets API. 
+While incorporating robust error handling to ensure a smooth and reliable user experience.
+
+Below is an outline of some key functions within the application and the specific roles they play:
+
+#### `generate_task_id()`
+
+This function assigns a unique identifier to each task, crucial for the easy management, updating, viewing, or deletion of tasks. It ensures tasks can be uniquely and efficiently managed within the system.
+
+#### `get_user_input()`
+
+At the core of user interaction, this function captures and validates user input, supporting various input types. It incorporates validation logic to maintain data integrity and provides user-friendly feedback, crucial for guiding users through correct data entry.
+
+#### `get_valid_due_date()`
+
+Validates that due dates for tasks are set in the future, a critical component for effective task scheduling and prioritization. This function helps users plan and prioritize their tasks with logical and practical due dates.
+
+#### `add_row_to_sheet()`
+
+Handles the addition of new tasks to the Google Sheet, encapsulating both the creation logic and error handling for API limits and connectivity issues. This ensures tasks are reliably stored in the application's persistent storage.
+
+#### `list_all_tasks()`
+
+Retrieves and displays all tasks from the Google Sheet, allowing users to view their entire task list in a structured format. Integrated error handling addresses unexpected data formats or API changes, ensuring robustness.
+
+#### `view_task()`
+
+Provides the functionality for detailed viewing of specific tasks based on their unique task ID. Error handling is integrated to offer clear feedback if a task ID does not correspond to an existing task, enhancing user interaction.
+
+#### `update_task()`
+
+Enables modifications to existing tasks, including updates to task descriptions, priorities, due dates, and statuses. The function includes error handling strategies to manage invalid inputs or issues when updating the Google Sheet.
+
+#### `delete_tasks()`
+
+Facilitates the deletion of tasks from the Google Sheet, with comprehensive error handling to manage invalid task IDs or connectivity problems, enabling users to efficiently remove completed or outdated tasks.
+
+
+The design and implementation of these functions are geared towards simplifying task management, ensuring that users can easily add, view, update, and delete tasks. By leveraging Google Sheets as a backend, the application also offers real-time data persistence and accessibility from any device.
+
+### Error Handling Strategy
+
+Error handling in the application is not confined to a single function but is woven throughout the application's logic. This approach ensures that users are provided with clear, actionable feedback in case of input errors, connectivity issues, or API limitations. Whether it's a validation error for a due date or an API limit being reached, the application strives to inform users of the issue and guide them towards resolving it. This not only enhances the user experience but also contributes to the application's overall reliability and robustness.
+
+By integrating error handling directly into the core functions and operations, the application can gracefully manage exceptions, maintain consistent performance, and ensure data integrity. This careful consideration of error handling is a testament to the application's design philosophy, prioritizing user satisfaction and operational reliability.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Imports
 
@@ -267,6 +336,10 @@ Following Python packages and/or external imported packages was used:
 
 To install use : ```pip install -name of package-```
 To generate list of installed Python packages use:  ```pip freeze```
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ### Programming paradigm
 
 Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward task manager (To-Do-list) application, I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
@@ -418,16 +491,19 @@ At the time of writing, there is no differance between the local version and the
 
 ### Content
 
-| Source | Location | Notes |
-| --- | --- | --- |
-
+* gspread: Amended from Code Institute project love_sandwiches
+* [import datetime](https://www.geeksforgeeks.org/python-datetime-module/)
+* [prettytable](https://pypi.org/project/prettytable/)
+* [API error handling](https://docs.gspread.org/en/latest/api/exceptions.html)
+* [API error handling](https://snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError)
+* [class ExitToMainMenu(Exception)](https://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python)
+* [format the time stamp which is in string format to date-time object](https://geeksforgeeks.org/python-datetime-strptime-function/)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Media
 
 For this project no external media was used for creation of this project.
-
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

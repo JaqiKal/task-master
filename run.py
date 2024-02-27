@@ -8,6 +8,7 @@ from google.oauth2.service_account import Credentials
 # Amended from pypi.org/project/prettytable/
 from prettytable import PrettyTable
 
+# Amended from Code Institute project love_sandwiches
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -15,6 +16,7 @@ SCOPE = [
 ]
 
 # Google Sheets setup
+# Amended from Code Institute project love_sandwiches
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -22,7 +24,7 @@ SHEET = GSPREAD_CLIENT.open("task-master-database")
 
 # Attempt to open the worksheet
 try:
-    worksheet = SHEET.worksheet("test-sheet")
+    worksheet = SHEET.worksheet("taskdb")
     # If the worksheet is found, continue with the program
 except gspread.WorksheetNotFound:
     # If the worksheet is not found, print an error message and exit
