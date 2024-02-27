@@ -1,8 +1,10 @@
 # Amended from www.geeksforgeeks.org/python-datetime-module/
 import datetime
+
 # Amended from Code Institute project love_sandwiches
 import gspread
 from google.oauth2.service_account import Credentials
+
 # Amended from pypi.org/project/prettytable/
 from prettytable import PrettyTable
 
@@ -24,7 +26,8 @@ try:
     # If the worksheet is found, continue with the program
 except gspread.WorksheetNotFound:
     # If the worksheet is not found, print an error message and exit
-    # API error handling amended from docs.gspread.org/en/latest/api/exceptions.html
+    # API error handling amended from
+    # docs.gspread.org/en/latest/api/exceptions.html
     # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
     print("Error: Worksheet not found")
     exit()
@@ -117,8 +120,7 @@ def get_user_input(
                 # Convert to integer and return if successful
                 return int(user_input)
             except ValueError:
-                print("Invalid input. Please enter a numeric value.\n"
-            )
+                print("Invalid input. Please enter a numeric value.\n")
             continue
         return user_input
 
@@ -148,7 +150,8 @@ def get_valid_due_date():
         try:
             # Amended from:geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
-                due_date_str, "%Y-%m-%d").date()
+                due_date_str, "%Y-%m-%d"
+            ).date()
             if due_date < datetime.date.today():
                 print("The due date must be in the future. Please try again.")
             else:
@@ -205,18 +208,70 @@ def add_row_to_sheet():
 
 def list_all_tasks():
     """
-    Amended from pypi.org/project/prettytable/
-
     Retrieves and displays all tasks from the worksheet in a formatted table.
-    Each task is fetched as a dictionary from the Google Sheet, displaying
-    the Task ID, To-Do, Priority, Due Date, Status and Creation Date for
-    each in a visually appealing table format. If no tasks are found,
-    it notifies the user.
+    It offers sorting based on user preference for priority, status, or
+    due_date, with a default sorting by Task ID.
     """
-    # Fetch all tasks as a list of dictionaries
     tasks = worksheet.get_all_records()
 
-    # Create a PrettyTable instance and define the column headers
+    if not tasks:
+        print("No tasks found.")
+        return
+
+    try:
+        # Ask the user for their preferred sorting criteria
+        print("\nChoose sorting criteria:")
+        print("1. Task ID (default)")
+        print("2. Priority")
+        print("3. Status")
+        print("4. Due Date (earliest to latest)")
+        print("5. Due Date (latest to earliest)\n")
+        sort_choice = get_user_input(
+            "Enter choice (or press Enter for default): ",
+            allow_skip=True, numeric=True
+        )
+
+        # Add a space after the user makes a selection
+        print()
+
+        # Default to sorting by Task ID if no valid choice is made
+        # and ensure the sort_choice is correctly interpreted as an integer
+        sort_choice = int(sort_choice) if sort_choice else 1
+
+        # Define custom sort orders for priority and status
+        priority_order = {"High": 1, "Medium": 2, "Low": 3}
+        status_order = {"New": 1, "Pending": 2, "Completed": 3}
+
+        # Define the sorting key
+        def sort_key(x):
+            if sort_choice == 2:
+                return priority_order.get(x["Priority"], 999)
+            elif sort_choice == 3:
+                return status_order.get(x["Status"], 999)
+            elif sort_choice in [4, 5]:
+                # Convert string to datetime.date for proper comparison
+                return datetime.datetime.strptime(
+                    x["Due Date"], "%Y-%m-%d").date(
+                    )
+            # Default to sorting by Task ID
+            else:
+                return int(x["Task ID"])
+
+        # Determine if sorting should be reversed based on user choice
+        reverse_sort = sort_choice == 5
+
+        # Perform the sorting
+        sorted_tasks = sorted(tasks, key=sort_key, reverse=reverse_sort)
+
+    except Exception as e:
+        print(f"An error occurred during sorting: {e}. Sorting by Task ID.")
+        # Fallback to default sorting if any error occurs
+        sorted_tasks = sorted(tasks, key=lambda x: int(x["Task ID"]))
+
+    # Adding a space before displaying the table for better readability
+    print()
+
+    # Prepare and display the table
     table = PrettyTable()
     table.field_names = [
         "Task ID",
@@ -228,8 +283,7 @@ def list_all_tasks():
     ]
     table.align = "l"
 
-    # Iterate over all tasks and add them to the table
-    for task in tasks:
+    for task in sorted_tasks:
         table.add_row(
             [
                 task["Task ID"],
@@ -241,11 +295,7 @@ def list_all_tasks():
             ]
         )
 
-    # Check if there are any tasks to list
-    if tasks:
-        print(table)
-    else:
-        print("No tasks found.")
+    print(table)
 
 
 def view_task():
@@ -258,10 +308,11 @@ def view_task():
 
     # Find the task by Task ID
     found_task = next(
-        (task for task in tasks if int(task["Task ID"]) == task_id), None)
+        (task for task in tasks if int(task["Task ID"]) == task_id),
+        None)
 
     if found_task:
-        # Code to display the task details. Create a PrettyTable 
+        # Code to display the task details. Create a PrettyTable
         # instance and define the column headers
         task_table = PrettyTable()
         task_table.field_names = [
@@ -270,19 +321,21 @@ def view_task():
             "Priority",
             "Due Date",
             "Status",
-            "Creation Date"
-            ]
+            "Creation Date",
+        ]
         task_table.align = "l"
 
         # Add the found task to the table
-        task_table.add_row([
-            found_task["Task ID"],
-            found_task["To-Do"],
-            found_task["Priority"],
-            found_task["Due Date"],
-            found_task["Status"],
-            found_task["Creation Date"]
-        ])
+        task_table.add_row(
+            [
+                found_task["Task ID"],
+                found_task["To-Do"],
+                found_task["Priority"],
+                found_task["Due Date"],
+                found_task["Status"],
+                found_task["Creation Date"],
+            ]
+        )
 
         # Print the task details table
         print(task_table)
@@ -302,12 +355,7 @@ def view_task_specific(task_id):
 
     # Find the task by Task ID
     found_task = next(
-        (
-            task for task in tasks
-            if str(task["Task ID"]) == task_id
-        ),
-        None
-    )
+        (task for task in tasks if str(task["Task ID"]) == task_id), None)
 
     # If the task is found, display its details
     if found_task:
@@ -359,7 +407,8 @@ def update_task():
 
         if current_task is None:
             print(
-                "Task not found." "Please ensure you have entered the"
+                "Task not found."
+                "Please ensure you have entered the"
                 "correct Task ID."
             )
             return
@@ -392,11 +441,17 @@ def update_task():
         )
 
         # Notify the user if the new priority is the same as the current one.
-        if new_priority and new_priority.lower(
-            ) == current_task["Priority"].lower():
-            confirm_change = input(
-                "The new priority is the same as the current one."
-                "Do you still want to change it? (yes/no): \n").strip().lower()
+        if (new_priority and
+                new_priority.lower() == current_task["Priority"].lower()):
+            confirm_change = (
+                input(
+                    "The new priority is the same as the current one. "
+                    "Do you still want to change it? (yes/no): \n"
+                )
+                .strip()
+                .lower()
+            )
+
             if confirm_change == "yes":
                 worksheet.update_cell(task_index, 3, new_priority)
             else:
@@ -409,13 +464,14 @@ def update_task():
         # ask for a new due date, allowing an empty input to skip
         new_due_date = get_user_input(
             "\nEnter new Due Date (YYYY-MM-DD) or press Enter to skip: \n",
-            allow_skip=True)
+            allow_skip=True,
+        )
         if new_due_date:
             try:
                 # Validate the date format by attempting to convert
                 # the string into a date
                 due_date = datetime.datetime.strptime(
-                    new_due_date, "%Y-%m-%d").date()
+                        new_due_date, "%Y-%m-%d").date()
                 if due_date < datetime.date.today():
                     print("Due date must be in the future. Please try again.")
                 else:
@@ -428,8 +484,8 @@ def update_task():
         # Ask the user for a new status, allowing an empty input
         # to skip the update
         new_status = get_user_input(
-            "Enter new status (New/Completed/Pending) or press"
-            "Enter to skip: \n",
+            "Enter new status (New/Completed/Pending) or"
+            "press" "Enter to skip: \n",
             normalize=True,
             allowed_values=status_allowed_values + [""],
             allow_skip=True,
@@ -439,9 +495,14 @@ def update_task():
         if new_status and new_status.lower() == current_task["Status"].lower():
             # Ask the user if they want to proceed with changing the status
             # even though it's the same as the current one
-            confirm_change_status = input(
-                "The new status is the same as the current one."
-                " Do you still want to change it? (yes/no): ").strip().lower()
+            confirm_change_status = (
+                input(
+                    "The new status is the same as the current one."
+                    " Do you still want to change it? (yes/no): "
+                )
+                .strip()
+                .lower()
+            )
             if confirm_change_status == "yes":
                 # If the user confirms, proceed with updating the status
                 worksheet.update_cell(task_index, 5, new_status)
@@ -516,7 +577,10 @@ def delete_tasks():
                     print("Tasks deleted successfully.")
             except gspread.exceptions.APIError as e:
                 # Print the API error
-                print("Failed to delete task due to a GOoogle sheet API error:", e)
+                error_message = (
+                    "Failed to delete task due to a Google Sheets API error: "
+                )
+                print(error_message, e)
         elif confirm == "no":
             print("Task deletion canceled.")
         else:
