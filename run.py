@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 from prettytable import PrettyTable
 
 # Amended from: www.geeksforgeeks.org/print-colors-python-terminal/
-import colorama 
+import colorama
 from colorama import Fore, Back, Style
 
 # Amended from: docs.python.org/3/library/textwrap.html
@@ -44,6 +44,7 @@ except gspread.WorksheetNotFound:
             f"Please check the worksheet name and try again.{Style.RESET_ALL}"
         )
     exit()
+
 
 class ExitToMainMenu(Exception):
     """
@@ -107,10 +108,10 @@ def get_user_input(
         # Stripping leading/trailing whitespace
         user_input = input(prompt).strip()
 
-         # Handle 'back' to exit or 'skip' functionality
+        # Handle 'back' to exit or 'skip' functionality
         if user_input.lower() == "back":
             raise ExitToMainMenu
-        
+
         # Return empty input to signify skipping
         if allow_skip and user_input == "":
             return user_input
@@ -121,7 +122,7 @@ def get_user_input(
                 f"Please try again.{Style.RESET_ALL}\n"
             )
             continue
-       
+
         # Capitalize the first letter and make the rest lowercase
         if normalize:
             user_input = user_input.capitalize()
@@ -130,8 +131,8 @@ def get_user_input(
             print(f"{Fore.RED}{Style.BRIGHT}"
                   "Error: Invalid input.\n"
                   "Please enter one of the following: "
-                 f"{', '.join(allowed_values)}{Style.RESET_ALL}\n"
-                 )
+                  f"{', '.join(allowed_values)}{Style.RESET_ALL}\n"
+                  )
             continue
 
         # Attempt to convert input to integer, retrying on failure
@@ -143,7 +144,7 @@ def get_user_input(
             except ValueError:
                 print(
                      f"{Fore.RED}{Style.BRIGHT}Error: Invalid input.\n"
-                    "Please enter a numeric value.{Style.RESET_ALL}\n"
+                     "Please enter a numeric value.{Style.RESET_ALL}\n"
                 )
             continue
         # Ensure a newline for readability
@@ -177,10 +178,11 @@ def get_valid_due_date():
 
         # Check for 'back' command to return or exit
         if due_date_str.lower() == "back":
-            raise ExitToMainMenu 
+            raise ExitToMainMenu
 
         try:
-            # Amended from: geeksforgeeks.org/python-datetime-strptime-function/
+            # Amended from:
+            # geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
                 due_date_str, "%y-%m-%d"
             ).date()
@@ -198,7 +200,7 @@ def get_valid_due_date():
             print(
                 f"{Fore.RED}{Style.BRIGHT}"
                 "Error: Invalid date format."
-                 "Please use YY-MM-DD."
+                "Please use YY-MM-DD."
                 f"{Style.RESET_ALL}\n"
                 )
 
@@ -227,7 +229,7 @@ def add_row_to_sheet():
         normalize=True,
         allowed_values=priority_allowed_values,
     )
- 
+
     # User adds due date = input("Enter Due Date (YY-MM-DD): ")
     due_date = get_valid_due_date()
     # Readibility
@@ -251,16 +253,15 @@ def add_row_to_sheet():
     try:
         worksheet.append_row(row)
         print(f"{Fore.GREEN}{Style.BRIGHT}"
-            "Task added successfully with creation date: "
-            f"{creation_date}{Style.RESET_ALL}")
-            
-       # print("\nTask added successfully with creation date:", creation_date)
+              "Task added successfully with creation date: "
+              f"{creation_date}{Style.RESET_ALL}")
+
+    # print("\nTask added successfully with creation date:", creation_date)
     except gspread.exceptions.APIError as e:
         # Print API error
         print(f"{Fore.RED}{Style.BRIGHT}"
-            "Error: Failed to add task due to Google sheets API error: "
-            f"{e}{Style.RESET_ALL}\n"
-            )
+              "Error: Failed to add task due to Google sheets API error: "
+              f"{e}{Style.RESET_ALL}\n")
 
 
 def wrap_text(text, width):
@@ -269,29 +270,29 @@ def wrap_text(text, width):
     Wraps text to the specified width and returns a list of wrapped lines.
     """
     return textwrap.wrap(text, width, break_long_words=True)
-    
+
 
 def list_all_tasks():
     """
     Retrieves and displays all tasks from the worksheet in a formatted table.
     It offers sorting based on user preference for priority, status, or
-    due_date, with a default sorting by Task ID. 
-    
-    This function incorporates sorting functionality, with modifications and 
-    adaptations based on examples from the following sources:
+    due_date, with a default sorting by Task ID.
+
+    This function incorporates sorting functionality, with modifications
+    and adaptations based on examples from the following sources:
     - ioflood.com/blog/python-sort-dictionary-by-value/#:~:
     text=TL%3BDR%3A%20How%20Do%20I,items()%2C%20key%3Doperator.
-    - /pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-of-the-dictionary/
+    - /pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-
+    of-the-dictionary/
     - www.geeksforgeeks.org/ways-sort-list-dictionaries-values-
     python-using-lambda-function/
-        
     """
     tasks = worksheet.get_all_records()
 
     if not tasks:
         print("No tasks found.")
         return
-        
+
     # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         # Ask the user for their preferred sorting criteria
@@ -337,7 +338,8 @@ def list_all_tasks():
         sorted_tasks = sorted(tasks, key=sort_key, reverse=reverse_sort)
 
     except ExitToMainMenu:
-        return  # If 'back' is entered, catch the exception and return immediately
+        # If 'back' is entered, catch the exception and return immediately
+        return
     except Exception as e:
         print(f"An error occurred during sorting: {e}. Sorting by Task ID.")
         # Fallback to default sorting if any error occurs
@@ -366,7 +368,7 @@ def list_all_tasks():
         wrapped_text = wrap_text(task["To-Do"], max_width)
         num_lines = len(wrapped_text)
 
-        # The first row with all the task details    
+        # The first row with all the task details
         first_line = [
                 task["Task ID"],
                 wrapped_text[0],
@@ -377,14 +379,16 @@ def list_all_tasks():
             ]
         table.add_row(first_line)
 
-        # For the additional lines from the wrapped text, add empty placeholders
-        # for all columns except the "To-Do" column which gets the additional text
+        # For the additional lines from the wrapped text, add empty
+        # placeholders for all columns except the "To-Do" column
+        # which gets the additional text
         for line in wrapped_text[1:]:
             # Create a row with empty values for all but the "To-Do" column
             # Empty placeholders for other columns
-            additional_line = [""] * (len(table.field_names))  
-            # Insert the wrapped text line into the correct position for "To-Do"
-            additional_line[1] = line  
+            additional_line = [""] * (len(table.field_names))
+            # Insert the wrapped text line into the correct position
+            # for "To-Do"
+            additional_line[1] = line
             table.add_row(additional_line)
 
     print(table)
@@ -396,21 +400,21 @@ def view_task():
     the specified task.
     """
     # Add a space before prompting for Task ID
-    print() 
+    print()
 
     task_id = get_user_input("Enter Task ID to view: \n", numeric=True)
     # Fetch all tasks as a list of dictionaries
     tasks = worksheet.get_all_records()
-    
+
     # Convert task_id to int for comparison, handle potential ValueError
     # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         task_id = int(task_id)
     except ValueError:
         print(f"{Fore.RED}{Style.BRIGHT}"
-            "\nError: Invalid Task ID format.\n"
-            "Please enter a numeric value."
-             f"{Style.RESET_ALL}\n")
+              "\nError: Invalid Task ID format.\n"
+              "Please enter a numeric value."
+              f"{Style.RESET_ALL}\n")
         return
 
     # Find the task by Task ID
@@ -418,7 +422,7 @@ def view_task():
         (task for task in tasks if str(task['Task ID']) == str(task_id)),
         None
     )
-    
+
     if found_task:
         # Add a space before displaying task details
         print("\nTask Details:")
@@ -431,7 +435,10 @@ def view_task():
             f"Status: {found_task['Status']}"
         )
     else:
-        print("\nTask not found. Please ensure you have entered a valid Task ID.")
+        print(f"{Fore.RED}{Style.BRIGHT}"
+              "\nError: Task not found.\n"
+              "Please ensure you have entered a valid Task ID."
+              f"{Style.RESET_ALL}\n")
 
 
 def update_task():
@@ -475,14 +482,14 @@ def update_task():
 
         if current_task is None:
             print(f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Task not found. \n"
-                "Please ensure you have entered the correct Task ID.\n"
-                f"{Style.RESET_ALL}")
+                  "Error: Task not found. \n"
+                  "Please ensure you have entered the correct Task ID.\n"
+                  f"{Style.RESET_ALL}")
             return
 
         print("Current task details:")
         print("---------------------")
-      
+
         # Ask the user for a new description, stripping
         # leading/trailing whitespace
         new_description = get_user_input(
@@ -541,8 +548,8 @@ def update_task():
                         new_due_date, "%y-%m-%d").date()
                 if due_date < datetime.date.today():
                     print(f"{Fore.RED}{Style.BRIGHT}"
-                    "Due date must be in the future. Please try again."
-                    f"{Style.RESET_ALL}\n")
+                          "Due date must be in the future. Please try again."
+                          f"{Style.RESET_ALL}\n")
                 else:
                     worksheet.update_cell(task_index, 4, new_due_date)
             except ValueError:
@@ -583,8 +590,8 @@ def update_task():
             # If the new status is different from the current one, update it
             worksheet.update_cell(task_index, 5, new_status)
         print(f"{Fore.GREEN}{Style.BRIGHT}"
-            "Task updated successfully."
-            f"{Style.RESET_ALL}")
+              "Task updated successfully."
+              f"{Style.RESET_ALL}")
     except ExitToMainMenu:
         return
 
@@ -625,10 +632,10 @@ def delete_tasks():
 
         if not tasks_to_delete:
             print(f"{Fore.RED}{Style.BRIGHT}"
-                "Error: None of the specified Task IDs were found. \n"
-                "Please ensure you have entered the correct Task IDs."
-                f"{Style.RESET_ALL}"
-            )
+                  "Error: None of the specified Task IDs were found. \n"
+                  "Please ensure you have entered the correct Task IDs."
+                  f"{Style.RESET_ALL}"
+                  )
             return
 
         # Confirm deletion with the user before proceeding
@@ -649,14 +656,15 @@ def delete_tasks():
                 for row in tasks_to_delete:
                     worksheet.delete_rows(row)
                     print(f"{Fore.GREEN}{Style.BRIGHT}"
-                    "\nTasks deleted successfully."
-                    f"{Style.RESET_ALL}")
+                          "\nTasks deleted successfully."
+                          f"{Style.RESET_ALL}")
 
             except gspread.exceptions.APIError as e:
                 # Print the API error
                 error_message = (
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "Error: Failed to delete task due to a Google Sheets API error: "
+                    "Error: Failed to delete task due"
+                    " to a Google Sheets API error: "
                     f"{e}"
                     f"{Style.RESET_ALL}"
                 )
@@ -664,13 +672,13 @@ def delete_tasks():
 
         elif confirm == "no":
             print(f"{Fore.YELLOW}{Style.BRIGHT}"
-            "\nTask deletion canceled."
-            f"{Style.RESET_ALL}")
+                  "\nTask deletion canceled."
+                  f"{Style.RESET_ALL}")
         else:
             print(f"{Fore.RED}{Style.BRIGHT}"
-            "\nError: Invalid input.\n"
-            "Please answer 'yes' or 'no'."
-            f"{Style.RESET_ALL}")
+                  "\nError: Invalid input.\n"
+                  "Please answer 'yes' or 'no'."
+                  f"{Style.RESET_ALL}")
 
     except ExitToMainMenu:
         return
@@ -715,32 +723,33 @@ def main_menu():
                 delete_tasks()
             elif choice == "6":
                 print(f"{Fore.MAGENTA}{Style.BRIGHT}"
-                "- - - Exiting the Task Organizer. Goodbye! - - - \n"
-                f"{Style.RESET_ALL}")
+                      "- - - Exiting the Task Organizer. Goodbye! - - - \n"
+                      f"{Style.RESET_ALL}")
                 break
             else:
                 print(f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Invalid choice. \n" 
-                "Please try again.\n"
-                f"{Style.RESET_ALL}")
+                      "Error: Invalid choice. \n"
+                      "Please try again.\n"
+                      f"{Style.RESET_ALL}")
         except ExitToMainMenu:
             # If "back" is entered at any input prompt,
             # loop back to the main menu
             continue
+
 
 # Amended from: geeksforgeeks.org/print-colors-python-terminal/
 colorama.init(autoreset=True)
 
 # Simplified ASCII art without centering
 ascii_art = [
-    f"{Fore.MAGENTA}{Style.BRIGHT}  _________",
-    f"{Fore.MAGENTA}{Style.BRIGHT} |         |     ___        ______         ____ ",
-    f"{Fore.MAGENTA}{Style.BRIGHT} |__     __|   /   _  \\     |   _   \\     /  _   \\",
-    f"{Fore.MAGENTA}{Style.BRIGHT}    |   |     |  |  |  |    |  | \\   |   |  |  |  |",
-    f"{Fore.MAGENTA}{Style.BRIGHT}    |   |     |  |  |  |    |  |  |  |   |  |  |  |",
-    f"{Fore.MAGENTA}{Style.BRIGHT}    |   |     |  \\__/  |    |  |__/  |   |  \\__/  |",
-    f"{Fore.MAGENTA}{Style.BRIGHT}    |___|      \\_____ /     |________/    \\_____ /",
-    f"{Style.RESET_ALL}"
+  f"{Fore.MAGENTA}{Style.BRIGHT} _________",
+  f"{Fore.MAGENTA}{Style.BRIGHT}|         |   ___      ______       ____ ",
+  f"{Fore.MAGENTA}{Style.BRIGHT}|__     __| /   _  \\   |   _   \\   /  _  \\",
+  f"{Fore.MAGENTA}{Style.BRIGHT}   |   |   |  |  |  |  |  | \\   | |  |  | |",
+  f"{Fore.MAGENTA}{Style.BRIGHT}   |   |   |  |  |  |  |  |  |  | |  |  | |",
+  f"{Fore.MAGENTA}{Style.BRIGHT}   |   |   |  \\__/  |  |  |__/  | |  \\__/ |",
+  f"{Fore.MAGENTA}{Style.BRIGHT}   |___|    \\_____ /   |________/  \\_____ /",
+  f"{Style.RESET_ALL}"
 ]
 
 # Print each line of the ASCII art in magenta color
