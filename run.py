@@ -737,21 +737,18 @@ def main_menu():
             continue
 
 
-# Amended from: geeksforgeeks.org/print-colors-python-terminal/
-colorama.init(autoreset=True)
-print()
-# Simplified ASCII art without centering
+# ASCII Art in Magenta Color
 ascii_art = [
-  f"{Fore.MAGENTA}{Style.BRIGHT} _________",
-  f"{Fore.MAGENTA}{Style.BRIGHT}|         |   ___      ______       ____ ",
-  f"{Fore.MAGENTA}{Style.BRIGHT}|__     __| /   _  \\   |   _   \\   /  _  \\",
-  f"{Fore.MAGENTA}{Style.BRIGHT}   |   |   |  |  |  |  |  | \\   | |  |  | |",
-  f"{Fore.MAGENTA}{Style.BRIGHT}   |   |   |  \\__/  |  |  |__/  | |  \\__/ |",
-  f"{Fore.MAGENTA}{Style.BRIGHT}   |___|    \\_____ /   |________/  \\_____ /",
-  f"{Style.RESET_ALL}"
+    f"{Fore.MAGENTA}#######        ######        ",
+    f"{Fore.MAGENTA}   #     ####  #     #  ####  ",
+    f"{Fore.MAGENTA}   #    #    # #     # #    # ",
+    f"{Fore.MAGENTA}   #    #    # #     # #    # ",
+    f"{Fore.MAGENTA}   #    #    # #     # #    # ",
+    f"{Fore.MAGENTA}   #    #    # #     # #    # ",
+    f"{Fore.MAGENTA}   #     ####  ######   ####  "
 ]
 
-# Print each line of the ASCII art in magenta color
+# Printing the ASCII Art
 for line in ascii_art:
     print(line)
 
