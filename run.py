@@ -775,7 +775,7 @@ print(
 )
 print(
     f"{Fore.BLUE}{Style.BRIGHT}"
-    "Manage tasks easily with our intuitive organizer. Stay focused; add, 
+    "Manage tasks easily with our intuitive organizer. Stay focused; add,"
     " update, and track to-dos.\n Get started now and make task management"
     "a breeze!"
     f"{Style.RESET_ALL}"
