@@ -1,3 +1,6 @@
+# Amended from www.geeksforgeeks.org/clear-screen-python/
+import os
+
 # Amended from www.geeksforgeeks.org/python-datetime-module/
 import datetime
 
@@ -684,6 +687,19 @@ def delete_tasks():
         return
 
 
+def clear_terminal():
+    """
+    # Amended from www.geeksforgeeks.org/clear-screen-python/
+    Clear the terminal screen.
+    """
+    # Windows
+    if os.name == 'nt':
+        os.system('cls')
+    # Unix/Linux/MacOS/BSD/etc
+    else:
+        os.system('clear')
+
+
 def main_menu():
     """
     Displays the main menu of the Task Organizer application and provides
@@ -704,7 +720,8 @@ def main_menu():
             print("3. View Task")
             print("4. Update Task")
             print("5. Delete Task(s)")
-            print("6. Exit application\n")
+            print("6. Clear screen")
+            print("7. Exit application\n")
             choice = get_user_input(
                 "Enter choice -> (or type 'back' to return to menu): \n"
             )
@@ -722,6 +739,8 @@ def main_menu():
             elif choice == "5":
                 delete_tasks()
             elif choice == "6":
+                clear_terminal()
+            elif choice == "7":
                 print(f"{Fore.MAGENTA}{Style.BRIGHT}"
                       "- - - Exiting the Task Organizer. Goodbye! - - - \n"
                       f"{Style.RESET_ALL}")
