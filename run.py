@@ -180,8 +180,8 @@ def get_valid_due_date():
 
 # Define allowed values for task priority and status
 # to ensure user inputs are standardized and limited to these options.
-priority_allowed_values = ["High", "Medium", "Low"]
-status_allowed_values = ["New", "Completed", "Pending"]
+priority_allowed_values = ["High", "Med", "Low"]
+status_allowed_values = ["New", "Done", "Pend"]
 
 
 def add_row_to_sheet():
@@ -197,7 +197,7 @@ def add_row_to_sheet():
     to_do = get_user_input("Enter task description: \n")
     # User adds priority
     priority = get_user_input(
-        "Enter priority (High/Medium/Low): \n",
+        "Enter priority (High/Med/Low): \n",
         normalize=True,
         allowed_values=priority_allowed_values,
     )
@@ -205,7 +205,7 @@ def add_row_to_sheet():
     due_date = get_valid_due_date()
     # User adds status
     status = get_user_input(
-        "Enter status (New/Completed/Pending): \n",
+        "Enter status (New/Done/Pend): \n",
         normalize=True,
         allowed_values=status_allowed_values,
     )
@@ -258,8 +258,8 @@ def list_all_tasks():
         sort_choice = int(sort_choice) if sort_choice else 1
 
         # Define custom sort orders for priority and status
-        priority_order = {"High": 1, "Medium": 2, "Low": 3}
-        status_order = {"New": 1, "Pending": 2, "Completed": 3}
+        priority_order = {"High": 1, "Med": 2, "Low": 3}
+        status_order = {"New": 1, "Pend": 2, "Done": 3}
 
         # Define the sorting key
         def sort_key(x):
@@ -425,7 +425,7 @@ def update_task():
         # Prompt for a new priority, allowing an empty input to skip
         # the update
         new_priority = get_user_input(
-            "Enter new priority (High/Medium/Low) or press Enter to skip: ",
+            "Enter new priority (High/Med/Low) or press Enter to skip: ",
             normalize=True,
             allowed_values=priority_allowed_values + [""],
             allow_skip=True,
@@ -476,7 +476,7 @@ def update_task():
         # Ask the user for a new status, allowing an empty input
         # to skip the update
         new_status = get_user_input(
-            "Enter new status (New/Completed/Pending) or"
+            "Enter new status (New/Done/Pend) or"
             "press" "Enter to skip: \n",
             normalize=True,
             allowed_values=status_allowed_values + [""],
