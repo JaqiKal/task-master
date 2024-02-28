@@ -743,8 +743,6 @@ ascii_art = [
     f"{Fore.MAGENTA}   #     ####  #     #  ####  ",
     f"{Fore.MAGENTA}   #    #    # #     # #    # ",
     f"{Fore.MAGENTA}   #    #    # #     # #    # ",
-    f"{Fore.MAGENTA}   #    #    # #     # #    # ",
-    f"{Fore.MAGENTA}   #    #    # #     # #    # ",
     f"{Fore.MAGENTA}   #     ####  ######   ####  "
 ]
 
