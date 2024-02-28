@@ -12,6 +12,9 @@ from prettytable import PrettyTable
 import colorama 
 from colorama import Fore, Back, Style
 
+# Amended from: docs.python.org/3/library/textwrap.html
+import textwrap
+
 # Amended from Code Institute project love_sandwiches
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -225,11 +228,28 @@ def add_row_to_sheet():
         print(f"Error: Failed to add task due to Google sheets API error:", e)
 
 
+def wrap_text(text, width):
+    """
+    Amended from: docs.python.org/3/library/textwrap.html
+    Wraps text to the specified width and returns a list of wrapped lines.
+    """
+    return textwrap.wrap(text, width, break_long_words=True)
+    
+
 def list_all_tasks():
     """
     Retrieves and displays all tasks from the worksheet in a formatted table.
     It offers sorting based on user preference for priority, status, or
-    due_date, with a default sorting by Task ID.
+    due_date, with a default sorting by Task ID. 
+    
+    This function incorporates sorting functionality, with modifications and 
+    adaptations based on examples from the following sources:
+    - ioflood.com/blog/python-sort-dictionary-by-value/#:~:
+    text=TL%3BDR%3A%20How%20Do%20I,items()%2C%20key%3Doperator.
+    - /pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-of-the-dictionary/
+    - www.geeksforgeeks.org/ways-sort-list-dictionaries-values-
+    python-using-lambda-function/
+        
     """
     tasks = worksheet.get_all_records()
 
@@ -303,17 +323,34 @@ def list_all_tasks():
     ]
     table.align = "l"
 
+    # Max width for the To-Do column
+    # Amended from: docs.python.org/3/library/textwrap.html
+    max_width = 30
+
     for task in sorted_tasks:
-        table.add_row(
-            [
+        wrapped_text = wrap_text(task["To-Do"], max_width)
+        num_lines = len(wrapped_text)
+
+        # The first row with all the task details    
+        first_line = [
                 task["Task ID"],
-                task["To-Do"],
+                wrapped_text[0],
                 task["Priority"],
                 task["Due Date"],
                 task["Status"],
                 task["Creation Date"],
             ]
-        )
+        table.add_row(first_line)
+
+        # For the additional lines from the wrapped text, add empty placeholders
+        # for all columns except the "To-Do" column which gets the additional text
+        for line in wrapped_text[1:]:
+            # Create a row with empty values for all but the "To-Do" column
+            # Empty placeholders for other columns
+            additional_line = [""] * (len(table.field_names))  
+            # Insert the wrapped text line into the correct position for "To-Do"
+            additional_line[1] = line  
+            table.add_row(additional_line)
 
     print(table)
 

@@ -333,6 +333,7 @@ Following Python packages and/or external imported packages was used:
 * [datetime](https://www.geeksforgeeks.org/python-datetime-module/#python-datetime-module) - Basic date and time type. Python Datetime module comes built into Python, so there is no need to install it externally. 
 * [gspread](https://pypi.org/project/gspread/) - Google Spreadsheets Python API
 * [PrettyTable](https://pypi.org/project/prettytable/) -  A simple Python library for easily displaying tabular data in a visually appealing ASCII table format
+* [textwrap](https//:docs.python.org/3/library/textwrap.html) - Text wrapping and filling
 
 To install use : ```pip install -name of package-```
 To generate list of installed Python packages use:  ```pip freeze```
@@ -342,7 +343,7 @@ To generate list of installed Python packages use:  ```pip freeze```
 
 ### Programming paradigm
 
-Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward task manager (To-Do-list) application, I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
+Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward small to medium sized project - a task manager (To-Do-list) application. I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -491,15 +492,22 @@ At the time of writing, there is no differance between the local version and the
 
 ### Content
 
-* gspread: Amended from Code Institute project love_sandwiches
-* [import datetime](https://www.geeksforgeeks.org/python-datetime-module/)
-* [prettytable](https://pypi.org/project/prettytable/)
-* [API error handling](https://docs.gspread.org/en/latest/api/exceptions.html)
-* [API error handling](https://snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError)
-* [class ExitToMainMenu(Exception)](https://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python)
-* [format the time stamp which is in string format to date-time object](https://geeksforgeeks.org/python-datetime-strptime-function/)
-* [Try - Except](https://www.w3schools.com/python/python_try_except.asp)
-* [ColouringPrint Colors in Python Terminal ](https://www.geeksforgeeks.org/print-colors-python-terminal/)
+This application was made possible by leveraging insights and code examples from a range of external resources. Below is a list of these key sources, which have significantly contributed to the functionality and design of the application. A heartfelt thank you to the creators and maintainers of these resources for their invaluable assistance.
+
+
+* [gspread](https://docs.gspread.org/en/v6.0.0/) - Amended from Code Institute project love_sandwiches
+* [import datetime](https://www.geeksforgeeks.org/python-datetime-module/) - For handling date and time operations.
+* [prettytable](https://pypi.org/project/prettytable/) - Used for organizing tabular data.
+* [API error handling](https://docs.gspread.org/en/latest/api/exceptions.html) - For managing API interactions.
+* [API error handling](https://snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError) - For managing API interactions.
+* [class ExitToMainMenu(Exception)](https://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python) -  Inspired custom error handling in the application.
+* [format the time stamp which is in string format to date-time object](https://geeksforgeeks.org/python-datetime-strptime-function/) For parsing and converting date strings.
+* [Try - Except](https://www.w3schools.com/python/python_try_except.asp) - For robust error management.
+* [Print Colors in Python Terminal ](https://www.geeksforgeeks.org/print-colors-python-terminal/) - For enhancing terminal output aesthetics.
+* [Text wrapping in column](https://docs.python.org/3/library/textwrap.html) -  Implemented for better text formatting.
+* [Sorting](https://ioflood.com/blog/python-sort-dictionary-by-value/#:~:text=TL%3BDR%3A%20How%20Do%20I,items()%2C%20key%3Doperator.) - Essential for data organization.
+* [Sorting](https://pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-of-the-dictionary/) - Essential for data organization.
+* [Sorting](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/) - Essential for data organization.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -513,7 +521,7 @@ For this project no external media was used for creation of this project.
 
 I would like to thank! 
 
-* My mentor [Jubril Akolade](https://github.com/jubrillionaire/) for all his help and advice throughout the project.
+* My mentor [Jubril Akolade](https://github.com/jubrillionaire/) for his help and advice throughout the project.
 * The whole team at [Code Institute Slack community](https://code-institute-room.slack.com) for their teaching and support.
 * To all engaged fellow student at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
 * My immediate and extended family, as well as my friends, support and cheer me on!

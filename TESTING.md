@@ -8,6 +8,9 @@ Visit the deployed site: [Tic-Tac-Toe](https://jaqikal.github.io/tic-tac-toe/)
 
 ## CONTENT
 
+* [Testing overview & environment](#testing-overview--environment)
+  * [Test environment](#test-environment)
+  * [Responsiveness](#responsiveness)
 * [Automated Testing](#automated-testing)
   * [pep8 validator](https://pep8ci.herokuapp.com/)
 * [Manual testing](#manual-testing)
@@ -18,8 +21,21 @@ Visit the deployed site: [Tic-Tac-Toe](https://jaqikal.github.io/tic-tac-toe/)
   * [Known issue](#known-issue)
 
 - - -
+## Testing overview & environment
 
 Testing was ongoing throughout the entire development. I utilised CI Python Linter tool and GITPOD terminal output whilst building to pinpoint and troubleshoot any issues as I went along. The validation process adhered to the guidelines outlined in PEP8. The majority of warnings stemmed from redundant or missing whitespace, as well as instances of redundant backslashes and insufficient indentation. These issues have been addressed and rectified accordingly.
+
+### Test environment
+
+* Desktop:
+  * Lenovo Legion T7
+* Screen:
+  * Samsung Odyssey G3 / 27" / 1920 x 1080 /
+* Google Chrome, version 121.0.6167.86 (Official Build) (64-bit)
+
+### Responsiveness
+
+Although not directly applicable to this project, I gained valuable knowledge on adjusting the mock terminal window size. This exploration allowed me to enhance the user interface with a more friendly table display. However, to maintain consistency with Code Institute's settings and requirements, I ultimately reverted these adjustments. Instead, I tailored my code to conform to the given limits of the mock terminal environment. This experience underscored the importance of adaptability and optimization within predefined constraints, enriching my understanding of creating user-centric interfaces within specific technical boundaries.
 
 ## Automated Testing
 
@@ -153,6 +169,19 @@ except gspread.WorksheetNotFound:
     # If the worksheet is not found, print an error message and exit
     print("Error: Worksheet not found")
     exit()
+```
+
+### Bug-02
+
+As mentioned in the [chapter Responsiveness](#responsiveness) I returned to the original size of the mock terminal. This necessitated altering the presentation format of information within the table upon rendering. During testing to ensure these modifications worked as planned, I discovered that the To-Do column had to be limited to 30 characters to prevent strings and integers from exceeding the column boundaries, which would otherwise completely disrupt the table's structure. 
+
+![x](/documentation/images/table-no_wrap.webp)
+
+### Solution Bug-02
+
+The problem was solved by introducing a new function, ```def wrap_text(text, width):```, and updating the ```def list_all_tasks():``` function. These modifications implement text wrapping, which automatically divides longer text lines at a specified maximum character limit. This ensures that text remains within a readable width, enhancing the presentation and readability of the information displayed.
+
+![x](/documentation/images/table-wrap.webp)
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
