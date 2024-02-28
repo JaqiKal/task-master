@@ -143,10 +143,10 @@ def get_valid_due_date():
     """
     Prompt the user for a due date, validate its format and ensure
     it's a future date. This function repeatedly prompts the user to
-    enter a due date in the YYYY-MM-DD format.
+    enter a due date in the YY-MM-DD format.
 
     It performs two key validations:
-    1. This step confirms the input matches the expected YYYY-MM-DD
+    1. This step confirms the input matches the expected YY-MM-DD
        format. If the input does not match the expected format a
        ValueError is raised, and user is informed of the correct format,
        prompting them to try again
@@ -160,12 +160,12 @@ def get_valid_due_date():
     tasks.
     """
     while True:
-        due_date_str = input("Enter Due Date (YYYY-MM-DD): \n")
+        due_date_str = input("Enter Due Date (YY-MM-DD): \n")
         # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
             # Amended from: geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
-                due_date_str, "%Y-%m-%d"
+                due_date_str, "%y-%m-%d"
             ).date()
             if due_date < datetime.date.today():
                 print(
@@ -175,7 +175,7 @@ def get_valid_due_date():
             else:
                 return due_date_str  # Return the valid due date string
         except ValueError:
-            print("Error: Invalid date format. Please use YYYY-MM-DD.")
+            print("Error: Invalid date format. Please use YY-MM-DD.")
 
 
 # Define allowed values for task priority and status
@@ -188,7 +188,7 @@ def add_row_to_sheet():
     """
     Prompts user for task details and adds a new row to the Google Sheet.
     Fields include as listed below Due Date is validated for future
-    dates in YYYY-MM-DD format.
+    dates in YY-MM-DD format.
     """
     # Generate & display the Task ID
     task_id = generate_task_id()
@@ -201,7 +201,7 @@ def add_row_to_sheet():
         normalize=True,
         allowed_values=priority_allowed_values,
     )
-    # User adds due_date = input("Enter Due Date (YYYY-MM-DD): ")
+    # User adds due_date = input("Enter Due Date (YY-MM-DD): ")
     due_date = get_valid_due_date()
     # User adds status
     status = get_user_input(
@@ -209,8 +209,8 @@ def add_row_to_sheet():
         normalize=True,
         allowed_values=status_allowed_values,
     )
-    # Generate the task creation date in YYYY-MM-DD format
-    creation_date = datetime.date.today().strftime("%Y-%m-%d")
+    # Generate the task creation date in YY-MM-DD format
+    creation_date = datetime.date.today().strftime("%y-%m-%d")
 
     # Adding the row to the sheet with API error handling
     # Amended from docs.gspread.org/en/latest/api/exceptions.html
@@ -270,7 +270,7 @@ def list_all_tasks():
             elif sort_choice in [4, 5]:
                 # Convert string to datetime.date for proper comparison
                 return datetime.datetime.strptime(
-                    x["Due Date"], "%Y-%m-%d").date(
+                    x["Due Date"], "%y-%m-%d").date(
                     )
             # Default to sorting by Task ID
             else:
@@ -368,7 +368,7 @@ def update_task():
       that field, leaving the original value unchanged.
     - The function validates the Task ID and informs the user if the specified
       task cannot be found.
-    - For the due date, the function checks for valid date format (YYYY-MM-DD)
+    - For the due date, the function checks for valid date format (YY-MM-DD)
       and skips update if the format is incorrect, without terminating the
       update process.
     - checks to notify the user if the new priority or status is the same
@@ -454,7 +454,7 @@ def update_task():
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
         new_due_date = get_user_input(
-            "\nEnter new Due Date (YYYY-MM-DD) or press Enter to skip: \n",
+            "\nEnter new Due Date (YY-MM-DD) or press Enter to skip: \n",
             allow_skip=True,
         )
         if new_due_date:
@@ -463,7 +463,7 @@ def update_task():
                 # Validate the date format by attempting to convert
                 # the string into a date
                 due_date = datetime.datetime.strptime(
-                        new_due_date, "%Y-%m-%d").date()
+                        new_due_date, "%y-%m-%d").date()
                 if due_date < datetime.date.today():
                     print("Due date must be in the future. Please try again.")
                 else:
