@@ -40,11 +40,10 @@ except gspread.WorksheetNotFound:
     # docs.gspread.org/en/latest/api/exceptions.html
     # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
     print(
-        "Error: Worksheet not found."
-        "Please check the worksheet name and try again."
-    )
+            f"{Fore.RED}{Style.BRIGHT}Error: Worksheet not found."
+            f"Please check the worksheet name and try again.{Style.RESET_ALL}"
+        )
     exit()
-
 
 class ExitToMainMenu(Exception):
     """
@@ -107,26 +106,34 @@ def get_user_input(
     while True:
         # Stripping leading/trailing whitespace
         user_input = input(prompt).strip()
+
+         # Handle 'back' to exit or 'skip' functionality
         if user_input.lower() == "back":
             raise ExitToMainMenu
+        
         # Return empty input to signify skipping
         if allow_skip and user_input == "":
             return user_input
         # Check for empty input
         if not user_input:
-            print("Error: Input cannot be empty. Please try again.\n")
+            print(
+                f"{Fore.RED}{Style.BRIGHT}Error: Input cannot be empty.\n"
+                f"Please try again.{Style.RESET_ALL}\n"
+            )
             continue
+       
         # Capitalize the first letter and make the rest lowercase
         if normalize:
             user_input = user_input.capitalize()
         # Prompt the user to re-enter the input
         if allowed_values and user_input not in allowed_values:
-            print(
-                "Error: Invalid input"
-                "Please enter one of the following:\n"
-                f"{', '.join(allowed_values)}"
-            )
+            print(f"{Fore.RED}{Style.BRIGHT}"
+                  "Error: Invalid input.\n"
+                  "Please enter one of the following: "
+                 f"{', '.join(allowed_values)}{Style.RESET_ALL}\n"
+                 )
             continue
+
         # Attempt to convert input to integer, retrying on failure
         if numeric:
             # Amended from: www.w3schools.com/python/python_try_except.asp
@@ -135,10 +142,12 @@ def get_user_input(
                 return int(user_input)
             except ValueError:
                 print(
-                    "Error: Invalid input."
-                    "Please enter a numeric value.\n"
+                     f"{Fore.RED}{Style.BRIGHT}Error: Invalid input.\n"
+                    "Please enter a numeric value.{Style.RESET_ALL}\n"
                 )
             continue
+        # Ensure a newline for readability
+        print()
         return user_input
 
 
@@ -165,20 +174,33 @@ def get_valid_due_date():
     while True:
         due_date_str = input("Enter Due Date (YY-MM-DD): \n")
         # Amended from: www.w3schools.com/python/python_try_except.asp
+
+        # Check for 'back' command to return or exit
+        if due_date_str.lower() == "back":
+            raise ExitToMainMenu 
+
         try:
             # Amended from: geeksforgeeks.org/python-datetime-strptime-function/
             due_date = datetime.datetime.strptime(
                 due_date_str, "%y-%m-%d"
             ).date()
+
             if due_date < datetime.date.today():
                 print(
-                    "Error: The due date must be in the future."
+                    f"{Fore.RED}{Style.BRIGHT}"
+                    "\nError: The due date must be in the future.\n"
                     "Please try again."
+                    f"{Style.RESET_ALL}\n"
                 )
             else:
                 return due_date_str  # Return the valid due date string
         except ValueError:
-            print("Error: Invalid date format. Please use YY-MM-DD.")
+            print(
+                f"{Fore.RED}{Style.BRIGHT}"
+                "Error: Invalid date format."
+                 "Please use YY-MM-DD."
+                f"{Style.RESET_ALL}\n"
+                )
 
 
 # Define allowed values for task priority and status
@@ -198,20 +220,26 @@ def add_row_to_sheet():
     print(f"Task ID: {task_id}")
     # User adds task description
     to_do = get_user_input("Enter task description: \n")
+
     # User adds priority
     priority = get_user_input(
         "Enter priority (High/Med/Low): \n",
         normalize=True,
         allowed_values=priority_allowed_values,
     )
-    # User adds due_date = input("Enter Due Date (YY-MM-DD): ")
+ 
+    # User adds due date = input("Enter Due Date (YY-MM-DD): ")
     due_date = get_valid_due_date()
+    # Readibility
+    print()
+
     # User adds status
     status = get_user_input(
         "Enter status (New/Done/Pend): \n",
         normalize=True,
         allowed_values=status_allowed_values,
     )
+
     # Generate the task creation date in YY-MM-DD format
     creation_date = datetime.date.today().strftime("%y-%m-%d")
 
@@ -222,10 +250,17 @@ def add_row_to_sheet():
     # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
         worksheet.append_row(row)
-        print("\nTask added successfully with creation date:", creation_date)
+        print(f"{Fore.GREEN}{Style.BRIGHT}"
+            "Task added successfully with creation date: "
+            f"{creation_date}{Style.RESET_ALL}")
+            
+       # print("\nTask added successfully with creation date:", creation_date)
     except gspread.exceptions.APIError as e:
         # Print API error
-        print(f"Error: Failed to add task due to Google sheets API error:", e)
+        print(f"{Fore.RED}{Style.BRIGHT}"
+            "Error: Failed to add task due to Google sheets API error: "
+            f"{e}{Style.RESET_ALL}\n"
+            )
 
 
 def wrap_text(text, width):
@@ -319,7 +354,7 @@ def list_all_tasks():
         "Prio",
         "Due Date",
         "Status",
-        "Creation ",
+        "Created ",
     ]
     table.align = "l"
 
@@ -372,7 +407,10 @@ def view_task():
     try:
         task_id = int(task_id)
     except ValueError:
-        print("\nInvalid Task ID format. Please enter a numeric value.")
+        print(f"{Fore.RED}{Style.BRIGHT}"
+            "\nError: Invalid Task ID format.\n"
+            "Please enter a numeric value."
+             f"{Style.RESET_ALL}\n")
         return
 
     # Find the task by Task ID
@@ -414,13 +452,15 @@ def update_task():
       at any point by typing a specific command (e.g., 'back')
     """
     # Amended from: www.w3schools.com/python/python_try_except.asp
+    current_task = None
+
     try:
         task_id = get_user_input(
             "Enter the Task ID of the task you want to update: \n",
             normalize=False
         )
-
         tasks = worksheet.get_all_records()
+        # Initialize current_task to None before the loop
         task_index = None
 
         # Iterates through tasks to find the index of the task with
@@ -434,21 +474,19 @@ def update_task():
                 break
 
         if current_task is None:
-            print(
-                "Task not found."
-                "Please ensure you have entered the"
-                "correct Task ID."
-            )
+            print(f"{Fore.RED}{Style.BRIGHT}"
+                "Error: Task not found. \n"
+                "Please ensure you have entered the correct Task ID.\n"
+                f"{Style.RESET_ALL}")
             return
 
-        print("\nCurrent task details:")
+        print("Current task details:")
         print("---------------------")
-        view_task_specific(task_id)
-
+      
         # Ask the user for a new description, stripping
         # leading/trailing whitespace
         new_description = get_user_input(
-            "\nEnter new description (or press Enter to skip): \n",
+            "Enter new description (or press Enter to skip): \n",
             normalize=False,
             allowed_values=None,
             allow_skip=True,
@@ -462,7 +500,7 @@ def update_task():
         # Prompt for a new priority, allowing an empty input to skip
         # the update
         new_priority = get_user_input(
-            "Enter new priority (High/Med/Low) or press Enter to skip: ",
+            "Enter new priority (High/Med/Low) or press Enter to skip: \n",
             normalize=True,
             allowed_values=priority_allowed_values + [""],
             allow_skip=True,
@@ -491,7 +529,7 @@ def update_task():
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
         new_due_date = get_user_input(
-            "\nEnter new Due Date (YY-MM-DD) or press Enter to skip: \n",
+            "Enter new Due Date (YY-MM-DD) or press Enter to skip: \n",
             allow_skip=True,
         )
         if new_due_date:
@@ -502,7 +540,9 @@ def update_task():
                 due_date = datetime.datetime.strptime(
                         new_due_date, "%y-%m-%d").date()
                 if due_date < datetime.date.today():
-                    print("Due date must be in the future. Please try again.")
+                    print(f"{Fore.RED}{Style.BRIGHT}"
+                    "Due date must be in the future. Please try again."
+                    f"{Style.RESET_ALL}\n")
                 else:
                     worksheet.update_cell(task_index, 4, new_due_date)
             except ValueError:
@@ -542,7 +582,9 @@ def update_task():
         elif new_status:
             # If the new status is different from the current one, update it
             worksheet.update_cell(task_index, 5, new_status)
-        print("Task updated successfully.")
+        print(f"{Fore.GREEN}{Style.BRIGHT}"
+            "Task updated successfully."
+            f"{Style.RESET_ALL}")
     except ExitToMainMenu:
         return
 
@@ -582,9 +624,10 @@ def delete_tasks():
                     tasks_to_delete.append(index + 2)
 
         if not tasks_to_delete:
-            print(
-                "None of the specified Task IDs were found."
-                " Please ensure you have entered the correct Task IDs."
+            print(f"{Fore.RED}{Style.BRIGHT}"
+                "Error: None of the specified Task IDs were found. \n"
+                "Please ensure you have entered the correct Task IDs."
+                f"{Style.RESET_ALL}"
             )
             return
 
@@ -605,18 +648,29 @@ def delete_tasks():
             try:
                 for row in tasks_to_delete:
                     worksheet.delete_rows(row)
-                    print("Tasks deleted successfully.")
+                    print(f"{Fore.GREEN}{Style.BRIGHT}"
+                    "\nTasks deleted successfully."
+                    f"{Style.RESET_ALL}")
+
             except gspread.exceptions.APIError as e:
                 # Print the API error
                 error_message = (
-                    f"Error: Failed to delete task"
-                    "due to a Google Sheets API error: "
+                    f"{Fore.RED}{Style.BRIGHT}"
+                    "Error: Failed to delete task due to a Google Sheets API error: "
+                    f"{e}"
+                    f"{Style.RESET_ALL}"
                 )
                 print(error_message, e)
+
         elif confirm == "no":
-            print("Task deletion canceled.")
+            print(f"{Fore.YELLOW}{Style.BRIGHT}"
+            "\nTask deletion canceled."
+            f"{Style.RESET_ALL}")
         else:
-            print("Invalid input. Please answer 'yes' or 'no'.")
+            print(f"{Fore.RED}{Style.BRIGHT}"
+            "\nError: Invalid input.\n"
+            "Please answer 'yes' or 'no'."
+            f"{Style.RESET_ALL}")
 
     except ExitToMainMenu:
         return
@@ -647,7 +701,7 @@ def main_menu():
                 "Enter choice -> (or type 'back' to return to menu): \n"
             )
             # Adds a blank line for clearer output separation
-            print()
+            # print()
 
             if choice == "1":
                 add_row_to_sheet()
@@ -660,15 +714,19 @@ def main_menu():
             elif choice == "5":
                 delete_tasks()
             elif choice == "6":
-                print("Exiting the Task Organizer. Goodbye!")
+                print(f"{Fore.MAGENTA}{Style.BRIGHT}"
+                "- - - Exiting the Task Organizer. Goodbye! - - - \n"
+                f"{Style.RESET_ALL}")
                 break
             else:
-                print("Error: Invalid choice. Please try again.")
+                print(f"{Fore.RED}{Style.BRIGHT}"
+                "Error: Invalid choice. \n" 
+                "Please try again.\n"
+                f"{Style.RESET_ALL}")
         except ExitToMainMenu:
             # If "back" is entered at any input prompt,
             # loop back to the main menu
             continue
-
 
 # Amended from: geeksforgeeks.org/print-colors-python-terminal/
 colorama.init(autoreset=True)
