@@ -275,8 +275,27 @@ def wrap_text(text, width):
     Amended from: docs.python.org/3/library/textwrap.html
     Wraps text to the specified width and returns a list of wrapped lines.
     """
-    text = str(text)
-    return textwrap.wrap(text, width, break_long_words=True)
+    text = str(text)  # Ensure all inputs are treated as strings
+    if len(text) <= width:
+        return [text]  # Return the text if it's short enoughclear
+
+    wrapped_text = []
+    while text:
+        if len(text) <= width:
+            wrapped_text.append(text)
+            break
+        else:
+            # Find space to break the line, if possible
+            space_index = text.rfind(' ', 0, width)
+            if space_index != -1:
+                # Break line at last space within width
+                wrapped_text.append(text[:space_index])
+                text = text[space_index+1:]  # Skip the space
+            else:
+                # No space found; hard break at the width limit
+                wrapped_text.append(text[:width])
+                text = text[width:]
+    return wrapped_text
 
 
 def list_all_tasks():
@@ -298,9 +317,9 @@ def list_all_tasks():
 
     if not tasks:
         print(f"{Fore.RED}{Style.BRIGHT}"
-        "No tasks found."
-        f"{Style.RESET_ALL}"
-        )
+              "No tasks found."
+              f"{Style.RESET_ALL}"
+              )
         return
 
     # Ask the user for their preferred sorting criteria
@@ -317,7 +336,7 @@ def list_all_tasks():
     # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
 
-         # Get user input for sorting choice
+        # Get user input for sorting choice
         sort_choice = get_user_input(
             "\nPlease, select an option (1-6) or press Enter for default: \n",
             allow_skip=True, numeric=True
@@ -447,17 +466,26 @@ def view_task():
         ]
         task_table.align = "l"
 
+        # Max width for the To-Do column
+        # Amended from: docs.python.org/3/library/textwrap.html
+        max_width = 30
+        wrapped_text = wrap_text(found_task["To-Do"], max_width)
+
         # Add the found task to the table
-        task_table.add_row(
-            [
-                found_task["Task ID"],
-                found_task["To-Do"],
-                found_task["Priority"],
-                found_task["Due Date"],
-                found_task["Status"],
-                found_task["Creation Date"],
-            ]
-        )
+        first_line = [
+            found_task["Task ID"],
+            wrapped_text[0] if wrapped_text else "",
+            found_task["Priority"],
+            found_task["Due Date"],
+            found_task["Status"],
+            found_task["Creation Date"],
+        ]
+        task_table.add_row(first_line)
+
+        # If 'To-Do' text was wrapped to more lines, add them to the table
+        for line in wrapped_text[1:]:
+            task_table.add_row(["", line, "", "", "", ""])
+
         # For readability
         print()
 
@@ -629,7 +657,7 @@ def update_task():
         print(f"{Fore.GREEN}{Style.BRIGHT}"
               "Task updated successfully."
               f"{Style.RESET_ALL}")
-           
+
     except ExitToMainMenu:
         return
 
@@ -679,10 +707,10 @@ def delete_tasks():
         # Confirm deletion with the user before proceeding
         confirm = (
             input(f"{Fore.YELLOW}{Style.BRIGHT}"
-                "Are you sure you want to delete these tasks?"
-                " The action is irreversible! (yes/no): "
-                f"{Style.RESET_ALL}"
-            )
+                  "Are you sure you want to delete these tasks?"
+                  " The action is irreversible! (yes/no): "
+                  f"{Style.RESET_ALL}"
+                  )
             .strip()
             .lower()
         )
