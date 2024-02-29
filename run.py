@@ -1,24 +1,26 @@
-# Amended from www.geeksforgeeks.org/clear-screen-python/
+# Amended from: www.geeksforgeeks.org/clear-screen-python/
 import os
 
-# Amended from www.geeksforgeeks.org/python-datetime-module/
+# Amended from: www.geeksforgeeks.org/python-datetime-module/
 import datetime
 
-# Amended from Code Institute project love_sandwiches
+# Amended from: Code Institute project love_sandwiches
 import gspread
 from google.oauth2.service_account import Credentials
 
-# Amended from pypi.org/project/prettytable/
+# Amended from: pypi.org/project/prettytable/
 from prettytable import PrettyTable
+
+# Amended from: docs.python.org/3/library/textwrap.html
+import textwrap
 
 # Amended from: www.geeksforgeeks.org/print-colors-python-terminal/
 import colorama
 from colorama import Fore, Back, Style
 
-# Amended from: docs.python.org/3/library/textwrap.html
-import textwrap
+colorama.init()
 
-# Amended from Code Institute project love_sandwiches
+# Amended from: Code Institute project love_sandwiches
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -26,7 +28,7 @@ SCOPE = [
 ]
 
 # Google Sheets setup
-# Amended from Code Institute project love_sandwiches
+# Amended from: Code Institute project love_sandwiches
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -39,7 +41,7 @@ try:
     # If the worksheet is found, continue with the program
 except gspread.WorksheetNotFound:
     # If the worksheet is not found, print an error message and exit
-    # API error handling amended from
+    # API error handling amended from:
     # docs.gspread.org/en/latest/api/exceptions.html
     # and  snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError
     print(
@@ -108,8 +110,8 @@ def get_user_input(
     is set to True.
     """
     while True:
-        # Stripping leading/trailing whitespace
-        user_input = input(prompt).strip()
+        # Colorize and reset prompt color within the function
+        user_input = input(Fore.BLUE + prompt + Fore.RESET).strip()
 
         # Handle 'back' to exit or 'skip' functionality
         if user_input.lower() == "back":
@@ -147,7 +149,8 @@ def get_user_input(
             except ValueError:
                 print(
                      f"{Fore.RED}{Style.BRIGHT}Error: Invalid input.\n"
-                     "Please enter a numeric value.{Style.RESET_ALL}\n"
+                     "Please enter a numeric value.\n"
+                     f"{Style.RESET_ALL}"
                 )
             continue
         # Ensure a newline for readability
@@ -293,22 +296,29 @@ def list_all_tasks():
     tasks = worksheet.get_all_records()
 
     if not tasks:
-        print("No tasks found.")
+        print(f"{Fore.RED}{Style.BRIGHT}"
+        "No tasks found."
+        f"{Style.RESET_ALL}"
+        )
         return
+
+    # Ask the user for their preferred sorting criteria
+    print("Sort Task By")
+    print("-------------")
+    # Print the options with the selected header color
+    print("1. Task ID (default)")
+    print("2. Priority")
+    print("3. Status")
+    print("4. Due Date (earliest to latest)")
+    print("5. Due Date (latest to earliest)")
+    print("6. Back to Main Menu")
 
     # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
-        # Ask the user for their preferred sorting criteria
-        print("Choose sorting criteria:")
-        print("------------------------")
-        print("1. Task ID (default)")
-        print("2. Priority")
-        print("3. Status")
-        print("4. Due Date (earliest to latest)")
-        print("5. Due Date (latest to earliest)\n")
 
+         # Get user input for sorting choice
         sort_choice = get_user_input(
-            "Enter choice (or press Enter for default): ",
+            "\nPlease, select an option (1-6) or press Enter for default: \n",
             allow_skip=True, numeric=True
         )
 
@@ -316,11 +326,20 @@ def list_all_tasks():
         # and ensure the sort_choice is correctly interpreted as an integer
         sort_choice = int(sort_choice) if sort_choice else 1
 
+        if sort_choice is None or sort_choice == 6:
+            print(
+                f"{Fore.GREEN}{Style.BRIGHT}"
+                "\nYou have returned to main menu."
+                "\nFeel free to explore more options!"
+                f"{Style.RESET_ALL}"
+                )
+            return
+
         # Define custom sort orders for priority and status
         priority_order = {"High": 1, "Med": 2, "Low": 3}
         status_order = {"New": 1, "Pend": 2, "Done": 3}
 
-        # Define the sorting key
+        # Define the sorting key7
         def sort_key(x):
             if sort_choice == 2:
                 return priority_order.get(x["Priority"], 999)
@@ -394,7 +413,10 @@ def list_all_tasks():
             additional_line[1] = line
             table.add_row(additional_line)
 
-    print(table)
+    # Print the task details table with colored text
+    print(
+        Fore.BLUE + str(table) + Fore.RESET
+        )
 
 
 def view_task():
@@ -402,46 +424,55 @@ def view_task():
     Prompts the user for a Task ID and displays the details of
     the specified task.
     """
-    # Add a space before prompting for Task ID
-    print()
-
     task_id = get_user_input("Enter Task ID to view: \n", numeric=True)
-    # Fetch all tasks as a list of dictionaries
     tasks = worksheet.get_all_records()
-
-    # Convert task_id to int for comparison, handle potential ValueError
-    # Amended from: www.w3schools.com/python/python_try_except.asp
-    try:
-        task_id = int(task_id)
-    except ValueError:
-        print(f"{Fore.RED}{Style.BRIGHT}"
-              "\nError: Invalid Task ID format.\n"
-              "Please enter a numeric value."
-              f"{Style.RESET_ALL}\n")
-        return
 
     # Find the task by Task ID
     found_task = next(
-        (task for task in tasks if str(task['Task ID']) == str(task_id)),
-        None
-    )
+        (task for task in tasks if int(task["Task ID"]) == task_id),
+        None)
 
     if found_task:
-        # Add a space before displaying task details
-        print("\nTask Details:")
-        print("-------------")
-        print(
-            f"Task ID: {found_task['Task ID']}\n"
-            f"To-Do: {found_task['To-Do']}\n"
-            f"Priority: {found_task['Priority']}\n"
-            f"Due Date: {found_task['Due Date']}\n"
-            f"Status: {found_task['Status']}"
+        # Code to display the task details. Create a PrettyTable
+        # instance and define the column headers
+        task_table = PrettyTable()
+        task_table.field_names = [
+            "ID",
+            "To-Do",
+            "Prio",
+            "Due Date",
+            "Status",
+            "Created",
+        ]
+        task_table.align = "l"
+
+        # Add the found task to the table
+        task_table.add_row(
+            [
+                found_task["Task ID"],
+                found_task["To-Do"],
+                found_task["Priority"],
+                found_task["Due Date"],
+                found_task["Status"],
+                found_task["Creation Date"],
+            ]
         )
+        # For readability
+        print()
+
+        # Print the task details table with colored text
+        print(
+            Fore.BLUE + str(task_table) + Fore.RESET
+            )
+
     else:
+        # No task was found with the given Task ID
         print(f"{Fore.RED}{Style.BRIGHT}"
               "\nError: Task not found.\n"
               "Please ensure you have entered a valid Task ID."
-              f"{Style.RESET_ALL}\n")
+              "\nYou have returned to main menu."
+              f"{Style.RESET_ALL}\n"
+              )
 
 
 def update_task():
@@ -490,13 +521,13 @@ def update_task():
                   f"{Style.RESET_ALL}")
             return
 
-        print("Current task details:")
+        print("Update Task Details:")
         print("---------------------")
 
         # Ask the user for a new description, stripping
         # leading/trailing whitespace
         new_description = get_user_input(
-            "Enter new description (or press Enter to skip): \n",
+            "Please, enter new description, or press Enter to skip: \n",
             normalize=False,
             allowed_values=None,
             allow_skip=True,
@@ -510,7 +541,8 @@ def update_task():
         # Prompt for a new priority, allowing an empty input to skip
         # the update
         new_priority = get_user_input(
-            "Enter new priority (High/Med/Low) or press Enter to skip: \n",
+            "Please, enter new priority (High/Med/Low) "
+            "or press key Enter to skip: \n",
             normalize=True,
             allowed_values=priority_allowed_values + [""],
             allow_skip=True,
@@ -539,7 +571,8 @@ def update_task():
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
         new_due_date = get_user_input(
-            "Enter new Due Date (YY-MM-DD) or press Enter to skip: \n",
+            "Please, enter new Due Date (YY-MM-DD) or "
+            "press Enter to skip: \n",
             allow_skip=True,
         )
         if new_due_date:
@@ -563,8 +596,8 @@ def update_task():
         # Ask the user for a new status, allowing an empty input
         # to skip the update
         new_status = get_user_input(
-            "Enter new status (New/Done/Pend) or"
-            "press" "Enter to skip: \n",
+            "Please, enter new status (New/Done/Pend) or "
+            "press Enter to skip: \n",
             normalize=True,
             allowed_values=status_allowed_values + [""],
             allow_skip=True,
@@ -595,6 +628,7 @@ def update_task():
         print(f"{Fore.GREEN}{Style.BRIGHT}"
               "Task updated successfully."
               f"{Style.RESET_ALL}")
+           
     except ExitToMainMenu:
         return
 
@@ -643,9 +677,10 @@ def delete_tasks():
 
         # Confirm deletion with the user before proceeding
         confirm = (
-            input(
+            input(f"{Fore.YELLOW}{Style.BRIGHT}"
                 "Are you sure you want to delete these tasks?"
                 " The action is irreversible! (yes/no): "
+                f"{Style.RESET_ALL}"
             )
             .strip()
             .lower()
@@ -674,7 +709,7 @@ def delete_tasks():
                 print(error_message, e)
 
         elif confirm == "no":
-            print(f"{Fore.YELLOW}{Style.BRIGHT}"
+            print(f"{Fore.GREEN}{Style.BRIGHT}"
                   "\nTask deletion canceled."
                   f"{Style.RESET_ALL}")
         else:
@@ -689,7 +724,7 @@ def delete_tasks():
 
 def clear_terminal():
     """
-    # Amended from www.geeksforgeeks.org/clear-screen-python/
+    Amended from www.geeksforgeeks.org/clear-screen-python/
     Clear the terminal screen.
     """
     # Windows
@@ -713,7 +748,7 @@ def main_menu():
     while True:
         # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
-            print("\n Menu To-Do-List")
+            print("\nMenu To-Do-List")
             print("-----------------")
             print("1. Add Task")
             print("2. List All Tasks")
@@ -723,10 +758,8 @@ def main_menu():
             print("6. Clear screen")
             print("7. Exit application\n")
             choice = get_user_input(
-                "Enter choice -> (or type 'back' to return to menu): \n"
+                "Please, select an option (1-7): \n"
             )
-            # Adds a blank line for clearer output separation
-            # print()
 
             if choice == "1":
                 add_row_to_sheet()
