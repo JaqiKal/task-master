@@ -275,6 +275,7 @@ def wrap_text(text, width):
     Amended from: docs.python.org/3/library/textwrap.html
     Wraps text to the specified width and returns a list of wrapped lines.
     """
+    text = str(text)
     return textwrap.wrap(text, width, break_long_words=True)
 
 

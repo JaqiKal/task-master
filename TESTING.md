@@ -183,6 +183,29 @@ The problem was solved by introducing a new function, ```def wrap_text(text, wid
 
 ![x](/documentation/images/table-wrap.webp)
 
+### Bug-03
+
+In 'Menu To-Do-List' I select '2. List All tasks' and then hit enter to select 'sort by Task ID'. which results in fault message:
+
+![x](/documentation/images/wrap_text-fail.webp)
+
+It seemed the problem arised when attempting to wrap text that is not a string, specifically when task["To-Do"] is an integer or contains integer values that are not automatically converted to string types by the wrap_text function or the textwrap.wrap method within it. I assumed this likely happens if a task's "To-Do" field is purely numeric and not explicitly cast to a string before being passed to wrap_text.
+
+### Solution Bug-03
+
+I assumed that the most direct way to solve this issue was to ensure that any value passed to wrap_text was explicitly converted to a string, regardless of its original type. I modified the wrap_text function to automatically convert its input to a string, ensuring compatibility with all types of input.
+
+```python
+def wrap_text(text, width):
+    """
+    Amended from: docs.python.org/3/library/textwrap.html
+    Wraps text to the specified width and returns a list of wrapped lines.
+    Ensures that the text is treated as a string to avoid errors with non-string inputs.
+    """
+    # Ensure the input is treated as a string to prevent errors
+    text = str(text)
+    return textwrap.wrap(text, width, break_long_words=True)
+```
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
