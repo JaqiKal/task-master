@@ -677,55 +677,64 @@ def update_task():
                 # and skip updating the due date
                 print(
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "\nError: Invalid date format.\n"
+                    "Error: Invalid date format.\n"
                     "Skipped updating due date.\n"
                     f"{Style.RESET_ALL}"
                     )
 
         # Prompt the user for a new status, allowing an empty input
         # to skip the update
-        new_status = get_user_input(
-            "Please, enter new status (New/Done/Pend) or "
-            "press Enter to skip: \n",
-            normalize=True,
-            allowed_values=status_allowed_values + [""],
-            allow_skip=True,
-        )
-
-        # Notify the user if the new status is the same as the current one.
-        if new_status and new_status.lower() == current_task["Status"].lower():
-            # Ask the user if they want to proceed with changing the status
-            # even though it's the same as the current one
-            confirm_change_status = (
-                input(
-                    f"{Fore.YELLOW}{Style.BRIGHT}"
-                    "The new status is the same as the current one.\n"
-                    " Do you still want to change it? (yes/no): \n"
-                    f"{Style.RESET_ALL}"
-                )
-                .strip()
-                .lower()
+        while True:
+            new_status = get_user_input(
+                "Please, enter new status (New/Done/Pend) or "
+                "press Enter to skip: \n",
+                normalize=True,
+                allowed_values=["New","Done", "Pend", ""],
+                allow_skip=True,
             )
-            if confirm_change_status == "yes":
-                # If the user confirms, proceed with updating the status
-                worksheet.update_cell(task_index, 5, new_status)
-                print(
-                    f"{Fore.GREEN}{Style.BRIGHT}"
-                    "Status updated successfully."
-                    f"{Style.RESET_ALL}"
-                    )
-            else:
-                # If the user decides not to change the status, skip this part
+            if new_status == "":
                 print(
                     f"{Fore.GREEN}{Style.BRIGHT}"
                     "Status update skipped."
-                    f"{Style.RESET_ALL}")
-        elif new_status:
-            # If the new status is different from the current one, update it
-            worksheet.update_cell(task_index, 5, new_status)
-        print(f"{Fore.GREEN}{Style.BRIGHT}"
-              "Task updated successfully."
-              f"{Style.RESET_ALL}")
+                    f"{Style.RESET_ALL}"
+                    )
+                break
+
+            # Notify the user if the new status is the same as the current one.
+            if new_status.lower() == current_task["Status"].lower():
+                # Ask the user if they want to proceed with changing the status
+                # even though it's the same as the current one
+                print(
+                    f"{Fore.YELLOW}{Style.BRIGHT}"
+                    "The new status is the same as the current one.\n"
+                    f"{Fore.GREEN}"
+                    "Status remains unchanged"
+                    f"{Style.RESET_ALL}"
+                    )
+                print(
+                    f"{Fore.YELLOW}{Style.BRIGHT}"
+                    "\nalt 1) If you wish to change, type 'back' or\n"
+                    "alt 2) Type any key to to return to Main Menu:"
+                    f"{Style.RESET_ALL}"
+                    )
+                # Direct input for local decision
+                choice = input().strip().lower()
+                # Allows the user to re-enter a new status
+                if choice == 'back':
+                    # Loop back for re-entry
+                    continue
+                else:
+                    # If the user decides not to type 'back',
+                    # just proceed without repeating the message.
+                    break
+            else:
+                # If the new status is different from the current one, update it
+                worksheet.update_cell(task_index, 5, new_status)
+                print(f"{Fore.GREEN}{Style.BRIGHT}"
+                "Status change successful."
+                f"{Style.RESET_ALL}")
+                status_updated = True
+                break
 
     except ExitToMainMenu:
         return
