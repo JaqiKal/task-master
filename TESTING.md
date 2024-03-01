@@ -32,6 +32,7 @@ Testing was ongoing throughout the entire development. I utilised CI Python Lint
 * Screen:
   * Samsung Odyssey G3 / 27" / 1920 x 1080 /
 * Google Chrome, version 121.0.6167.86 (Official Build) (64-bit)
+* Firefox, version 123.0 (64-bi)
 
 ### Responsiveness
 
@@ -222,7 +223,14 @@ def wrap_text(text, width):
 
 ### KNOWN issue
 
-* None
+* Within the `update_task` function, the application's handling of date inputs does not offer the same level of comprehensiveness as seen with the 'Priority' and 'Status' fields. While users can update the due date of tasks, the current implementation lacks robust validation and feedback mechanisms comparable to those provided for other task attributes. This discrepancy may lead to less intuitive user experiences when modifying task due dates, as the application does not guide users through the process with the same level of detail or error handling. Efforts to enhance the date handling feature are underway to ensure consistency across all aspects of task management within the application.
+
+* If the application frequently interacts with Google Sheets, reaching API rate limits could lead to temporary disruptions. 
+
+* The application currently does not implement user-specific authentication for accessing the Google Sheets backend
+
+* Accessibility, I have no details if there are any known limitations regarding accessibility features for users with disabilities, such as screen reader compatibility or color contrast consideration. As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, color contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and are committed to improving these aspects in future updates.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
+
 - - -

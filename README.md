@@ -17,7 +17,13 @@
   * [Developer's goal](#developers-goal)
   * [User's goal](#users-goal)
 * [User Experience](#user-experience)
+  * [The Strategy](#the-strategy)
+  * [The Scope](#the-scope)
+  * [The Structure](#the-structure)
+  * [The Skeleton](#the-skeleton)
   * [User stories](#user-stories)
+* [Design](#design)
+  * [Color Usage in Application](#color-usage-in-application)
 * [Features](#features)
   * [Existing features](#existing-features)
   * [Future features](#future-features)
@@ -105,6 +111,18 @@ The user's primary goal in using this to-do list application is to have a reliab
 
 ## User Experience
 
+### The Strategy
+Dive into productivity with Task Master, a to-do list application engineered to streamline task management effortlessly. Designed with a focus on simplicity and efficiency, Task Master aims to help users organize their daily tasks, prioritize what's important, and track their progress towards completion. By integrating seamlessly with Google Sheets, it ensures that your tasks are always accessible and up-to-date, fostering an environment where productivity thrives.
+
+### The Scope
+Task Master is more than just a to-do list; it's a comprehensive task management solution that caters to the needs of various users, from students and professionals to anyone looking to enhance their organizational skills. The application offers a full suite of features, including the ability to add tasks, set priorities and due dates, update task statuses, and delete tasks no longer needed. With a single guess approach for task management actions, users are encouraged to think strategically about their task priorities, making it an essential tool for anyone looking to optimize their daily routine.
+
+### The Structure
+At its core, Task Master boasts a structured yet intuitive design that guides users through task management with ease. The application operates on a straightforward, menu-driven interface, allowing for quick navigation between adding, viewing, updating, and deleting tasks. Each task is uniquely identified, ensuring that users can easily manage their tasks without confusion. This structured approach ensures that users can focus more on accomplishing their tasks and less on how to manage them.
+
+### The Skeleton
+For the meticulous planning and organization of Task Master's components and functionalities, tools like 'draw.io' were employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
+
 ### User stories
 
 #### First Time Visitor Goals
@@ -149,6 +167,39 @@ The user's primary goal in using this to-do list application is to have a reliab
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
+
+## Design
+
+In the Task Master application, I've employed the Colorama library to infuse a touch of color into the terminal interface, enhancing both the visual appeal and the user experience by differentiating various types of information. 
+
+### Color Usage in Application
+
+By thoughtfully integrating these colors into the terminal-based Task Master application, I aim to create a more engaging and intuitive user experience, despite the inherent design limitations of terminal interfaces.
+
+#### Magenta
+
+This vibrant hue welcomes users right from the start, used prominently for the application's ASCII art logo and the welcome message. It's designed to grab attention and set a positive, inviting tone for the user interaction.
+
+#### Blue
+
+I've chosen a calming shade of blue to highlight all user input prompts and messages. This color choice helps to distinguish input fields from the rest of the text, guiding users through their task management journey with clarity.
+
+#### Green
+
+Signifying success, green is used to confirm successful actions within the application, such as the addition of a new task or successful updates to existing tasks. It offers instant, positive feedback that reassures users their actions have been successfully completed.
+
+#### Yellow
+
+This color is reserved for warnings or important notices that require the user's attention. Yellow text might indicate a reminder or a caution before performing actions like task deletion, ensuring users proceed with full awareness of the implications.
+
+### Red
+
+Employed for error messages or alerts, red is utilized to immediately draw the user's attention to issues or errors, such as invalid inputs or failed operations. This stark contrast against the other colors ensures that errors are not overlooked and can be addressed promptly.
+
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
+---
 ## Features
 
 These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity.
@@ -161,41 +212,61 @@ Here's an overview of its key features:
 
 Effortlessly add, edit, and organize tasks in a centralized Google Worksheet, ensuring your to-do list is always up-to-date and accessible. 
 
-![screenshot](XX)
+![x](/documentation/images/landingpage.webp)
 
 #### Dynamic Task Addition and Editing
 
 Easily add new tasks or modify existing ones, including details such as task descriptions, priorities, and due dates, for precise task management. 
 
-![screenshot](XX)
+![x](/documentation/images/add-task.webp)
 
 #### Unique Task ID Generation
 
 I implemented the `generate_task_id` function to ensure each task is uniquely identifiable. This choice simplifies the management process for updates, views, or deletions, avoids complex ID generation schemes, and integrates seamlessly with the Google Sheets framework. 
 
-![screenshot](XX)
+![x](/documentation/images/gen-id.webp)
 
 #### Prioritization and Deadlines
 
 Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most. 
 
-![screenshot](XX)
+![x](/documentation/images/prio.webp)
 
 #### Efficient Task Listing
 
-View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. 
+View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. Below a few examples:
 
-![screenshot](XX)
+##### List all tasks in default order by low to high Task ID
+
+![x](/documentation/images/list-all-default.webp)
+
+##### Sort Priority (High-Med-Low)
+
+![x](/documentation/images/prio-sort.webp)
+
+##### Sort Due Date (latest to earliest)
+
+![x](/documentation/images/sort-due-latest.webp)
 
 #### Task Completion Tracking
 
-Mark tasks as done with a simple click, offering a satisfying way to track your progress and maintain motivation. 
+Mark tasks as done, offering a satisfying way to track your progress and maintain motivation. 
 
-![screenshot](XX)
+##### Task prior update of status 
+
+![x](/documentation/images/update-pre.webp)
+
+##### Task being updated 
+
+![x](/documentation/images/update-ongoing.webp)
+
+##### Task updated 
+
+![x](/documentation/images/update-post.webp) 
 
 #### Error Handling and User Feedback
 
-Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. I plan to include screenshots and GIFs to showcase these mechanisms in action, providing a clearer understanding of the app's ease of use. 
+Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. 
 
 ![screenshot](XX)
 
@@ -203,13 +274,13 @@ Benefit from built-in error handling and user feedback mechanisms, ensuring a sm
 
 With tasks stored in Google Sheets, access your task list from any device, ensuring that your data is always there when you need it. Security and privacy are paramount, and I've taken measures to ensure data security, including the use of secure API keys and restricted spreadsheet access. 
 
-![screenshot](XX)
+![x](/documentation/images/spreadsheet.webp)
 
 #### Secure and Easy Exit
 
 Confidently exit the application, knowing that all your tasks are safely stored in Google Sheets, ready for your next session. 
 
-![screenshot](XX)
+![x](/documentation/images/exit.webp)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -218,18 +289,22 @@ Confidently exit the application, knowing that all your tasks are safely stored 
 There are a lot one can do to enhance this application, I want to highlight these four (in no specific prioirity order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
 
 #### Integration with Calendar Applications
+
 - **Description**: Allow users to sync their to-do list items with their preferred calendar applications (e.g., Google Calendar, Microsoft Outlook).
 - **Benefit**: Users can see their tasks alongside their appointments, providing a comprehensive view of their schedules.
 
 #### Collaborative Task Management
+
 - **Description**: Add features that enable users to share lists with others, assign tasks, and track progress collaboratively.
 - **Benefit**: Facilitates teamwork and shared task management, making the app suitable for both personal and professional use.
 
 #### Natural Language Processing (NLP) for Task Entry
+
 - **Description**: Utilize NLP to allow users to add tasks in natural language, which the app can then parse into structured task entries.
 - **Benefit**: Simplifies the process of adding new tasks, making the application more intuitive and user-friendly.
 
 #### Analytics and Productivity Insights
+
 - **Description**: Offer analytics features that give users insights into their task completion patterns, productivity trends, and suggest optimizations.
 - **Benefit**: Helps users understand their productivity habits and make informed adjustments to improve efficiency.
 
@@ -330,6 +405,7 @@ By integrating error handling directly into the core functions and operations, t
 
 Following Python packages and/or external imported packages was used:
 
+* [os](https://www.geeksforgeeks.org/os-module-python-examples/?ref=lbp) - The OS module in Python provides functions for interacting with the operating system.
 * [datetime](https://www.geeksforgeeks.org/python-datetime-module/#python-datetime-module) - Basic date and time type. Python Datetime module comes built into Python, so there is no need to install it externally. 
 * [gspread](https://pypi.org/project/gspread/) - Google Spreadsheets Python API
 * [PrettyTable](https://pypi.org/project/prettytable/) -  A simple Python library for easily displaying tabular data in a visually appealing ASCII table format
@@ -494,7 +570,7 @@ At the time of writing, there is no differance between the local version and the
 
 This application was made possible by leveraging insights and code examples from a range of external resources. Below is a list of these key sources, which have significantly contributed to the functionality and design of the application. A heartfelt thank you to the creators and maintainers of these resources for their invaluable assistance.
 
-
+* [os](https://www.geeksforgeeks.org/os-module-python-examples/?ref=lbp) - The os module in Python provides a way to interface with the underlying operating system, allowing you to perform tasks like navigating the file system, managing files, and executing system commands, enhancing portability and interaction with the host environment.
 * [gspread](https://docs.gspread.org/en/v6.0.0/) - Amended from Code Institute project love_sandwiches
 * [import datetime](https://www.geeksforgeeks.org/python-datetime-module/) - For handling date and time operations.
 * [prettytable](https://pypi.org/project/prettytable/) - Used for organizing tabular data.
