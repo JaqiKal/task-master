@@ -36,7 +36,7 @@ Testing was ongoing throughout the entire development. I utilised CI Python Lint
 ### Browser compatibilty
 
 * Google Chrome, version 121.0.6167.86 (Official Build) (64-bit)
-* Firefox, version 123.0 (64-bi)
+* Firefox, version 123.0 (64-bit)
 
 ### Responsiveness
 
