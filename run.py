@@ -1,3 +1,17 @@
+"""
+This is the main and only script for the Task Master application,
+a tool designed to simplify task management.
+The application allows users to add, manage, and track tasks with ease.
+It leverages the power of Google Sheets for data storage, ensuring
+that your task list is accessible and up-to-date. It features a
+menu-driven interface for straightforward navigation and is built to
+support a wide range of task management activities, from setting
+due dates to prioritizing tasks.
+
+By: JaqiKal
+Date: March 2024
+"""
+
 # Amended from: www.geeksforgeeks.org/clear-screen-python/
 import os
 
@@ -778,7 +792,7 @@ def main_menu():
         # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
             print("\nMenu To-Do-List")
-            print("-----------------")
+            print("---------------")
             print("1. Add Task")
             print("2. List All Tasks")
             print("3. View Task")
@@ -804,7 +818,8 @@ def main_menu():
                 clear_terminal()
             elif choice == "7":
                 print(f"{Fore.MAGENTA}{Style.BRIGHT}"
-                      "- - - Exiting the Task Organizer. Goodbye! - - - \n"
+                      "- - - Exiting the Task Organizer."
+                      " Goodbye & Welcome back! - - - \n"
                       f"{Style.RESET_ALL}")
                 break
             else:
@@ -837,9 +852,9 @@ print(
 )
 print(
     f"{Fore.BLUE}{Style.BRIGHT}"
-    "Manage tasks easily with our intuitive organizer."
-    "\nStay focused; add, update, and track to-dos."
-    "\n Get started now and make task management a breeze!"
+    "Welcome to Task Master! Streamline your to-dos with ease."
+    "\nAdd, manage, and track tasks effortlessly with our simple menu-driven"
+    "\ninterface. Select an option, press Enter, and you're on your way!"
     f"{Style.RESET_ALL}"
 )
 
