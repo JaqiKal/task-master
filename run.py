@@ -187,13 +187,15 @@ def get_valid_due_date():
     tasks.
     """
     while True:
-        due_date_str = input("Enter Due Date (YY-MM-DD): \n")
-        # Amended from: www.w3schools.com/python/python_try_except.asp
-
+        due_date_str = input(
+            f"{Fore.BLUE}{Style.BRIGHT}"
+            "Enter Due Date (YY-MM-DD): \n"
+            f"{Style.RESET_ALL}")
         # Check for 'back' command to return or exit
         if due_date_str.lower() == "back":
             raise ExitToMainMenu
 
+        # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
             # Amended from:
             # geeksforgeeks.org/python-datetime-strptime-function/
@@ -332,7 +334,7 @@ def list_all_tasks():
 
     # Ask the user for their preferred sorting criteria
     print("Sort Task By")
-    print("-------------")
+    print("------------")
     # Print the options with the selected header color
     print("1. Task ID (default)")
     print("2. Priority")
@@ -576,7 +578,7 @@ def update_task():
             return
 
         print("Update Task Details:")
-        print("---------------------")
+        print("--------------------")
 
         # Ask the user for a new description, stripping
         # leading/trailing whitespace
@@ -607,8 +609,10 @@ def update_task():
                 new_priority.lower() == current_task["Priority"].lower()):
             confirm_change = (
                 input(
+                    f"{Fore.YELLOW}{Style.BRIGHT}"
                     "The new priority is the same as the current one. "
                     "Do you still want to change it? (yes/no): \n"
+                    f"{Style.RESET_ALL}"
                 )
                 .strip()
                 .lower()
@@ -617,7 +621,11 @@ def update_task():
             if confirm_change == "yes":
                 worksheet.update_cell(task_index, 3, new_priority)
             else:
-                print("Priority update skipped.")
+                print(
+                    f"{Fore.GREEN}{Style.BRIGHT}"
+                    "Priority update skipped."
+                    f"{Style.RESET_ALL}"
+                    )
             # If a new priority is provided, update it in the sheet
         elif new_priority:
             worksheet.update_cell(task_index, 3, new_priority)
@@ -645,7 +653,11 @@ def update_task():
             except ValueError:
                 # If the date format is invalid, inform user
                 # and skip updating the due date
-                print("Invalid date format. Skipped updating due date.\n")
+                print(
+                    f"{Fore.RED}{Style.BRIGHT}"
+                    "Error: Invalid date format. Skipped updating due date.\n"
+                    f"{Style.RESET_ALL}"
+                    )
 
         # Ask the user for a new status, allowing an empty input
         # to skip the update
@@ -663,8 +675,10 @@ def update_task():
             # even though it's the same as the current one
             confirm_change_status = (
                 input(
+                    f"{Fore.YELLOW}{Style.BRIGHT}"
                     "The new status is the same as the current one."
                     " Do you still want to change it? (yes/no): "
+                    f"{Style.RESET_ALL}"
                 )
                 .strip()
                 .lower()
@@ -672,10 +686,17 @@ def update_task():
             if confirm_change_status == "yes":
                 # If the user confirms, proceed with updating the status
                 worksheet.update_cell(task_index, 5, new_status)
-                print("Status updated successfully.")
+                print(
+                    f"{Fore.GREEN}{Style.BRIGHT}"
+                    "Status updated successfully."
+                    f"{Style.RESET_ALL}"
+                    )
             else:
                 # If the user decides not to change the status, skip this part
-                print("Status update skipped.")
+                print(
+                    f"{Fore.GREEN}{Style.BRIGHT}"
+                    "Status update skipped."
+                    f"{Style.RESET_ALL}")
         elif new_status:
             # If the new status is different from the current one, update it
             worksheet.update_cell(task_index, 5, new_status)
@@ -802,8 +823,8 @@ def main_menu():
     while True:
         # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
-            print("\nMenu To-Do-List")
-            print("---------------")
+            print("\nMain Menu")
+            print("---------")
             print("1. Add Task")
             print("2. List All Tasks")
             print("3. View Task")
@@ -864,7 +885,7 @@ print(
 print(
     f"{Fore.BLUE}{Style.BRIGHT}"
     "Welcome to Task Master! Streamline your to-dos with ease."
-    "\nAdd, manage, and track tasks effortlessly with our simple menu-driven"
+    "\nAdd, manage, and track tasks effortlessly with the simple menu-driven"
     "\ninterface. Select an option, press Enter, and you're on your way!"
     f"{Style.RESET_ALL}"
 )
