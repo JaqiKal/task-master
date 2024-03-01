@@ -396,9 +396,27 @@ def list_all_tasks():
     except ExitToMainMenu:
         # If 'back' is entered, catch the exception and return immediately
         return
+    except KeyError as e:
+        print(
+            f"{Fore.RED}{Style.BRIGHT}"
+            f"An error occurred due to a missing key during sorting: {e}."
+            f"{Style.RESET_ALL}"
+            )
+        sorted_tasks = sorted(tasks, key=lambda x: int(x["Task ID"]))
+    except ValueError as e:
+        print(
+            f"{Fore.RED}{Style.BRIGHT}"
+            f"An error occurred due to a value problem during sorting: {e}."
+            f"{Style.RESET_ALL}"
+            )
+        sorted_tasks = sorted(tasks, key=lambda x: int(x["Task ID"]))
     except Exception as e:
-        print(f"An error occurred during sorting: {e}. Sorting by Task ID.")
-        # Fallback to default sorting if any error occurs
+        print(
+            f"{Fore.RED}{Style.BRIGHT}"
+            f"An unexpected error occurred during sorting: {e}."
+            " Proceeding with caution."
+            f"{Style.RESET_ALL}"
+            )
         sorted_tasks = sorted(tasks, key=lambda x: int(x["Task ID"]))
 
     # Adding a space before displaying the table for better readability
