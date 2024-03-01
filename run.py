@@ -347,8 +347,8 @@ def list_all_tasks():
     print("------------")
     # Print the options with the selected header color
     print("1. Task ID (default)")
-    print("2. Priority")
-    print("3. Status")
+    print("2. Priority (High to Low)")
+    print("3. Status (New to Done)")
     print("4. Due Date (earliest to latest)")
     print("5. Due Date (latest to earliest)")
     print("6. Back to Main Menu")
@@ -480,7 +480,9 @@ def view_task():
     Prompts the user for a Task ID and displays the details of
     the specified task.
     """
-    task_id = get_user_input("Enter Task ID to view: \n", numeric=True)
+    task_id = get_user_input(
+        "Enter Task ID to view (type 'back' for Main Menu): \n",
+        numeric=True)
     tasks = worksheet.get_all_records()
 
     # Find the task by Task ID
@@ -689,7 +691,7 @@ def update_task():
                 "Please, enter new status (New/Done/Pend) or "
                 "press Enter to skip: \n",
                 normalize=True,
-                allowed_values=["New","Done", "Pend", ""],
+                allowed_values=["New", "Done", "Pend", ""],
                 allow_skip=True,
             )
             if new_status == "":
@@ -728,12 +730,13 @@ def update_task():
                     # just proceed without repeating the message.
                     break
             else:
-                # If the new status is different from the current one, update it
+                # If the new status is different from the current one,
+                # update it
                 worksheet.update_cell(task_index, 5, new_status)
-                print(f"{Fore.GREEN}{Style.BRIGHT}"
-                "Status change successful."
-                f"{Style.RESET_ALL}")
-                status_updated = True
+                print(
+                    f"{Fore.GREEN}{Style.BRIGHT}"
+                    "Status change successful."
+                    f"{Style.RESET_ALL}")
                 break
 
     except ExitToMainMenu:
@@ -785,7 +788,7 @@ def delete_tasks():
         # Confirm deletion with the user before proceeding
         confirm = (
             input(f"{Fore.YELLOW}{Style.BRIGHT}"
-                  "Are you sure you want to delete these tasks?\n"
+                  "Are you sure you want to delete task(s)?\n"
                   "The action is irreversible! (yes/no): \n"
                   f"{Style.RESET_ALL}"
                   )
@@ -855,17 +858,17 @@ def main_menu():
     while True:
         # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
-            print("\nMain Menu")
+            print("\nMain Menu ")
             print("---------")
             print("1. Add Task")
             print("2. List All Tasks")
-            print("3. View Task")
-            print("4. Update Task")
-            print("5. Delete Task(s)")
+            print("3. View Task      (select ID from menu item 2)")
+            print("4. Update Task    (select ID from menu item 2)")
+            print("5. Delete Task(s) (select ID from menu item 2)")
             print("6. Clear screen")
             print("7. Exit application\n")
             choice = get_user_input(
-                "Please, select an option (1-7): \n"
+             "Please, select option (1-7) or type 'back' to return to menu: "
             )
 
             if choice == "1":
