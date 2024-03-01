@@ -14,23 +14,18 @@ Date: March 2024
 
 # Amended from: www.geeksforgeeks.org/clear-screen-python/
 import os
-
 # Amended from: www.geeksforgeeks.org/python-datetime-module/
 import datetime
-
+# Amended from: docs.python.org/3/library/textwrap.html
+import textwrap
 # Amended from: Code Institute project love_sandwiches
 import gspread
 from google.oauth2.service_account import Credentials
-
 # Amended from: pypi.org/project/prettytable/
 from prettytable import PrettyTable
-
-# Amended from: docs.python.org/3/library/textwrap.html
-import textwrap
-
 # Amended from: www.geeksforgeeks.org/print-colors-python-terminal/
 import colorama
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 colorama.init()
 
@@ -72,7 +67,6 @@ class ExitToMainMenu(Exception):
 
     Exception used to signal an exit back to the main menu.
     """
-    pass
 
 
 def generate_task_id():
