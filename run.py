@@ -434,7 +434,6 @@ def list_all_tasks():
 
     for task in sorted_tasks:
         wrapped_text = wrap_text(task["To-Do"], max_width)
-        num_lines = len(wrapped_text)
 
         # The first row with all the task details
         first_line = [
@@ -854,8 +853,8 @@ ascii_art = [
 ]
 
 # Printing the ASCII Art
-for line in ascii_art:
-    print(line)
+for ascii_line in ascii_art:
+    print(ascii_line)
 
 print(
     f"{Fore.MAGENTA}{Style.BRIGHT}"
