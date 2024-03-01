@@ -192,6 +192,7 @@ In 'Menu To-Do-List' I select '2. List All tasks' and then hit enter to select '
 It seemed the problem arised when attempting to wrap text that is not a string, specifically when task["To-Do"] is an integer or contains integer values that are not automatically converted to string types by the wrap_text function or the textwrap.wrap method within it. I assumed this likely happens if a task's "To-Do" field is purely numeric and not explicitly cast to a string before being passed to wrap_text.
 
 ### Solution Bug-03
+Edit: In later version, lib textwrap was removed and a function refactored with custom code, which still converts to string.
 
 I assumed that the most direct way to solve this issue was to ensure that any value passed to wrap_text was explicitly converted to a string, regardless of its original type. I modified the wrap_text function to automatically convert its input to a string, ensuring compatibility with all types of input.
 

@@ -504,7 +504,6 @@ This application was made possible by leveraging insights and code examples from
 * [format the time stamp which is in string format to date-time object](https://geeksforgeeks.org/python-datetime-strptime-function/) For parsing and converting date strings.
 * [Try - Except](https://www.w3schools.com/python/python_try_except.asp) - For robust error management.
 * [Print Colors in Python Terminal ](https://www.geeksforgeeks.org/print-colors-python-terminal/) - For enhancing terminal output aesthetics.
-* [Text wrapping in column](https://docs.python.org/3/library/textwrap.html) -  Implemented for better text formatting.
 * [Sorting](https://ioflood.com/blog/python-sort-dictionary-by-value/#:~:text=TL%3BDR%3A%20How%20Do%20I,items()%2C%20key%3Doperator.) - Essential for data organization.
 * [Sorting](https://pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-of-the-dictionary/) - Essential for data organization.
 * [Sorting](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/) - Essential for data organization.

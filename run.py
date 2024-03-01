@@ -16,8 +16,6 @@ Date: March 2024
 import os
 # Amended from: www.geeksforgeeks.org/python-datetime-module/
 import datetime
-# Amended from: docs.python.org/3/library/textwrap.html
-import textwrap
 # Amended from: Code Institute project love_sandwiches
 import gspread
 from google.oauth2.service_account import Credentials
@@ -287,8 +285,15 @@ def add_row_to_sheet():
 
 def wrap_text(text, width):
     """
-    Amended from: docs.python.org/3/library/textwrap.html
-    Wraps text to the specified width and returns a list of wrapped lines.
+    Function handles text wrapping for displaying task descriptions 
+    within PrettyTable output. Initially attempted using 'textwrap' lib to 
+    manage overflow, but content still exceeded boundaries. This prioritizes 
+    keeping text intact or breaking at spaces, resorting to hard breaks when 
+    necessary. Not ideal for maintaining readability for long text that should 
+    be kept intact or broken wih hyphens, but for this app purpose it works. 
+    While not leveraging 'textwrap', it maintains readability for 
+    this app's context, ensuring descriptions fit within specified width
+    constraints without awkward word splits.
     """
     text = str(text)  # Ensure all inputs are treated as strings
     if len(text) <= width:
@@ -436,7 +441,6 @@ def list_all_tasks():
     table.align = "l"
 
     # Max width for the To-Do column
-    # Amended from: docs.python.org/3/library/textwrap.html
     max_width = 30
 
     for task in sorted_tasks:
@@ -499,7 +503,6 @@ def view_task():
         task_table.align = "l"
 
         # Max width for the To-Do column
-        # Amended from: docs.python.org/3/library/textwrap.html
         max_width = 30
         wrapped_text = wrap_text(found_task["To-Do"], max_width)
 
