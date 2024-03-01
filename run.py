@@ -285,13 +285,13 @@ def add_row_to_sheet():
 
 def wrap_text(text, width):
     """
-    Function handles text wrapping for displaying task descriptions 
-    within PrettyTable output. Initially attempted using 'textwrap' lib to 
-    manage overflow, but content still exceeded boundaries. This prioritizes 
-    keeping text intact or breaking at spaces, resorting to hard breaks when 
-    necessary. Not ideal for maintaining readability for long text that should 
-    be kept intact or broken wih hyphens, but for this app purpose it works. 
-    While not leveraging 'textwrap', it maintains readability for 
+    Function handles text wrapping for displaying task descriptions
+    within PrettyTable output. Initially attempted using 'textwrap' lib to
+    manage overflow, but content still exceeded boundaries. This prioritizes
+    keeping text intact or breaking at spaces, resorting to hard breaks when
+    necessary. Not ideal for maintaining readability for long text that should
+    be kept intact or broken wih hyphens, but for this app purpose it works.
+    While not leveraging 'textwrap', it maintains readability for
     this app's context, ensuring descriptions fit within specified width
     constraints without awkward word splits.
     """
@@ -601,42 +601,56 @@ def update_task():
         # description in the sheet
         if new_description:
             worksheet.update_cell(task_index, 2, new_description)
+            print(
+                f"{Fore.GREEN}{Style.BRIGHT}"
+                "Description updated successfully.\n"
+                f"{Style.RESET_ALL}")
 
         # Prompt for a new priority, allowing an empty input to skip
         # the update
-        new_priority = get_user_input(
-            "Please, enter new priority (High/Med/Low) "
-            "or press key Enter to skip: \n",
-            normalize=True,
-            allowed_values=priority_allowed_values + [""],
-            allow_skip=True,
-        )
+        while True:
+            new_priority = get_user_input(
+                "Enter new priority (High/Med/Low) "
+                "or press Enter to skip: \n",
+                normalize=True,
+                allowed_values=["High", "Med", "Low", ""],
+                allow_skip=True
+                )
 
-        # Notify the user if the new priority is the same as the current one.
-        if (new_priority and
-                new_priority.lower() == current_task["Priority"].lower()):
-            confirm_change = (
-                input(
+            if new_priority == "":
+                break
+
+            if new_priority.lower() == current_task["Priority"].lower():
+                print(
                     f"{Fore.YELLOW}{Style.BRIGHT}"
-                    "The new priority is the same as the current one. "
-                    "Do you still want to change it? (yes/no): \n"
+                    "The new priority is the same as the current one.\n"
+                    f"{Fore.GREEN}"
+                    "Priority remains unchanged."
                     f"{Style.RESET_ALL}"
                 )
-                .strip()
-                .lower()
-            )
-
-            if confirm_change == "yes":
-                worksheet.update_cell(task_index, 3, new_priority)
+                print(
+                    f"{Fore.YELLOW}{Style.BRIGHT}"
+                    "\nalt 1) If you wish to change, type 'back' or\n"
+                    "alt 2) Type any key to continue:"
+                    f"{Style.RESET_ALL}"
+                )
+                # Using `input` directly for local control
+                choice = input().strip().lower()
+                if choice == 'back':
+                    # Loop back for re-entry
+                    continue
+                else:
+                    # If the user decides not to type 'back',
+                    # just proceed without repeating the message.
+                    break
             else:
+                worksheet.update_cell(task_index, 3, new_priority)
                 print(
                     f"{Fore.GREEN}{Style.BRIGHT}"
-                    "Priority update skipped."
+                    "Priority change successful.\n"
                     f"{Style.RESET_ALL}"
                     )
-            # If a new priority is provided, update it in the sheet
-        elif new_priority:
-            worksheet.update_cell(task_index, 3, new_priority)
+                break
 
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
@@ -663,11 +677,12 @@ def update_task():
                 # and skip updating the due date
                 print(
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "Error: Invalid date format. Skipped updating due date.\n"
+                    "\nError: Invalid date format.\n"
+                    "Skipped updating due date.\n"
                     f"{Style.RESET_ALL}"
                     )
 
-        # Ask the user for a new status, allowing an empty input
+        # Prompt the user for a new status, allowing an empty input
         # to skip the update
         new_status = get_user_input(
             "Please, enter new status (New/Done/Pend) or "
@@ -684,8 +699,8 @@ def update_task():
             confirm_change_status = (
                 input(
                     f"{Fore.YELLOW}{Style.BRIGHT}"
-                    "The new status is the same as the current one."
-                    " Do you still want to change it? (yes/no): "
+                    "The new status is the same as the current one.\n"
+                    " Do you still want to change it? (yes/no): \n"
                     f"{Style.RESET_ALL}"
                 )
                 .strip()
@@ -761,8 +776,8 @@ def delete_tasks():
         # Confirm deletion with the user before proceeding
         confirm = (
             input(f"{Fore.YELLOW}{Style.BRIGHT}"
-                  "Are you sure you want to delete these tasks?"
-                  " The action is irreversible! (yes/no): "
+                  "Are you sure you want to delete these tasks?\n"
+                  "The action is irreversible! (yes/no): \n"
                   f"{Style.RESET_ALL}"
                   )
             .strip()
