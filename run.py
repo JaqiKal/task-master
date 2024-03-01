@@ -188,7 +188,7 @@ def get_valid_due_date():
     """
     while True:
         due_date_str = input(
-            f"{Fore.BLUE}{Style.BRIGHT}"
+            f"{Fore.BLUE}"
             "Enter Due Date (YY-MM-DD): \n"
             f"{Style.RESET_ALL}")
         # Check for 'back' command to return or exit
@@ -235,7 +235,12 @@ def add_row_to_sheet():
     """
     # Generate & display the Task ID
     task_id = generate_task_id()
-    print(f"Task ID: {task_id}")
+    print(
+        f"{Fore.BLUE}"
+        "Task ID generated automatically:\n"
+        f"{Style.RESET_ALL}"
+        f"Task ID: {task_id}\n"
+        )
     # User adds task description
     to_do = get_user_input("Enter task description: \n")
 
