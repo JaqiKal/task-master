@@ -10,6 +10,7 @@ Visit the deployed site: [Tic-Tac-Toe](https://jaqikal.github.io/tic-tac-toe/)
 
 * [Testing overview & environment](#testing-overview--environment)
   * [Test environment](#test-environment)
+  * [Browser compatibilty](#browser-compatibilty)
   * [Responsiveness](#responsiveness)
 * [Automated Testing](#automated-testing)
   * [pep8 validator](https://pep8ci.herokuapp.com/)
@@ -31,6 +32,9 @@ Testing was ongoing throughout the entire development. I utilised CI Python Lint
   * Lenovo Legion T7
 * Screen:
   * Samsung Odyssey G3 / 27" / 1920 x 1080 /
+
+### Browser compatibilty
+
 * Google Chrome, version 121.0.6167.86 (Official Build) (64-bit)
 * Firefox, version 123.0 (64-bi)
 
