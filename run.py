@@ -200,7 +200,8 @@ def get_valid_due_date():
         if not due_date_str:
             print(
                 f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Empty inputs are not valid. Please try again."
+                "Error: Empty inputs are not valid."
+                "Please try again."
                 f"{Style.RESET_ALL}\n")
             continue
 
@@ -596,11 +597,12 @@ def update_task():
             print(f"{Fore.RED}{Style.BRIGHT}"
                   "Error: Task not found. \n"
                   "Please ensure you have entered the correct Task ID.\n"
+                  "Check with the help of Main Menu item no. 2"
                   f"{Style.RESET_ALL}")
             return
 
-        print("Update Task Details:")
-        print("--------------------")
+        print("Update Task Details (or type 'back' for Main Menu):")
+        print("---------------------------------------------------")
 
         # Ask the user for a new description, stripping
         # leading/trailing whitespace
@@ -644,8 +646,10 @@ def update_task():
                 )
                 print(
                     f"{Fore.YELLOW}{Style.BRIGHT}"
-                    "\nalt 1) If you wish to change, type 'back' or\n"
-                    "alt 2) Type any key to continue:"
+                    "\nOptions:\n"
+                    "- Type 'back' to modify your input.\n"
+                    "- Press Enter or any other key to proceed without changes.\n"
+                    "\nChoose an option:"
                     f"{Style.RESET_ALL}"
                 )
                 # Using `input` directly for local control
@@ -673,6 +677,7 @@ def update_task():
             "press Enter to skip: \n",
             allow_skip=True,
         )
+        
         if new_due_date:
             # Amended from: www.w3schools.com/python/python_try_except.asp
             try:
@@ -682,7 +687,8 @@ def update_task():
                         new_due_date, "%y-%m-%d").date()
                 if due_date < datetime.date.today():
                     print(f"{Fore.RED}{Style.BRIGHT}"
-                          "Due date must be in the future. Please try again."
+                          "Error: Due date must be in the future."
+                          "Please try again."
                           f"{Style.RESET_ALL}\n")
                 else:
                     worksheet.update_cell(task_index, 4, new_due_date)
@@ -727,8 +733,10 @@ def update_task():
                     )
                 print(
                     f"{Fore.YELLOW}{Style.BRIGHT}"
-                    "\nalt 1) If you wish to change, type 'back' or\n"
-                    "alt 2) Type any key to to return to Main Menu:"
+                    "\nOptions:\n"
+                    "- Type 'back' to modify your input.\n"
+                    "- Press Enter or any other key to proceed without changes.\n"
+                    "\nChoose an option:"
                     f"{Style.RESET_ALL}"
                     )
                 # Direct input for local decision

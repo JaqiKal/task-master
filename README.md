@@ -201,67 +201,81 @@ These features are designed to make the to-do list application a comprehensive t
 
 Here's an overview of its key features:
 
-#### Centralized Task Management
+**Centralized Task Management**
 
 Effortlessly add, edit, and organize tasks in a centralized Google Worksheet, ensuring your to-do list is always up-to-date and accessible. 
 
 ![x](/documentation/images/landingpage.webp)
 
-#### Dynamic Task Addition and Editing
+**Dynamic Task Addition and Editing**
 
 Easily add new tasks or modify existing ones, including details such as task descriptions, priorities, and due dates, for precise task management. 
 
 ![x](/documentation/images/add-task.webp)
 
-#### Unique Task ID Generation
+**Unique Task ID Generation**
 
 I implemented the `generate_task_id` function to ensure each task is uniquely identifiable. This choice simplifies the management process for updates, views, or deletions, avoids complex ID generation schemes, and integrates seamlessly with the Google Sheets framework. 
 
 ![x](/documentation/images/gen-id.webp)
 
-#### Prioritization and Deadlines
+**Prioritization and Deadlines**
 
 Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most. 
 
 ![x](/documentation/images/prio.webp)
 
-#### Efficient Task Listing
+**Efficient Task Listing**
 
 View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. Below a few examples:
 
-##### List all tasks in default order by low to high Task ID
+**List all tasks in default order by low to high Task ID**
 
 ![x](/documentation/images/list-all-default.webp)
 
-##### Sort Priority (High-Med-Low)
+**Sort Priority (High-Med-Low)**
 
 ![x](/documentation/images/prio-sort.webp)
 
-##### Sort Due Date (latest to earliest)
+**Sort Due Date (latest to earliest)**
 
 ![x](/documentation/images/sort-due-latest.webp)
 
-#### Task Completion Tracking
+**Task Completion Tracking**
 
 Mark tasks as done, offering a satisfying way to track your progress and maintain motivation. 
 
-##### Task prior update of status 
+**Task prior update of status**
 
 ![x](/documentation/images/update-pre.webp)
 
-##### Task being updated 
+**Task being updated**
 
 ![x](/documentation/images/update-ongoing.webp)
 
-##### Task updated 
+**Task updated**
 
 ![x](/documentation/images/update-post.webp) 
 
-#### Error Handling and User Feedback
+**Error Handling and User Feedback**
 
 Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. 
 
-![screenshot](XX)
+**Error managment when adding a task**
+
+These are common error types managed during the task addition process.
+* Validation Errors, occur when user input does not meet predefined criteria, such as due dates in the past or incorrect formats for input fields. These errors prompt the user to re-enter data correctly.
+* Empty Input Errors are triggered when the user submits an empty string for a required field. The application alerts the user that input is necessary to proceed.
+* API Errors are also handled but now shown in image, Example on an API error is when there's an issue communicating with external services, like Google Sheets. Users are  informed that the operation couldn't be completed and are asked to try again later.
+
+![x](/documentation/images/add-task-error.webp)
+
+**Error managment udating a task**
+
+These are common error types managed during the task updating process.
+
+![x](/documentation/images/update-task-error.webp)
+
 
 #### Flexible Access and Data Persistence
 
