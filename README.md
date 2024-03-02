@@ -38,7 +38,7 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
   * [Error Handling Strategy](#error-handling-strategy)
   * [Imports](#imports)
   * [Programming paradigm](#programming-paradigm)
-* [Testing](#testing)
+* [Testing and known issues](#testing-and-known-issues)
 * [Prerequisites and Deployment](#prerequisites-and-deployment)
   * [Prerequisite](#prerequisite)
   * [Deploying on Heroku](#deploying-on-heroku)
@@ -435,9 +435,8 @@ Procedural Programming and Object-Oriented Programming (OOP) represent two separ
 
 ## Testing
 
-### Results
+### Results and known issues
 Please refer to [TESTING.md](/TESTING.md) file for all testing and trouble shooting carried out.
-
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

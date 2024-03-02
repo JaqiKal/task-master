@@ -648,7 +648,8 @@ def update_task():
                     f"{Fore.YELLOW}{Style.BRIGHT}"
                     "\nOptions:\n"
                     "- Type 'back' to modify your input.\n"
-                    "- Press Enter or any other key to proceed without changes.\n"
+                    "- Press Enter or any other key to proceed"
+                    "without changes.\n"
                     "\nChoose an option:"
                     f"{Style.RESET_ALL}"
                 )
@@ -669,36 +670,51 @@ def update_task():
                     f"{Style.RESET_ALL}"
                     )
                 break
-
         # Handle invalid date formats gracefully
         # ask for a new due date, allowing an empty input to skip
-        new_due_date = get_user_input(
-            "Please, enter new Due Date (YY-MM-DD) or "
-            "press Enter to skip: \n",
-            allow_skip=True,
-        )
-        
-        if new_due_date:
-            # Amended from: www.w3schools.com/python/python_try_except.asp
+        print(
+            f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
+            "Please, enter new Due Date (YY-MM-DD)"
+            "or press Enter to skip: \n"
+            f"{Style.RESET_ALL}"
+            )
+        while True:
+            # Directly use input for user interaction
+            new_due_date = input().strip()
+
+            # Allow the user to skip updating the due date by pressing Enter
+            if new_due_date == '':
+                break
+
             try:
+                # Amended from: www.w3schools.com/python/python_try_except.asp
                 # Validate the date format by attempting to convert
                 # the string into a date
                 due_date = datetime.datetime.strptime(
-                        new_due_date, "%y-%m-%d").date()
+                    new_due_date, "%y-%m-%d").date()
                 if due_date < datetime.date.today():
-                    print(f"{Fore.RED}{Style.BRIGHT}"
-                          "Error: Due date must be in the future."
-                          "Please try again."
-                          f"{Style.RESET_ALL}\n")
+                    print(
+                        f"{Fore.RED}{Style.BRIGHT}"
+                        "Error: The due date must be in the future."
+                        "Please try again or press Enter to skip.\n"
+                        f"{Style.RESET_ALL}"
+                        )
                 else:
+                    # If the date is valid and in the future,
+                    # update the due date in the worksheet
                     worksheet.update_cell(task_index, 4, new_due_date)
+                    print(
+                        f"{Fore.GREEN}{Style.BRIGHT}"
+                        "Due date updated successfully."
+                        f"{Style.RESET_ALL}\n")
+                    # Exit the loop after successful update
+                    break
             except ValueError:
-                # If the date format is invalid, inform user
-                # and skip updating the due date
+                # If the date format is invalid, inform user to try again
                 print(
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "Error: Invalid date format.\n"
-                    "Skipped updating due date.\n"
+                    "Error: Invalid date format."
+                    " Please use YY-MM-DD or press Enter to skip.\n"
                     f"{Style.RESET_ALL}"
                     )
 
@@ -735,7 +751,8 @@ def update_task():
                     f"{Fore.YELLOW}{Style.BRIGHT}"
                     "\nOptions:\n"
                     "- Type 'back' to modify your input.\n"
-                    "- Press Enter or any other key to proceed without changes.\n"
+                    "- Press Enter or any other key to proceed"
+                    "without changes.\n"
                     "\nChoose an option:"
                     f"{Style.RESET_ALL}"
                     )

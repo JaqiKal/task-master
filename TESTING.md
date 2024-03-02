@@ -1,8 +1,8 @@
 # Task master - Your Personal Task Organizer! 🌟
 
-![Screenshot of the application](/documentation/doc-images/amiresponsive.webp)
+![x](/documentation/images/landingpage.webp)
 
-Visit the deployed site: [Tic-Tac-Toe](https://jaqikal.github.io/tic-tac-toe/)
+Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.herokuapp.com/)
 
 - - -
 
@@ -72,7 +72,7 @@ No automatic testing apart from using the pep8 validator was perfomed.
 
 |  Goals | Expected Outcome | Testing Performed | Result |
 | :--- | :--- | :--- | :--- |
-| Quick access specific task	| Navigate to the "View Task" option on the main menu. Enter the Task ID of the task you want to review. |The app retrieves and displays all details of the specified task, including its description, priority, due date, status, and creation date. 
+| Quick access specific task	| Navigate to the "View Task" option on the main menu. Enter the Task ID of the task you want to review. |The app retrieves and displays all details of the specified task, including its description, priority, due date, status, and creation date. | PASS |
 
 
 `Frequent Visitors`
@@ -213,6 +213,18 @@ def wrap_text(text, width):
     return textwrap.wrap(text, width, break_long_words=True)
 ```
 
+### Bug-04
+
+During the task update process, I encountered an issue when prompted to enter a new date or choose to skip this step. Specifically, if an incorrect date was input—either due to being in the wrong format or not being set in the future—the application would incorrectly proceed to the next prompt, which ask to enter a new status. This behavior bypassed the opportunity for user to correct the date input, potentially leading to incomplete or inaccurate task updates.
+
+![x](/documentation/images/bug04.webp)
+
+### Solution Bug-04
+
+To address this issue, I've refactored the code to ensure that users are now looped back to the "Enter a new status" prompt if they input an incorrect date. This revision introduces built-in loops for immediate error correction and provides users with the option to skip updating if they choose. The original implementation aimed to abstract the input gathering process to improve code organization. While this approach was intended to create a more structured codebase, it inadvertently made user retries more complicated. The latest code adjustments aim to strike a better balance between code organization and user interaction fluidity.
+
+![x](/documentation/images/bug04-s.webp)
+
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 - - -
@@ -226,8 +238,6 @@ def wrap_text(text, width):
 - - -
 
 ### KNOWN issue
-
-* Within the `update_task` function, the application's handling of date inputs does not offer the same level of comprehensiveness as seen with the 'Priority' and 'Status' fields. While users can update the due date of tasks, the current implementation lacks robust validation and feedback mechanisms comparable to those provided for other task attributes. This discrepancy may lead to less intuitive user experiences when modifying task due dates, as the application does not guide users through the process with the same level of detail or error handling. Efforts to enhance the date handling feature are underway to ensure consistency across all aspects of task management within the application.
 
 * If the application frequently interacts with Google Sheets, reaching API rate limits could lead to temporary disruptions. 
 
