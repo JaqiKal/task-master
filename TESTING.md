@@ -1,4 +1,4 @@
-# Task master - Your Personal Task Organizer! 🌟
+# Task master - Your Task Organizer! 🌟
 
 ![x](/documentation/images/landingpage.webp)
 
@@ -24,7 +24,7 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
 - - -
 ## Testing overview & environment
 
-Testing was ongoing throughout the entire development. I utilised CI Python Linter tool and GITPOD terminal output whilst building to pinpoint and troubleshoot any issues as I went along. The validation process adhered to the guidelines outlined in PEP8. The majority of warnings stemmed from redundant or missing whitespace, as well as instances of redundant backslashes and insufficient indentation. These issues have been addressed and rectified accordingly.
+Testing was ongoing throughout the entire development. I utilised the CI Python Linter tool and GITPOD terminal output whilst building to pinpoint and troubleshoot any issues as I went along. The validation process adhered to the guidelines outlined in PEP8. The majority of warnings stemmed from redundant or missing whitespace, as well as instances of redundant backslashes and insufficient indentation. These issues have been addressed and rectified accordingly.
 
 ### Test environment
 
@@ -33,7 +33,7 @@ Testing was ongoing throughout the entire development. I utilised CI Python Lint
 * Screen:
   * Samsung Odyssey G3 / 27" / 1920 x 1080 /
 
-### Browser compatibilty
+### Browser compatibility
 
 * Google Chrome, version 121.0.6167.86 (Official Build) (64-bit)
 * Firefox, version 123.0 (64-bit)
@@ -44,11 +44,11 @@ Although not directly applicable to this project, I gained valuable knowledge on
 
 ## Automated Testing
 
-No automatic testing apart from using the pep8 validator was perfomed.
+No automatic testing apart from using the pep8 validator was performed.
 
 ### PEP8 validator 
 
-* [CI Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python code. Result is ALL CLEAR, NO ERRORS FOUND.
+* [CI Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python code. The result is ALL CLEAR, NO ERRORS FOUND.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -96,7 +96,7 @@ No automatic testing apart from using the pep8 validator was perfomed.
 | NRM-01 | Add Task | A new row is added to the Google Sheet with task details and a unique, auto-generated task ID. | Fill in the prompted fields and submit the task. | PASS | |
 | NRM-02 | List All Tasks | All tasks from the Google Sheet are displayed in a formatted table with details including Task ID, description, and dates.| Select the option to list all tasks. | PASS | |
 | NRM-03 | View Specific Task | Details of the specified task are displayed, including Task ID, description, priority, due date, status, and creation date.| Enter a Task ID to view its details. Ensure Task ID exists | PASS |  |
-| NRM-04 | Update Task | Specified task is updated on the Google Sheet with new values for any provided task details. | Update various fields of an existing task. Changes should be verified in Google Sheets | PASS | |
+| NRM-04 | Update Task | The specified task is updated on the Google Sheet with new values for any provided task details. | Update various fields of an existing task. Changes should be verified in Google Sheets | PASS | |
 | NRM-05 | Delete Task | The specified tasks are deleted from the Google Sheet. | Delete specific task(s) by entering Task ID(s). | PASS | |
 | NRM-06 | Multiple Tasks Deletion| Successfully deletes multiple specified tasks from the Google Sheet. | Delete multiple tasks by entering their IDs separated by commas. | PASS | |
 
@@ -116,10 +116,9 @@ No automatic testing apart from using the pep8 validator was perfomed.
 | TestCase ID | Feature | Expected Outcome | Testing Performed | Result | Comment |
 |---|---|---|---|---|---|
 | ERR-01 | Invalid Task ID | For invalid Task ID inputs, the application prevents action and displays an error message. ID.  | Attempt actions with non-existent Task ID. | PASS | |
-| ERR-02 | Update Non-existent Task | Attempting to update a task that does not exist shows an error message indicating the task cannot be found. | Update a task with an ID that doesn't exist. | PASS | |
+| ERR-02 | Update non-existent Task | Attempting to update a task that does not exist shows an error message indicating the task cannot be found. | Update a task with an ID that doesn't exist. | PASS | |
 | ERR-03 | Delete Non-existent Task | Attempting to delete a task that does not exist shows an error message indicating the task cannot be found. | Delete a task with an ID that doesn't exist. | PASS | |
-| ERR-04 | Add Task | Temporarily change the permissions on the Google Sheet so that the API user does not have write access and attempt to add a task. | This results in an API error (PERMISSION_DENIED) when attempting to append a row. App terminates. | PASS | |
-| ERR-05 | Add Task | Temporarily change the permissions on the Google Sheet so that the API user does not have write access and attempt to delete a task. | This results in an API error (PERMISSION_DENIED) when attempting to remove a row. App terminates. | PASS | |
+| ERR-04 | Add Task | Temporarily change the permissions on the Google Sheet so that the API user does not have write access and attempts to add a task. | This results in an API error (PERMISSION_DENIED) when attempting to append a row. App terminates. | PASS | |
 
 #### User Interaction Test (UIA)
 
@@ -140,7 +139,7 @@ No automatic testing apart from using the pep8 validator was perfomed.
 
 #### Comment<sup>1</sup>
 
-I lack the technical skills necessary to manually trigger rate limits by conducting numerous operations that generate API requests in a short span, or to emulate conditions of network disruptions or API unavailability. These test cases serve as a reminder that it's crucial to assess such scenarios, especially if there are plans to expand the application further.
+I lack the technical skills necessary to manually trigger rate limits by conducting numerous operations that generate API requests in a short span or to emulate conditions of network disruptions or API unavailability. These test cases serve as a reminder that it's crucial to assess such scenarios, especially if there are plans to expand the application further.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -190,14 +189,14 @@ The problem was solved by introducing a new function, ```def wrap_text(text, wid
 
 ### Bug-03
 
-In 'Menu To-Do-List' I select '2. List All tasks' and then hit enter to select 'sort by Task ID'. which results in fault message:
+In 'Menu To-Do-List' I select '2. List All tasks' and then hit enter to select 'sort by Task ID'. which results in the fault message:
 
 ![x](/documentation/images/wrap_text-fail.webp)
 
-It seemed the problem arised when attempting to wrap text that is not a string, specifically when task["To-Do"] is an integer or contains integer values that are not automatically converted to string types by the wrap_text function or the textwrap.wrap method within it. I assumed this likely happens if a task's "To-Do" field is purely numeric and not explicitly cast to a string before being passed to wrap_text.
+It seemed the problem arose when attempting to wrap text that is not a string, specifically when task["To-Do"] is an integer or contains integer values that are not automatically converted to string types by the wrap_text function or the textwrap.wrap method within it. I assumed this likely happens if a task's "To-Do" field is purely numeric and not explicitly cast to a string before being passed to wrap_text.
 
 ### Solution Bug-03
-Edit: In later version, lib textwrap was removed and a function refactored with custom code, which still converts to string.
+Edit: In a later version, lib textwrap was removed and a function was refactored with custom code, which still converts to string.
 
 I assumed that the most direct way to solve this issue was to ensure that any value passed to wrap_text was explicitly converted to a string, regardless of its original type. I modified the wrap_text function to automatically convert its input to a string, ensuring compatibility with all types of input.
 
@@ -215,7 +214,7 @@ def wrap_text(text, width):
 
 ### Bug-04
 
-During the task update process, I encountered an issue when prompted to enter a new date or choose to skip this step. Specifically, if an incorrect date was input—either due to being in the wrong format or not being set in the future—the application would incorrectly proceed to the next prompt, which ask to enter a new status. This behavior bypassed the opportunity for user to correct the date input, potentially leading to incomplete or inaccurate task updates.
+During the task update process, I encountered an issue when prompted to enter a new date or choose to skip this step. Specifically, if an incorrect date was input—either due to being in the wrong format or not being set in the future—the application would incorrectly proceed to the next prompt, which asks to enter a new status. This behaviour bypassed the opportunity for the user to correct the date input, potentially leading to incomplete or inaccurate task updates.
 
 ![x](/documentation/images/bug04.webp)
 
@@ -243,7 +242,7 @@ To address this issue, I've refactored the code to ensure that users are now loo
 
 * The application currently does not implement user-specific authentication for accessing the Google Sheets backend
 
-* As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, color contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and are committed to improving these aspects in future updates.
+* As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and am committed to improving these aspects in future updates.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

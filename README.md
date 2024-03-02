@@ -101,13 +101,13 @@ The user's primary goal in using this to-do list application is to have a reliab
 Dive into productivity with Task Master, a to-do list application crafted to streamline task management effortlessly. Designed with a focus on simplicity and efficiency, Task Master aims to help users organize their daily tasks, prioritize what's important, and track their progress towards completion. By integrating seamlessly with Google Sheets, it ensures that your tasks are always accessible and up-to-date, fostering an environment where productivity thrives.
 
 ### The Scope
-Task Master is more than just a to-do list; it's a comprehensive task management solution that caters to the needs of various users, from students and professionals to anyone looking to enhance their organizational skills. The application offers a full suite of features, including the ability to add tasks, set priorities and due dates, update task statuses, and delete tasks no longer needed. With a single guess approach for task management actions, users are encouraged to think strategically about their task priorities, making it an essential tool for anyone looking to optimize their daily routine.
+Task Master is more than just a to-do list; it's a comprehensive task management solution that caters to the needs of various users, from students and professionals to anyone looking to enhance their organizational skills. The application offers a full suite of features, including the ability to add tasks, set priorities and due dates, update task statuses, and delete tasks no longer needed. With a single-guess approach for task management actions, users are encouraged to think strategically about their task priorities, making it an essential tool for anyone looking to optimize their daily routine.
 
 ### The Structure
 At its core, Task Master boasts a structured yet intuitive design that guides users through task management with ease. The application operates on a straightforward, menu-driven interface, allowing for quick navigation between adding, viewing, updating, and deleting tasks. Each task is uniquely identified, ensuring that users can easily manage their tasks without confusion. This structured approach ensures that users can focus more on accomplishing their tasks and less on how to manage them.
 
 ### The Skeleton
-For the thorough planning and organization of Task Master's components and functionalities, tool ['draw.io'](https://www.drawio.com/) were employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
+For the thorough planning and organization of Task Master's components and functionalities, tool ['draw.io'](https://www.drawio.com/) was employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
 
 ### User stories
 
@@ -117,7 +117,7 @@ For the thorough planning and organization of Task Master's components and funct
 
   * As a first-time visitor, I want to easily understand the purpose of the task organizer app so that I can decide if it meets my needs.
   
-    * *Achieved by*:  Providing having a clear and concise description welcome message on the app's landing page.
+    * *Achieved by*:  Providing a clear and concise description welcome message on the app's landing page.
 
 ##### User story 2: Intuitive UI
 
@@ -131,7 +131,7 @@ For the thorough planning and organization of Task Master's components and funct
 
   * As a returning visitor I want to quickly access and review the details of a specific task that you've previously added to the organizer.
 
-    * *Achieved by*: Navigating to the "View Task" option on the main menu and entering the Task ID you want yo review. The app will retrieve and display all the details of the specified task, including its description, priority, due date, status, and creation date.
+    * *Achieved by*: Navigate to the "View Task" option on the main menu and enter the Task ID you want you review. The app will retrieve and display all the details of the specified task, including its description, priority, due date, status, and creation date.
 
 #### Frequent Visitor Goals
 
@@ -148,7 +148,7 @@ For the thorough planning and organization of Task Master's components and funct
 
 ## Design
 
-In the Task Master application, I've employed the Colorama library to infuse a touch of color into the terminal interface, enhancing both the visual appeal and the user experience by differentiating various types of information. 
+In the Task Master application, I've employed the Colorama library to infuse a touch of colour into the terminal interface, enhancing both the visual appeal and the user experience by differentiating various types of information. 
 
 ### Color Usage in Application
 
@@ -158,37 +158,37 @@ By thoughtfully integrating these colors into the terminal-based Task Master app
 
 #### Magenta
 
-This vibrant hue welcomes users right from the start, used prominently for the application's ASCII art logo and the welcome message. It's designed to grab attention and set a positive, inviting tone for the user interaction.
+This vibrant hue welcomes users right from the start, used prominently for the application's ASCII art logo and the welcome message. It's designed to grab attention and set a positive, inviting tone for user interaction.
 
 #### Blue
 
-I've chosen a calming shade of blue to highlight all user input prompts and messages. This color choice helps to distinguish input fields from the rest of the text, guiding users through their task management journey with clarity.
+I've chosen a calming shade of blue to highlight all user input prompts and messages. This colour choice helps to distinguish input fields from the rest of the text, guiding users through their task management journey with clarity.
 
 #### Green
 
-Signifying success, green is used to confirm successful actions within the application, such as the addition of a new task or successful updates to existing tasks. It offers instant, positive feedback that reassures users their actions have been successfully completed.
+Signifying success, green is used to confirm successful actions within the application, such as the addition of a new task or successful updates to existing tasks. It offers instant, positive feedback that reassures users their actions have been completed.
 
 #### Yellow
 
-This color is reserved for warnings or important notices that require the user's attention. Yellow text might indicate a reminder or a caution before performing actions like task deletion, ensuring users proceed with full awareness of the implications.
+This colour is reserved for warnings or important notices that require the user's attention. The yellow text might indicate a reminder or a caution before performing actions like task deletion, ensuring users proceed with full awareness of the implications.
 
 #### Red
 
-Employed for error messages or alerts, red is utilized to immediately draw the user's attention to issues or errors, such as invalid inputs or failed operations. This stark contrast against the other colors ensures that errors are not overlooked and can be addressed promptly.
+Employed for error messages or alerts, red is utilized to immediately draw the user's attention to issues or errors, such as invalid inputs or failed operations. This stark contrast against the other colours ensures that errors are not overlooked and can be addressed promptly.
 
 #### White
 
-White, is crucial for general text and information, providing a clear, readable contrast against other colors. It serves as the foundation for the application's visual design, balancing the vibrant colors and maintaining readability and a clean aesthetic.
+White, is crucial for general text and information, providing a clear, readable contrast against other colors. It serves as the foundation for the application's visual design, balancing vibrant colours and maintaining readability and a clean aesthetic.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Accessibility
 
-As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, color contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and are committed to improving these aspects in future updates.
+As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and I am committed to improving these aspects in future updates.
 
 ### Am I Responsive 
 
-A Command Line Interface app isn't inherently aimed at responsiveness in the context of varying screen sizes and interactive web design because it is primarily designed for interaction through a terminal or command prompt, not a graphical user interface or web browsers. The teaser image from "Am I Responsive" highlight this contrast by showing the app's interface in various device frames, illustrating that a CLI app's user experience and layout do not adapt like a web application designed with responsive web design principles.
+A Command Line Interface app isn't inherently aimed at responsiveness in the context of varying screen sizes and interactive web design because it is primarily designed for interaction through a terminal or command prompt, not a graphical user interface or web browsers. The teaser image from "Am I Responsive" highlights this contrast by showing the app's interface in various device frames, illustrating that a CLI app's user experience and layout do not adapt like a web application designed with responsive web design principles.
 
 ![x](documentation/images/amiresponsive.webp)
 
@@ -227,7 +227,7 @@ Assign priority levels and set due dates for each task, enabling you to manage y
 
 **Efficient Task Listing**
 
-View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. Below a few examples:
+View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. Below are a few examples:
 
 **List all tasks in default order by low to high Task ID**
 
@@ -261,16 +261,16 @@ Mark tasks as done, offering a satisfying way to track your progress and maintai
 
 Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. 
 
-**Error managment when adding a task**
+**Error management when adding a task**
 
 These are common error types managed during the task addition process.
 * Validation Errors, occur when user input does not meet predefined criteria, such as due dates in the past or incorrect formats for input fields. These errors prompt the user to re-enter data correctly.
 * Empty Input Errors are triggered when the user submits an empty string for a required field. The application alerts the user that input is necessary to proceed.
-* API Errors are also handled but now shown in image, Example on an API error is when there's an issue communicating with external services, like Google Sheets. Users are  informed that the operation couldn't be completed and are asked to try again later.
+* API Errors are also handled but not shown in the image, Example of an API error is when there's an issue communicating with external services, like Google Sheets. Users are informed that the operation couldn't be completed and are asked to try again later.
 
 ![x](/documentation/images/add-task-error.webp)
 
-**Error managment udating a task**
+**Error management updating a task**
 
 These are common error types managed during the task updating process.
 
@@ -293,7 +293,7 @@ Confidently exit the application, knowing that all your tasks are safely stored 
 
 ### Future Features
 
-There are a lot one can do to enhance this application, I want to highlight these four (in no specific prioirity order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
+There is a lot one can do to enhance this application, I want to highlight these four (in no specific priority order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
 
 #### Integration with Calendar Applications
 
@@ -312,11 +312,11 @@ There are a lot one can do to enhance this application, I want to highlight thes
 
 #### Analytics and Productivity Insights
 
-- **Description**: Offer analytics features that give users insights into their task completion patterns, productivity trends, and suggest optimizations.
+- **Description**: Offer analytics features that give users insights into their task completion patterns, and productivity trends, and suggest optimizations.
 - **Benefit**: Helps users understand their productivity habits and make informed adjustments to improve efficiency.
 
-#### Refactoring code to Obejct-Oriented Programming
-- **Description**:  Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviors into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
+#### Refactoring code to Object-Oriented Programming
+- **Description**:  Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviours into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
 - **Benefit**:  By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
 
 
@@ -328,7 +328,7 @@ There are a lot one can do to enhance this application, I want to highlight thes
 
 ### Language
 
-[Python](https://www.python.org) used as the back-end programming language.
+[Python](https://www.python.org) is used as the back-end programming language.
 
 ### Tools
 
@@ -337,7 +337,7 @@ There are a lot one can do to enhance this application, I want to highlight thes
 * [Git](https://git-scm.com) used for version control. (```git add```, ```git commit```, ```git push```)
 * [Visual Studio Code](https://code.visualstudio.com/): A versatile and powerful IDE that supports Python development well, offering debugging tools, extensions for Python, and integrated Git control. While Gitpod provides its own web-based VS Code editor, one might use the desktop version for local development or when offline.
 * [Gitpod](https://gitpod.io) Streamlines your development process by providing a pre-configured, cloud-based development environment that's instantly ready for coding.
-* [GitHub](https://github.com) Essential for version control, allowing you to track changes, collaborate with others (if applicable), and for secure online code storage.
+* [GitHub](https://github.com) Essential for version control, allowing you to track changes, collaborate with others (if applicable), and secure online code storage.
 * [Heroku](https://www.heroku.com): A platform for deploying and hosting web applications. 
 * [Markup Validation Service](https://validator.w3.org/) - Used to check code ensuring that my HTML is error-free and adheres to the latest web standards.
 * [PEP8](https://peps.python.org/pep-0008/): Style Guide for Python Code.
@@ -351,7 +351,7 @@ There are a lot one can do to enhance this application, I want to highlight thes
 
 ### Flowchart
 
-To follow best practice, a flowchart was created for the app's logic, and mapped out before coding began using a free version of [Draw.io](https://www.drawio.com/). Please note, the flowchart provided is designed to offer a simplified visual overview of the Task Master application's core workflow. While it captures the essential operations and user interactions, some implementation details and error-handling mechanisms are abstracted for clarity. The actual application logic may involve additional steps and checks not depicted in the flowchart.
+To follow best practice, a flowchart was created for the app's logic, and mapped out before coding began using a free version of [Draw.io](https://www.drawio.com/). Please note, that the flowchart provided is designed to offer a simplified visual overview of the Task Master application's core workflow. While it captures the essential operations and user interactions, some implementation details and error-handling mechanisms are abstracted for clarity. The actual application logic may involve additional steps and checks not depicted in the flowchart.
 
 ![Flowchart](/documentation/images/flowchart.webp)
 
@@ -359,8 +359,7 @@ To follow best practice, a flowchart was created for the app's logic, and mapped
 
 The primary functions used in this application are designed to streamline the task management process, making it intuitive and efficient for users to interact with their tasks. 
 
-The application is built with a focus on procedural programming, leveraging a series of functions to handle the core logic and interactions with the Google Sheets API. 
-While incorporating robust error handling to ensure a smooth and reliable user experience.
+The application is built with a focus on procedural programming, leveraging a series of functions to handle the core logic and interactions with the Google Sheets API. While incorporating robust error handling to ensure a smooth and reliable user experience.
 
 Below is an outline of some key functions within the application and the specific roles they play:
 
@@ -390,7 +389,7 @@ Provides the functionality for detailed viewing of specific tasks based on their
 
 #### `update_task()`
 
-Enables modifications to existing tasks, including updates to task descriptions, priorities, due dates, and statuses. The function includes error handling strategies to manage invalid inputs or issues when updating the Google Sheet.
+Enables modifications to existing tasks, including updates to task descriptions, priorities, due dates, and statuses. The function includes error-handling strategies to manage invalid inputs or issues when updating the Google Sheet.
 
 #### `delete_tasks()`
 
@@ -410,7 +409,7 @@ By integrating error handling directly into the core functions and operations, t
 
 ### Imports
 
-Following Python packages and/or external imported packages was used:
+Following Python packages and/or external imported packages were used:
 
 * [os](https://www.geeksforgeeks.org/os-module-python-examples/?ref=lbp) - The OS module in Python provides functions for interacting with the operating system.
 * [datetime](https://www.geeksforgeeks.org/python-datetime-module/#python-datetime-module) - Basic date and time type. Python Datetime module comes built into Python, so there is no need to install it externally. 
@@ -418,8 +417,8 @@ Following Python packages and/or external imported packages was used:
 * [PrettyTable](https://pypi.org/project/prettytable/) -  A simple Python library for easily displaying tabular data in a visually appealing ASCII table format
 * [textwrap](https//:docs.python.org/3/library/textwrap.html) - Text wrapping and filling
 
-To install use : ```pip install -name of package-```
-To generate list of installed Python packages use:  ```pip freeze```
+To install use: ```pip install -name of package-```
+To generate a list of installed Python packages use:  ```pip freeze```
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -436,7 +435,7 @@ Procedural Programming and Object-Oriented Programming (OOP) represent two separ
 ## Testing
 
 ### Results and known issues
-Please refer to [TESTING.md](/TESTING.md) file for all testing and trouble shooting carried out.
+Please refer to the [TESTING.md](/TESTING.md) file for all testing and troubleshooting carried out.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -475,12 +474,12 @@ The game was developed in VS Code, stored in GitHub as the local repository, and
 7. **New App**
    - From the new app **Settings**, click **Reveal Config Vars**, and set the value of KEY to `PORT`, and the value to `8000` then select *add*.   
    
-8. **Cofidential credentials**
-   - If one need to use any private credentials, like CREDS.JSON, you should also add them to the Config Variables section. This is a crucial step for maintaining the security and integrity of your application, especially when it interacts with external services or APIs that require authentication. 
+8. **Confidential credentials**
+   - If one needs to use any private credentials, like CREDS.JSON, you should also add them to the Config Variables section. This is a crucial step for maintaining the security and integrity of your application, especially when it interacts with external services or APIs that require authentication. 
    
 9. **Add Buildpack**
-   - Scroll further down on page, to support dependencies, select **Add Buildpack**.
-   - It's crucial to arrange the buildpacks correctly! First choose Python and then Node.js. If they're not in this sequence, you can reorder them by dragging.
+   - Scroll further down on the page, to support dependencies, select **Add Buildpack**.
+   - It's crucial to arrange the build packs correctly! First, choose Python and then Node.js. If they're not in this sequence, you can reorder them by dragging.
    
 10. **Extra files for Heroku deployment**
    - For successful deployment, Heroku requires two extra files:
@@ -491,11 +490,11 @@ The game was developed in VS Code, stored in GitHub as the local repository, and
 	  Impact on Deployment: Heroku reads this file to understand which packages and versions to install in the deployment environment.Ensures consistency between local and deployed environments, reducing deployment failures and runtime errors.
 	  
 11. **requirements**
-   - To install the necessary requirements for this project (where applicable), use the following command:
+   - To install necessary requirements for this project (where applicable), use the following command:
      ```pip3 install -r requirements.txt```
 	 
 12. **Own packages**
-   - If you've installed your own packages, you need to update the requirements file with:
+   - If you've installed your packages, you need to update the requirements file with:
      ```pip3 freeze --local > requirements.txt```
 	 
 13. **Procfile**
@@ -524,7 +523,7 @@ The game was developed in VS Code, stored in GitHub as the local repository, and
 
 ### Local Deployment
 
-The project can be cloned or forked in order to make a local copy on your own system.
+The project can be cloned or forked to make a local copy on your system.
 
 For either method, you will need to install any applicable packages found within the *requirements.txt* file.
 - ```pip3 install -r requirements.txt```.
@@ -555,7 +554,7 @@ To clone the project repository:
 Forking the GitHub Repository allows us to create a duplicate of the original repository in our own GitHub account. This enables us to explore and modify the content without impacting the original repository. To fork this repository, follow these steps:
 
 1. Log in to GitHub and locate the [GitHub Repository](https://github.com/JaqiKal/task-master)
-2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+2. At the top of the Repository (not the top of the page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
 
@@ -563,7 +562,7 @@ Forking the GitHub Repository allows us to create a duplicate of the original re
 
 ### Local VS Deployment
 
-At the time of writing, there is no differance between the local version and the version deployed on Heroku.
+At the time of writing, there is no difference between the local version and the version deployed on Heroku.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -594,7 +593,7 @@ This application was made possible by leveraging insights and code examples from
 
 ### Media
 
-For this project no external media was used for creation of this project.
+For this project, no external media was used for the creation of this project.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -604,7 +603,7 @@ I would like to thank!
 
 * My mentor [Jubril Akolade](https://github.com/jubrillionaire/) for his help and advice throughout the project.
 * The whole team at [Code Institute Slack community](https://code-institute-room.slack.com) for their teaching and support.
-* To all engaged fellow student at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
+* To all engaged fellow students at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
 * My immediate and extended family, as well as my friends, support and cheer me on!
 
 
