@@ -100,7 +100,7 @@ def get_user_input(
     allowed_values=None,
     allow_skip=False,
     numeric=False
-    ):
+):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
     Inspo on removing leading or trailing whitespace characters is
@@ -117,7 +117,9 @@ def get_user_input(
     """
     while True:
         # Colorize and reset prompt color within the function
-        user_input = input(Fore.LIGHTBLUE_EX + Style.BRIGHT + prompt + Fore.RESET).strip()
+        user_input = input(
+            Fore.LIGHTBLUE_EX + Style.BRIGHT + prompt + Fore.RESET
+        ).strip()
 
         # Handle 'back' to exit or 'skip' functionality
         if user_input.lower() == "back":
@@ -189,9 +191,18 @@ def get_valid_due_date():
             f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
             "Enter Due Date (YY-MM-DD): \n"
             f"{Style.RESET_ALL}")
+
         # Check for 'back' command to return or exit
         if due_date_str.lower() == "back":
             raise ExitToMainMenu
+
+        # Check for empty input
+        if not due_date_str:
+            print(
+                f"{Fore.RED}{Style.BRIGHT}"
+                "Error: Empty inputs are not valid. Please try again."
+                f"{Style.RESET_ALL}\n")
+            continue
 
         # Amended from: www.w3schools.com/python/python_try_except.asp
         try:
@@ -503,8 +514,7 @@ def view_task():
             "Created",
         ]
 
-        task_table.align["ID"] = "r"
-#        task_table.align = "l"
+        task_table.align = "l"
 
         # Max width for the To-Do column
         max_width = 30
