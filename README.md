@@ -351,9 +351,9 @@ There are a lot one can do to enhance this application, I want to highlight thes
 
 ### Flowchart
 
-To follow best practice, a flowchart was created for the app's logic, and mapped out before coding began using a free version of [Draw.io](https://www.drawio.com/).
+To follow best practice, a flowchart was created for the app's logic, and mapped out before coding began using a free version of [Draw.io](https://www.drawio.com/). Please note, the flowchart provided is designed to offer a simplified visual overview of the Task Master application's core workflow. While it captures the essential operations and user interactions, some implementation details and error-handling mechanisms are abstracted for clarity. The actual application logic may involve additional steps and checks not depicted in the flowchart.
 
-![Flowchart](XXXXXX.webp)
+![Flowchart](/documentation/images/flowchart.webp)
 
 ### Functions & Error Handling
 
