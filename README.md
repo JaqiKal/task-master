@@ -1,16 +1,16 @@
 # Task Master
 
-## About
+Task Master is a user-friendly to-do list app designed for casual users, students, and professionals to efficiently manage tasks, priorities, and deadlines. It features Google Sheets integration, intuitive task prioritization, a clean interface, and real-time collaboration, making task management straightforward and customizable.
 
-**Task Master, a To-Do-List**
+This app solves the problem of managing daily responsibilities in a busy world by providing a digital platform for users to note tasks, assign priority levels, set deadlines, and track progress. It helps users focus on important tasks, manage time effectively, and improve productivity by offering a reliable and organized system for task management. Task Master is accessible to anyone seeking to enhance their daily and long-term productivity, acting as a digital assistant to navigate tasks with ease and clarity.
 
-![screenshot](docs/Mockup.png)  
-[**Live site**](https://xx.com/)
+![x](/documentation/images/landingpage.webp)
+
+Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.herokuapp.com/)
 
 ## CONTENT
 
 * [Introduction](#introduction)
-  * [Demo](#demo)
   * [Who is the application for](#who-is-the-application-for)
   * [The problem it solves and its intended use](#the-problem-it-solves-and-its-intended-use)
 * [Objectives](#objectives)
@@ -24,6 +24,8 @@
   * [User stories](#user-stories)
 * [Design](#design)
   * [Color Usage in Application](#color-usage-in-application)
+  * [Accessibility](#accessibility)
+  * [Am I Responsive](#am-i-responsive)
 * [Features](#features)
   * [Existing features](#existing-features)
   * [Future features](#future-features)
@@ -50,22 +52,6 @@
    * [Acknowledgements](#acknowledgements)
 
 ## Introduction
-
-### Demo
-
-* [Live Site on Heroku](https://xx.com/)
-
-### Who is the Application For
-
-Task Master is a user-friendly to-do list app designed for casual users, students, and professionals to efficiently manage tasks, priorities, and deadlines. It features Google Sheets integration, intuitive task prioritization, a clean interface, and real-time collaboration, making task management straightforward and customizable.
-
-### The problem it solves and its intended use
-
-This app solves the problem of managing daily responsibilities in a busy world by providing a digital platform for users to note tasks, assign priority levels, set deadlines, and track progress. It helps users focus on important tasks, manage time effectively, and improve productivity by offering a reliable and organized system for task management. Task Master is accessible to anyone seeking to enhance their daily and long-term productivity, acting as a digital assistant to navigate tasks with ease and clarity.
-
-*<span style="color: blue;">[Back to Content](#content)</span>*
-
----
 
 ### Objectives
 
@@ -112,7 +98,7 @@ The user's primary goal in using this to-do list application is to have a reliab
 ## User Experience
 
 ### The Strategy
-Dive into productivity with Task Master, a to-do list application engineered to streamline task management effortlessly. Designed with a focus on simplicity and efficiency, Task Master aims to help users organize their daily tasks, prioritize what's important, and track their progress towards completion. By integrating seamlessly with Google Sheets, it ensures that your tasks are always accessible and up-to-date, fostering an environment where productivity thrives.
+Dive into productivity with Task Master, a to-do list application crafted to streamline task management effortlessly. Designed with a focus on simplicity and efficiency, Task Master aims to help users organize their daily tasks, prioritize what's important, and track their progress towards completion. By integrating seamlessly with Google Sheets, it ensures that your tasks are always accessible and up-to-date, fostering an environment where productivity thrives.
 
 ### The Scope
 Task Master is more than just a to-do list; it's a comprehensive task management solution that caters to the needs of various users, from students and professionals to anyone looking to enhance their organizational skills. The application offers a full suite of features, including the ability to add tasks, set priorities and due dates, update task statuses, and delete tasks no longer needed. With a single guess approach for task management actions, users are encouraged to think strategically about their task priorities, making it an essential tool for anyone looking to optimize their daily routine.
@@ -121,47 +107,39 @@ Task Master is more than just a to-do list; it's a comprehensive task management
 At its core, Task Master boasts a structured yet intuitive design that guides users through task management with ease. The application operates on a straightforward, menu-driven interface, allowing for quick navigation between adding, viewing, updating, and deleting tasks. Each task is uniquely identified, ensuring that users can easily manage their tasks without confusion. This structured approach ensures that users can focus more on accomplishing their tasks and less on how to manage them.
 
 ### The Skeleton
-For the meticulous planning and organization of Task Master's components and functionalities, tools like 'draw.io' were employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
+For the thorough planning and organization of Task Master's components and functionalities, tool ['draw.io'](https://www.drawio.com/) were employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
 
 ### User stories
 
 #### First Time Visitor Goals
 
-* **User story 1: Understand Purpose**
+##### User story 1: Understand Purpose
 
   * As a first-time visitor, I want to easily understand the purpose of the task organizer app so that I can decide if it meets my needs.
-
-* **Achieved by**
   
-  *  Providing having a clear and concise description welcome message on the app's landing page.
+    * *Achieved by*:  Providing having a clear and concise description welcome message on the app's landing page.
 
-  **User story 2: Intuitive UI**
+##### User story 2: Intuitive UI
 
   * As a first-time visitor, I want a straightforward and intuitive user interface so that I can quickly navigate the app and perform basic tasks.
-
-* **Achieved by**
-
-  * Having implemented a well-organized menu with clear labels and simple instructions for adding, updating, deleting, and viewing tasks.
+  
+    * *Achieved by*:  Having implemented a well-organized menu with clear labels and simple instructions for adding, updating, deleting, and viewing tasks.
 
 #### Returning Visitor Goals
 
-* **User story 2: As a returning visitor**
+##### User story 2: As a returning visitor
 
   * As a returning visitor I want to quickly access and review the details of a specific task that you've previously added to the organizer.
 
-* **Achieved by**
-
-  * Navigating to the "View Task" option on the main menu and entering the Task ID you want yo review. The app will retrieve and display all the details of the specified task, including its description, priority, due date, status, and creation date.
+    * *Achieved by*: Navigating to the "View Task" option on the main menu and entering the Task ID you want yo review. The app will retrieve and display all the details of the specified task, including its description, priority, due date, status, and creation date.
 
 #### Frequent Visitor Goals
 
-* **User story 3: Efficient updating**
+##### User story 3: Efficient updating
 
   * As a frequent visitor, I want to be able to update existing tasks quickly and efficiently without having to re-enter all the details.
 
-* **Achieved by**
-
-  * A streamlined "Update Task" functionality, allowing users to selectively modify task details while receiving confirmation upon successful updates.
+    * *Achieved by*: A streamlined "Update Task" functionality, allowing users to selectively modify task details while receiving confirmation upon successful updates.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -175,6 +153,8 @@ In the Task Master application, I've employed the Colorama library to infuse a t
 ### Color Usage in Application
 
 By thoughtfully integrating these colors into the terminal-based Task Master application, I aim to create a more engaging and intuitive user experience, despite the inherent design limitations of terminal interfaces.
+
+![x](/documentation/images/color-rect.webp)
 
 #### Magenta
 
@@ -192,12 +172,25 @@ Signifying success, green is used to confirm successful actions within the appli
 
 This color is reserved for warnings or important notices that require the user's attention. Yellow text might indicate a reminder or a caution before performing actions like task deletion, ensuring users proceed with full awareness of the implications.
 
-### Red
+#### Red
 
 Employed for error messages or alerts, red is utilized to immediately draw the user's attention to issues or errors, such as invalid inputs or failed operations. This stark contrast against the other colors ensures that errors are not overlooked and can be addressed promptly.
 
+#### White
+
+White, is crucial for general text and information, providing a clear, readable contrast against other colors. It serves as the foundation for the application's visual design, balancing the vibrant colors and maintaining readability and a clean aesthetic.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
+
+### Accessibility
+
+As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, color contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and are committed to improving these aspects in future updates.
+
+### Am I Responsive 
+
+A Command Line Interface app isn't inherently aimed at responsiveness in the context of varying screen sizes and interactive web design because it is primarily designed for interaction through a terminal or command prompt, not a graphical user interface or web browsers. The teaser image from "Am I Responsive" highlight this contrast by showing the app's interface in various device frames, illustrating that a CLI app's user experience and layout do not adapt like a web application designed with responsive web design principles.
+
+![x](documentation/images/amiresponsive.webp)
 
 ---
 ## Features

@@ -233,7 +233,7 @@ def wrap_text(text, width):
 
 * The application currently does not implement user-specific authentication for accessing the Google Sheets backend
 
-* Accessibility, I have no details if there are any known limitations regarding accessibility features for users with disabilities, such as screen reader compatibility or color contrast consideration. As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, color contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and are committed to improving these aspects in future updates.
+* As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, color contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and are committed to improving these aspects in future updates.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

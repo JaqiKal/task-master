@@ -100,7 +100,7 @@ def get_user_input(
     allowed_values=None,
     allow_skip=False,
     numeric=False
-):
+    ):
     """
     Amended from: www.geeksforgeeks.org/string-capitalize-python/
     Inspo on removing leading or trailing whitespace characters is
@@ -117,7 +117,7 @@ def get_user_input(
     """
     while True:
         # Colorize and reset prompt color within the function
-        user_input = input(Fore.BLUE + prompt + Fore.RESET).strip()
+        user_input = input(Fore.LIGHTBLUE_EX + Style.BRIGHT + prompt + Fore.RESET).strip()
 
         # Handle 'back' to exit or 'skip' functionality
         if user_input.lower() == "back":
@@ -186,7 +186,7 @@ def get_valid_due_date():
     """
     while True:
         due_date_str = input(
-            f"{Fore.BLUE}"
+            f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
             "Enter Due Date (YY-MM-DD): \n"
             f"{Style.RESET_ALL}")
         # Check for 'back' command to return or exit
@@ -234,7 +234,7 @@ def add_row_to_sheet():
     # Generate & display the Task ID
     task_id = generate_task_id()
     print(
-        f"{Fore.BLUE}"
+        f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
         "Task ID generated automatically:\n"
         f"{Style.RESET_ALL}"
         f"Task ID: {task_id}\n"
@@ -471,7 +471,7 @@ def list_all_tasks():
 
     # Print the task details table with colored text
     print(
-        Fore.BLUE + str(table) + Fore.RESET
+        Fore.LIGHTBLUE_EX + Style.BRIGHT + str(table) + Fore.RESET
         )
 
 
@@ -502,7 +502,9 @@ def view_task():
             "Status",
             "Created",
         ]
-        task_table.align = "l"
+
+        task_table.align["ID"] = "r"
+#        task_table.align = "l"
 
         # Max width for the To-Do column
         max_width = 30
@@ -528,7 +530,7 @@ def view_task():
 
         # Print the task details table with colored text
         print(
-            Fore.BLUE + str(task_table) + Fore.RESET
+            Fore.BLUE + Style.BRIGHT + str(task_table) + Fore.RESET
             )
 
     else:
