@@ -648,7 +648,7 @@ def update_task():
                     f"{Fore.YELLOW}{Style.BRIGHT}"
                     "\nOptions:\n"
                     "- Type 'back' to modify your input.\n"
-                    "- Press Enter or any other key to proceed"
+                    "- Press Enter or any other key to proceed "
                     "without changes.\n"
                     "\nChoose an option:"
                     f"{Style.RESET_ALL}"
@@ -682,7 +682,11 @@ def update_task():
             # Directly use input for user interaction
             new_due_date = input().strip()
 
-            # Allow the user to skip updating the due date by pressing Enter
+            # Check for 'back' input to return to the main menu
+            if new_due_date.lower() == 'back':
+                raise ExitToMainMenu
+                
+            # Allow skipping the due date update
             if new_due_date == '':
                 break
 
@@ -695,8 +699,9 @@ def update_task():
                 if due_date < datetime.date.today():
                     print(
                         f"{Fore.RED}{Style.BRIGHT}"
-                        "Error: The due date must be in the future."
-                        "Please try again or press Enter to skip.\n"
+                        "\nError: The due date must be in the future.\n"
+                        f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
+                        "\nPlease try again or press Enter to skip.\n"
                         f"{Style.RESET_ALL}"
                         )
                 else:
@@ -713,8 +718,9 @@ def update_task():
                 # If the date format is invalid, inform user to try again
                 print(
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "Error: Invalid date format."
-                    " Please use YY-MM-DD or press Enter to skip.\n"
+                    "\nError: Invalid date format.\n"
+                    f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
+                    "\nPlease use YY-MM-DD or press Enter to skip.\n"
                     f"{Style.RESET_ALL}"
                     )
 

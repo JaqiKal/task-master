@@ -231,7 +231,7 @@ To address this issue, I've refactored the code to ensure that users are now loo
 
 ### UNSOLVED issue
 
-* None
+* In the current version of the app, entering 'back' during task update redirects users to the main menu rather than the previous step, which isn't ideal for user experience. This issue will be addressed and corrected in future updates.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
