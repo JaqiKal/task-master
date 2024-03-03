@@ -50,6 +50,7 @@ No automatic testing apart from using the pep8 validator was performed.
 
 * [CI Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python code. The result is ALL CLEAR, NO ERRORS FOUND.
 
+![x](/documentation/images/pep8.webp)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -237,6 +238,9 @@ To address this issue, I've refactored the code to ensure that users are now loo
 - - -
 
 ### KNOWN issue
+
+* Currently, the Task Master application operates without user-specific login functionality, limiting its ability to support multiple users simultaneously. This presents a challenge for environments where task management needs to be personalized or shared among team members. To address this, future updates are planned to introduce the following enhancements:
+
 
 * If the application frequently interacts with Google Sheets, reaching API rate limits could lead to temporary disruptions. 
 

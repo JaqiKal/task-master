@@ -26,9 +26,8 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
   * [Color Usage in Application](#color-usage-in-application)
   * [Accessibility](#accessibility)
   * [Am I Responsive](#am-i-responsive)
-* [Features](#features)
-  * [Existing features](#existing-features)
-  * [Future features](#future-features)
+* [Existing features](#existing-features)
+* [Future features](#future-features)
 * [Technologies used](#technologies-used)
   * [Language](#language)
   * [Tools](#tools)
@@ -193,13 +192,10 @@ A Command Line Interface app isn't inherently aimed at responsiveness in the con
 ![x](documentation/images/amiresponsive.webp)
 
 ---
-## Features
 
-These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity.
+## Existing features
 
-### Existing features
-
-Here's an overview of its key features:
+These features are designed to make the to-do list application a comprehensive tool for managing tasks efficiently, catering to the needs of a wide range of users looking for a simple yet effective way to organize their daily responsibilities. The to-do list application comes packed with several user-friendly features designed to enhance task management and productivity. Here's an overview of its key features:
 
 **Centralized Task Management**
 
@@ -289,35 +285,75 @@ Confidently exit the application, knowing that all your tasks are safely stored 
 
 ![x](/documentation/images/exit.webp)
 
+#### Swift Screen Clearing
+
+Instantly clear your terminal screen with the clear_terminal feature, ensuring a neat workspace for efficient task management. Simplify your workflow with a command that offers a fresh start for every new task.
+
+![x](/documentation/images/clear-pre.webp)
+
+![x](/documentation/images/clear-post.webp)
+
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
-### Future Features
+## Future Features
 
-There is a lot one can do to enhance this application, I want to highlight these four (in no specific priority order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
+There is a lot one can do to enhance this application, I want to highlight these (in no specific priority order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
 
-#### Integration with Calendar Applications
+1.  User-specific Login
 
-- **Description**: Allow users to sync their to-do list items with their preferred calendar applications (e.g., Google Calendar, Microsoft Outlook).
-- **Benefit**: Users can see their tasks alongside their appointments, providing a comprehensive view of their schedules.
+* Implement a secure login mechanism to allow individual users to access their unique task lists.
 
-#### Collaborative Task Management
+* This feature will enable personalization of the task management experience, ensuring users can manage their tasks privately and securely.
 
-- **Description**: Add features that enable users to share lists with others, assign tasks, and track progress collaboratively.
-- **Benefit**: Facilitates teamwork and shared task management, making the app suitable for both personal and professional use.
+2. Multi-User Support
 
-#### Natural Language Processing (NLP) for Task Entry
+* Develop functionalities that support multiple users, allowing for collaborative task management and assignment among team members or family.
 
-- **Description**: Utilize NLP to allow users to add tasks in natural language, which the app can then parse into structured task entries.
-- **Benefit**: Simplifies the process of adding new tasks, making the application more intuitive and user-friendly.
+* By facilitating shared task lists and assignments, this feature will expand the application's usability in collaborative settings, making it more versatile and applicable to a broader range of use cases.
 
-#### Analytics and Productivity Insights
+3. Integration with Calendar Applications
 
-- **Description**: Offer analytics features that give users insights into their task completion patterns, and productivity trends, and suggest optimizations.
-- **Benefit**: Helps users understand their productivity habits and make informed adjustments to improve efficiency.
+* Allow users to sync their to-do list items with their preferred calendar applications (e.g., Google Calendar, Microsoft Outlook).
 
-#### Refactoring code to Object-Oriented Programming
-- **Description**:  Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviours into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
-- **Benefit**:  By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
+* Users can see their tasks alongside their appointments, providing a comprehensive view of their schedules.
+
+3. Collaborative Task Management
+
+* Add features that enable users to share lists with others, assign tasks, and track progress collaboratively.
+
+* Facilitates teamwork and shared task management, making the app suitable for both personal and professional use.
+
+4. Natural Language Processing (NLP) for Task Entry
+
+* Utilize NLP to allow users to add tasks in natural language, which the app can then parse into structured task entries.
+
+* Simplifies the process of adding new tasks, making the application more intuitive and user-friendly.
+
+5. Analytics and Productivity Insights
+
+* Offer analytics features that give users insights into their task completion patterns, and productivity trends, and suggest optimizations.
+
+* Helps users understand their productivity habits and make informed adjustments to improve efficiency.
+
+6. Refactoring code to Object-Oriented Programming
+
+* Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviours into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
+
+* By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
+
+7. Splitting code inte several script.
+
+*  Increase the code organization and maintainability by refactoring the current monolithic codebase into a modular structure, dividing it into several script files based on functionality. Proposed structure:
+
+``` plaintext 
+/project_root
+    /task_master.py         # Main application script.
+    /config.py              # Configuration settings.
+    /sheets_integration.py  # Google Sheets integration functions.
+    /utils.py               # Utility functions.
+```
+
+* By organizing the code into distinct modules, future developers can easily navigate the project, understand its structure, and contribute more effectively. This approach minimizes merge conflicts and facilitates parallel development, allowing team members to work on different aspects of the project simultaneously. Updating, debugging, and extending the application becomes more manageable when the codebase is modular, as changes in one module are less likely to impact others unexpectedly. This approach also aligns with best practices in software development.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
@@ -579,15 +615,15 @@ This application was made possible by leveraging insights and code examples from
 * [gspread](https://docs.gspread.org/en/v6.0.0/) - Amended from Code Institute project love_sandwiches
 * [import datetime](https://www.geeksforgeeks.org/python-datetime-module/) - For handling date and time operations.
 * [prettytable](https://pypi.org/project/prettytable/) - Used for organizing tabular data.
-* [API error handling](https://docs.gspread.org/en/latest/api/exceptions.html) - For managing API interactions.
-* [API error handling](https://snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError) - For managing API interactions.
+* [API error handling 1](https://docs.gspread.org/en/latest/api/exceptions.html) - For managing API interactions.
+* [API error handling 2](https://snyk.io/advisor/python/gspread/functions/gspread.exceptions.APIError) - For managing API interactions.
 * [class ExitToMainMenu(Exception)](https://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python) -  Inspired custom error handling in the application.
 * [format the time stamp which is in string format to date-time object](https://geeksforgeeks.org/python-datetime-strptime-function/) For parsing and converting date strings.
 * [Try - Except](https://www.w3schools.com/python/python_try_except.asp) - For robust error management.
 * [Print Colors in Python Terminal ](https://www.geeksforgeeks.org/print-colors-python-terminal/) - For enhancing terminal output aesthetics.
-* [Sorting](https://ioflood.com/blog/python-sort-dictionary-by-value/#:~:text=TL%3BDR%3A%20How%20Do%20I,items()%2C%20key%3Doperator.) - Essential for data organization.
-* [Sorting](https://pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-of-the-dictionary/) - Essential for data organization.
-* [Sorting](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/) - Essential for data organization.
+* [Sorting 1](https://ioflood.com/blog/python-sort-dictionary-by-value/#:~:text=TL%3BDR%3A%20How%20Do%20I,items()%2C%20key%3Doperator.) - Essential for data organization.
+* [Sorting 2](https://pythonhow.com/how/sort-a-list-of-dictionaries-by-a-value-of-the-dictionary/) - Essential for data organization.
+* [Sorting 3](https://www.geeksforgeeks.org/ways-sort-list-dictionaries-values-python-using-lambda-function/) - Essential for data organization.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

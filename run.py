@@ -58,6 +58,12 @@ except gspread.WorksheetNotFound:
     exit()
 
 
+# Define allowed values for task priority and status
+# to ensure user inputs are standardized and limited to these options.
+priority_allowed_values = ["High", "Med", "Low"]
+status_allowed_values = ["New", "Done", "Pend"]
+
+
 class ExitToMainMenu(Exception):
     """
     Amended from: stackoverflow.com/questions/1319615/
@@ -229,12 +235,6 @@ def get_valid_due_date():
                 "Please use YY-MM-DD."
                 f"{Style.RESET_ALL}\n"
                 )
-
-
-# Define allowed values for task priority and status
-# to ensure user inputs are standardized and limited to these options.
-priority_allowed_values = ["High", "Med", "Low"]
-status_allowed_values = ["New", "Done", "Pend"]
 
 
 def add_row_to_sheet():
