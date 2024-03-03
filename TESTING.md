@@ -241,12 +241,13 @@ To address this issue, I've refactored the code to ensure that users are now loo
 
 * Currently, the Task Master application operates without user-specific login functionality, limiting its ability to support multiple users simultaneously. This presents a challenge for environments where task management needs to be personalized or shared among team members. To address this, future updates are planned to introduce the following enhancements:
 
-
 * If the application frequently interacts with Google Sheets, reaching API rate limits could lead to temporary disruptions. 
 
 * The application currently does not implement user-specific authentication for accessing the Google Sheets backend
 
 * As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and am committed to improving these aspects in future updates.
+
+* In developing the app, I employed Pylint (v2023.10.1) which flagged the use of a broad try-except block with "Catching too general exception Exception." Despite the general advice against catching broad exceptions, I opted for this method for several reasons, fully aware of the best practices. This decision balances robustness and user-friendliness, ensuring that users are shielded from raw Python errors with more accessible error messages. It's particularly vital for managing unforeseen errors from external dependencies like Google Sheets API, where issues like API limits can arise. Recognizing the challenge of covering all potential errors from various sources, this approach serves as a safeguard against unhandled crashes, enhancing user experience. I'm committed to evolving this strategy as the application and its error handling capabilities develop.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

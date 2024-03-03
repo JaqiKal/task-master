@@ -675,7 +675,7 @@ def update_task():
         print(
             f"{Fore.LIGHTBLUE_EX}{Style.BRIGHT}"
             "Please, enter new Due Date (YY-MM-DD)"
-            "or press Enter to skip: \n"
+            "or press Enter to skip:"
             f"{Style.RESET_ALL}"
             )
         while True:
