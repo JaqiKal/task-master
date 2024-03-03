@@ -14,6 +14,7 @@ Date: March 2024
 
 # Amended from: www.geeksforgeeks.org/clear-screen-python/
 import os
+
 # Amended from: www.geeksforgeeks.org/python-datetime-module/
 import datetime
 # Amended from: Code Institute project love_sandwiches
@@ -303,13 +304,24 @@ def wrap_text(text, width):
     keeping text intact or breaking at spaces, resorting to hard breaks when
     necessary. Not ideal for maintaining readability for long text that should
     be kept intact or broken wih hyphens, but for this app purpose it works.
-    While not leveraging 'textwrap', it maintains readability for
-    this app's context, ensuring descriptions fit within specified width
-    constraints without awkward word splits.
+    This function has been modified to strip leading and trailing spaces
+    from the input text before wrapping. It checks if the stripped text is
+    empty and returns an empty list if so, ensuring that long empty strings
+    are handled more gracefully. It maintains readability for this app's
+    context, ensuring descriptions fit within specified width constraints
+    without awkward word splits, and with improved handling of long empty
+    strings.
     """
-    text = str(text)  # Ensure all inputs are treated as strings
+    # Ensure all inputs are treated as strings
+    # and strip leading/trailing spaces
+    text = str(text).strip()
+    # Check if the string is empty after stripping
+    if not text:
+        # Return a list with an empty string if the text is empty
+        return ['']
     if len(text) <= width:
-        return [text]  # Return the text if it's short enoughclear
+        # Return the text if it's short enough
+        return [text]
 
     wrapped_text = []
     while text:
@@ -322,7 +334,8 @@ def wrap_text(text, width):
             if space_index != -1:
                 # Break line at last space within width
                 wrapped_text.append(text[:space_index])
-                text = text[space_index+1:]  # Skip the space
+                # Skip the space
+                text = text[space_index+1:]
             else:
                 # No space found; hard break at the width limit
                 wrapped_text.append(text[:width])
@@ -685,7 +698,6 @@ def update_task():
             # Check for 'back' input to return to the main menu
             if new_due_date.lower() == 'back':
                 raise ExitToMainMenu
-                
             # Allow skipping the due date update
             if new_due_date == '':
                 break
