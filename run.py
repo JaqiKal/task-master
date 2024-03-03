@@ -222,7 +222,7 @@ def get_valid_due_date():
             if due_date < datetime.date.today():
                 print(
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "\nError: The due date must be in the future.\n"
+                    "Error: The due date must be in the future.\n"
                     "Please try again."
                     f"{Style.RESET_ALL}\n"
                 )
