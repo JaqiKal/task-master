@@ -206,7 +206,7 @@ def get_valid_due_date():
         if not due_date_str:
             print(
                 f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Empty inputs are not valid.\n"
+                "Error: Input cannot be empty.\n"
                 "Please try again."
                 f"{Style.RESET_ALL}\n")
             continue

@@ -231,7 +231,7 @@ View all tasks at a glance or filter them by priority or due date, providing a c
 
 **Sort Priority (High-Med-Low)**
 
-![x](/documentation/images/prio-sort.webp)
+![x](/documentation/images/sort-prio.webp)
 
 **Sort Due Date (latest to earliest)**
 
@@ -264,7 +264,7 @@ These are common error types managed during the task addition process.
 * Empty Input Errors are triggered when the user submits an empty string for a required field. The application alerts the user that input is necessary to proceed.
 * API Errors are also handled but not shown in the image, Example of an API error is when there's an issue communicating with external services, like Google Sheets. Users are informed that the operation couldn't be completed and are asked to try again later.
 
-![x](/documentation/images/add-task-error.webp)
+![x](/documentation/images/add-task-err-handl.webp)
 
 **Error management updating a task**
 
