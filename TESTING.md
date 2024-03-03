@@ -229,15 +229,11 @@ To address this issue, I've refactored the code to ensure that users are now loo
 
 - - -
 
-### UNSOLVED issue
+### UNSOLVED issue 
 
 * In the current version of the app, entering 'back' during task update redirects users to the main menu rather than the previous step, which isn't ideal for user experience. This issue will be addressed and corrected in future updates.
 
-*<span style="color: blue;">[Back to Content](#content)</span>*
-
-- - -
-
-### KNOWN issue
+* When users quickly enter selections in the Task Master application, an issue arises where input can overlap with existing text on the console. This problem seems to stem from the way the application handles asynchronous input and output operations, leading to a situation where the console output does not synchronize correctly with user inputs. As a result, the user experience is negatively impacted, with the terminal display becoming cluttered and confusing. This issue will be addressed and corrected in future updates. 
 
 * Currently, the Task Master application operates without user-specific login functionality, limiting its ability to support multiple users simultaneously. This presents a challenge for environments where task management needs to be personalized or shared among team members. To address this, future updates are planned to introduce the following enhancements:
 
@@ -248,6 +244,16 @@ To address this issue, I've refactored the code to ensure that users are now loo
 * As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and am committed to improving these aspects in future updates.
 
 * In developing the app, I employed Pylint (v2023.10.1) which flagged the use of a broad try-except block with "Catching too general exception Exception." Despite the general advice against catching broad exceptions, I opted for this method for several reasons, fully aware of the best practices. This decision balances robustness and user-friendliness, ensuring that users are shielded from raw Python errors with more accessible error messages. It's particularly vital for managing unforeseen errors from external dependencies like Google Sheets API, where issues like API limits can arise. Recognizing the challenge of covering all potential errors from various sources, this approach serves as a safeguard against unhandled crashes, enhancing user experience. I'm committed to evolving this strategy as the application and its error handling capabilities develop.
+
+![x](/documentation/images/overlap.webp)
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
+- - -
+
+### KNOWN issue 
+
+None identified
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
