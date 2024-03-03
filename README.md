@@ -221,6 +221,12 @@ Assign priority levels and set due dates for each task, enabling you to manage y
 
 ![x](/documentation/images/prio.webp)
 
+**Submenu**
+
+The application's menu system is designed to streamline user navigation, offering a simple, intuitive interface that allows users to effortlessly add, manage, and track tasks, making task management both efficient and user-friendly.
+
+![x](/documentation/images/submenu.webp)
+
 **Efficient Task Listing**
 
 View all tasks at a glance or filter them by priority or due date, providing a clear overview of your responsibilities and helping you plan your day or week with ease. Below are a few examples:
@@ -253,26 +259,6 @@ Mark tasks as done, offering a satisfying way to track your progress and maintai
 
 ![x](/documentation/images/update-post.webp) 
 
-**Error Handling and User Feedback**
-
-Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. 
-
-**Error management when adding a task**
-
-These are common error types managed during the task addition process.
-* Validation Errors, occur when user input does not meet predefined criteria, such as due dates in the past or incorrect formats for input fields. These errors prompt the user to re-enter data correctly.
-* Empty Input Errors are triggered when the user submits an empty string for a required field. The application alerts the user that input is necessary to proceed.
-* API Errors are also handled but not shown in the image, Example of an API error is when there's an issue communicating with external services, like Google Sheets. Users are informed that the operation couldn't be completed and are asked to try again later.
-
-![x](/documentation/images/add-task-err-handl.webp)
-
-**Error management updating a task**
-
-These are common error types managed during the task updating process.
-
-![x](/documentation/images/update-task-error.webp)
-
-
 #### Flexible Access and Data Persistence
 
 With tasks stored in Google Sheets, access your task list from any device, ensuring that your data is always there when you need it. Security and privacy are paramount, and I've taken measures to ensure data security, including the use of secure API keys and restricted spreadsheet access. 
@@ -294,6 +280,23 @@ Instantly clear your terminal screen with the clear_terminal feature, ensuring a
 ![x](/documentation/images/clear-post.webp)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
+
+**Error Handling and User Feedback**
+
+Benefit from built-in error handling and user feedback mechanisms, ensuring a smooth and intuitive user experience even when mistakes are made. 
+These are common error types managed during both the task addition and updating process:
+
+* Validation Errors, occur when user input does not meet predefined criteria, such as due dates in the past or incorrect formats for input fields. These errors prompt the user to re-enter data correctly.
+* Empty Input Errors are triggered when the user submits an empty string for a required field. The application alerts the user that input is necessary to proceed.
+* API Errors are also handled but not shown in the image, Example of an API error is when there's an issue communicating with external services, like Google Sheets. Users are informed that the operation couldn't be completed and are asked to try again later.
+
+**Error handling when adding a task**
+
+![x](/documentation/images/add-task-error.webp),  
+
+**Error management when updating a task**
+
+![x](/documentation/images/update-task-error.webp)
 
 ## Future Features
 
