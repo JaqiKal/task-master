@@ -206,7 +206,7 @@ def get_valid_due_date():
         if not due_date_str:
             print(
                 f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Empty inputs are not valid."
+                "Error: Empty inputs are not valid.\n"
                 "Please try again."
                 f"{Style.RESET_ALL}\n")
             continue
@@ -231,7 +231,7 @@ def get_valid_due_date():
         except ValueError:
             print(
                 f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Invalid date format."
+                "Error: Invalid date format.\n"
                 "Please use YY-MM-DD."
                 f"{Style.RESET_ALL}\n"
                 )
