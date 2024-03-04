@@ -239,7 +239,15 @@ In the "update task" functionality, when adding a new due date, the system accep
 
 ### Solution Bug-06
 
- Implement validation by splitting the input string by - to separate year, month, and day components. Then, check if each component meets the expected length: two digits for the year, two digits for the month, and two digits for the day. If the input does not conform to these expectations, introduce a new error message to inform the user. This ensures the due date is strictly in the YY-MM-DD format, enhancing data consistency and preventing format-related errors. This solution  standardizes date input across the application, promoting uniformity and reducing potential confusion for users.
+Implement validation by splitting the input string by - to separate year, month, and day components. Then, check if each component meets the expected length: two digits for the year, two digits for the month, and two digits for the day. If the input does not conform to these expectations, introduce a new error message to inform the user. This ensures the due date is strictly in the YY-MM-DD format, enhancing data consistency and preventing format-related errors. This solution  standardizes date input across the application, promoting uniformity and reducing potential confusion for users.
+
+### Bug-07
+
+When attempting to delete tasks I encountered a peculiar issue. Initially, I entered 4 task IDs without commas, which was correctly identified as an error by the system. However, when I attempted to delete these tasks by entering the IDs with commas but incorrectly specifying the task IDs, the system still deleted the four most recent tasks. This behavior suggests that the system might not be correctly identifying and processing the task IDs entered by the user, leading to unintended deletion of tasks.
+
+### Solution Bug-07
+
+The revised code adds a step to verify that each task ID entered by the user exists before proceeding with the deletion. This ensures that the function does not attempt to delete tasks that do not exist, which could lead to confusion or errors.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 

@@ -1,12 +1,11 @@
 """
-This is the main and only script for the Task Master application,
-a tool designed to simplify task management.
-The application allows users to add, manage, and track tasks with ease.
-It leverages the power of Google Sheets for data storage, ensuring
-that your task list is accessible and up-to-date. It features a
-menu-driven interface for straightforward navigation and is built to
-support a wide range of task management activities, from setting
-due dates to prioritizing tasks.
+This is the main and only script for the Task Master application, a tool
+designed to simplify task management. The application allows users to add,
+manage, and track tasks with ease. It leverages the power of Google Sheets for
+data storage, ensuring that your task list is accessible and up-to-date. It
+features a menu-driven interface for straightforward navigation and is built to
+support a wide range of task management activities, from setting due dates to
+prioritizing tasks.
 
 By: JaqiKal
 Date: March 2024
@@ -24,7 +23,10 @@ from prettytable import PrettyTable
 # Amended from: www.geeksforgeeks.org/print-colors-python-terminal/
 import colorama
 from colorama import Fore, Style
+# Amended from: docs.gspread.org/en/latest/api/exceptions.html
+from gspread.exceptions import APIError
 
+# Initialize colorama
 colorama.init()
 
 # Amended from: Code Institute project love_sandwiches
@@ -68,21 +70,19 @@ class ExitToMainMenu(Exception):
     """
     Amended from: stackoverflow.com/questions/1319615/
     proper-way-to-declare-custom-exceptions-in-modern-python
-
     Exception used to signal an exit back to the main menu.
     """
 
 
 def generate_task_id():
     """
-    Generates a unique, sequential task ID for new tasks.
-    This function fetches all current tasks from the Google Sheet,
-    identifies the highest task ID in use, and increments it by 1 to
-    ensure uniqueness and maintain a sequential order.
-    The method is chosen for its simplicity and effectiveness in environments
-    where task creation occurs at a manageable rate and concurrency issues
-    are minimal. It leverages the existing data structure without requiring
-    external dependencies or complex ID generation schemes.
+    Generates a unique, sequential task ID for new tasks. This function fetches
+    all current tasks from the Google Sheet, identifies the highest task ID in
+    use, and increments it by 1 to ensure uniqueness and maintain a sequential
+    order. The method is chosen for its simplicity and effectiveness in
+    environments where task creation occurs at a manageable rate and
+    concurrency issues are minimal. It leverages the existing data structure
+    without requiring external dependencies or complex ID generation schemes.
     """
     # Fetch all tasks as a list of dictionaries
     tasks = worksheet.get_all_records()
@@ -112,13 +112,12 @@ def get_user_input(
     Inspo on removing leading or trailing whitespace characters is
     found at: www.codeease.net/programming/python/python-input-strip
 
-    Prompts the user for input and allows exit to the main menu
-    upon receiving a specific input. If 'normalize' is True,
-    it will capitalize the first letter and make the rest lowercase.
-    If 'allowed_values' is provided, it will ensure the user input
-    is among the allowed values, prompting re-entry if necessary.
-    Function also reject empty inputs with consistent error feedback,
-    but enables skipping an action with empty input if 'allow_skip'
+    Prompts the user for input and allows exit to the main menu upon receiving
+    a specific input. If 'normalize' is True, it will capitalize the first
+    letter and make the rest lowercase. If 'allowed_values' is provided, it
+    will ensure the user input is among the allowed values, prompting re-entry
+    if necessary. Function also reject empty inputs with consistent error
+    feedback, but enables skipping an action with empty input if 'allow_skip'
     is set to True.
     """
     while True:
@@ -180,14 +179,8 @@ def get_valid_due_date():
 
     It performs two key validations:
     1. This step confirms the input matches the expected YY-MM-DD
-       format. If the input does not match the expected format a
-       ValueError is raised, and user is informed of the correct format,
-       prompting them to try again
     2. Compares the input date to today's date to ensure the due date
-       is in the future. Dates in the past are not allowed, and the user
-       will be asked to provide a new date if the entered date is not in
-       the future.
-
+       is in the future.
     The loop continues until a valid future date is provided, ensuring
     the due date is always correctly formatted and suitable for scheduling
     tasks.
@@ -315,7 +308,7 @@ def add_row_to_sheet():
 def wrap_text(text, width):
     """
     Function handles text wrapping for displaying task descriptions
-    within PrettyTable output. Initially attempted using 'textwrap' lib to
+    within Table output. Initially attempted using 'textwrap' lib to
     manage overflow, but content still exceeded boundaries. This prioritizes
     keeping text intact or breaking at spaces, resorting to hard breaks when
     necessary. Not ideal for maintaining readability for long text that should
@@ -588,17 +581,6 @@ def update_task():
     This function allows user to update an exisiting task in the task
     organizer. Unlike other functions that require user input for every field,
     this function allows optional updates:
-    - Empty input for any field (except the Task ID) skips the update for
-      that field, leaving the original value unchanged.
-    - The function validates the Task ID and informs the user if the specified
-      task cannot be found.
-    - For the due date, the function checks for valid date format (YY-MM-DD)
-      and skips update if the format is incorrect, without terminating the
-      update process.
-    - checks to notify the user if the new priority or status is the same
-      as the current one, avoiding unnecessary updates.
-    - Utilizes the `ExitToMainMenu` exception to allow exiting to the main menu
-      at any point by typing a specific command (e.g., 'back')
     """
     # Amended from: www.w3schools.com/python/python_try_except.asp
     current_task = None
@@ -830,10 +812,12 @@ def delete_tasks():
     """
     # Amended from: www.w3schools.com/python/python_try_except.asp
     try:
+        # Prompt user for task IDs to delete, separated by commas
         task_ids_input = get_user_input(
+            f"{Fore.LIGHTBLUE_EX}"
             "Enter the Task ID(s) of the tasks you want to delete"
-            "(separated by commas): \n",
-            normalize=False,
+            "(separated by commas): \n"
+            f"{Style.RESET_ALL}"
         )
         # Split the input into a list of task IDs, trimming whitespace
         task_ids = [task_id.strip() for task_id in task_ids_input.split(",")]
@@ -843,61 +827,72 @@ def delete_tasks():
 
         # Collect rows (indexes) to delete
         for task_id in task_ids:
+            found = False
             for index, task in enumerate(tasks):
                 if str(task["Task ID"]) == task_id:
                     # Considering header row and 1-based indexing
                     tasks_to_delete.append(index + 2)
+                    found = True
+                    break
+            if not found:
+                print(
+                    f"{Fore.RED}{Style.BRIGHT}"
+                    "Error: Task ID not found.\n"
+                    "Please, try again."
+                    f"{Style.RESET_ALL}"
+                )
+                return
 
         if not tasks_to_delete:
-            print(f"{Fore.RED}{Style.BRIGHT}"
-                  "Error: None of the specified Task IDs were found. \n"
-                  "Please ensure you have entered the correct Task IDs."
-                  f"{Style.RESET_ALL}"
-                  )
+            print(
+                f"{Fore.RED}{Style.BRIGHT}"
+                "Error: None of the specified Task IDs were found.\n"
+                "Please ensure you have entered the correct Task IDs.\n"
+                f"{Style.RESET_ALL}"
+            )
             return
 
         # Confirm deletion with the user before proceeding
-        confirm = (
-            input(f"{Fore.YELLOW}{Style.BRIGHT}"
-                  "Are you sure you want to delete task(s)?\n"
-                  "The action is irreversible! (yes/no): \n"
-                  f"{Style.RESET_ALL}"
-                  )
-            .strip()
-            .lower()
-        )
+        confirm = input(
+            f"{Fore.YELLOW}{Style.BRIGHT}"
+            "Are you sure you want to delete task(s)?\n"
+            "The action is irreversible! (yes/no): \n"
+            f"{Style.RESET_ALL}"
+        ).strip().lower()
 
         if confirm == "yes":
-            # Sort the list in reverse order to avoid messing up the indexes
             tasks_to_delete.sort(reverse=True)
-            # Amended from: www.w3schools.com/python/python_try_except.asp
-            try:
-                for row in tasks_to_delete:
+            for row in tasks_to_delete:
+                try:
                     worksheet.delete_rows(row)
-                    print(f"{Fore.GREEN}{Style.BRIGHT}"
-                          "\nTasks deleted successfully."
-                          f"{Style.RESET_ALL}")
-
-            except gspread.exceptions.APIError as e:
-                # Print the API error
-                error_message = (
-                    f"{Fore.RED}{Style.BRIGHT}"
-                    "Error: Failed to delete task due"
-                    " to a Google Sheets API error: "
-                    f"{e}"
-                    f"{Style.RESET_ALL}"
-                )
-                print(error_message, e)
-
+                    print(
+                        f"{Fore.GREEN}{Style.BRIGHT}"
+                        "\nTask(s) deleted successfully."
+                        f"{Style.RESET_ALL}"
+                    )
+                except APIError as e:
+                    # Print the API error
+                    error_message = (
+                        f"{Fore.RED}{Style.BRIGHT}"
+                        "Error: Failed to delete task due"
+                        "to a Google Sheets API error: "
+                        f"{e}"
+                        f"{Style.RESET_ALL}"
+                    )
+                    print(error_message, e)
         elif confirm == "no":
-            print(f"{Fore.GREEN}{Style.BRIGHT}"
-                  "\nTask deletion canceled."
-                  f"{Style.RESET_ALL}")
+            print(
+                f"{Fore.GREEN}{Style.BRIGHT}"
+                "\nTask deletion canceled."
+                f"{Style.RESET_ALL}"
+            )
         else:
-            print(f"{Fore.RED}{Style.BRIGHT}"
-                  "\nError: Invalid input.\n"
-                  "Please answer 'yes' or 'no'."
-                  f"{Style.RESET_ALL}")
+            print(
+                f"{Fore.RED}{Style.BRIGHT}"
+                "\nError: Invalid input."
+                "Please answer 'yes' or 'no'."
+                f"{Style.RESET_ALL}"
+            )
 
     except ExitToMainMenu:
         return
@@ -995,5 +990,4 @@ print(
     "\ninterface. Select an option, press Enter, and you're on your way!"
     f"{Style.RESET_ALL}"
 )
-
 main_menu()
