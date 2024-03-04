@@ -1,4 +1,4 @@
-# Task Master
+# Introduction
 
 Task Master is a user-friendly to-do list app designed for casual users, students, and professionals to efficiently manage tasks, priorities, and deadlines. It features Google Sheets integration, intuitive task prioritization, a clean interface, and real-time collaboration, making task management straightforward and customizable.
 
@@ -11,9 +11,7 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
 ## CONTENT
 
 * [Introduction](#introduction)
-  * [Who is the application for](#who-is-the-application-for)
-  * [The problem it solves and its intended use](#the-problem-it-solves-and-its-intended-use)
-* [Objectives](#objectives)
+  * [Objectives](#objectives)
   * [Developer's goal](#developers-goal)
   * [User's goal](#users-goal)
 * [User Experience](#user-experience)
@@ -37,7 +35,7 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
   * [Error Handling Strategy](#error-handling-strategy)
   * [Imports](#imports)
   * [Programming paradigm](#programming-paradigm)
-* [Testing and known issues](#testing-and-known-issues)
+* [Testing](#testing)
 * [Prerequisites and Deployment](#prerequisites-and-deployment)
   * [Prerequisite](#prerequisite)
   * [Deploying on Heroku](#deploying-on-heroku)
@@ -71,9 +69,6 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
 5.	*Learn and Apply New Skills*
 	- Use the project as an opportunity to learn more about Python programming, Google Sheets API, and other relevant technologies or programming concepts.
 
-
-*<span style="color: blue;">[Back to Content](#content)</span>*
-
 #### User's goal
 
 The user's primary goal in using this to-do list application is to have a reliable and convenient tool that helps them manage their daily tasks, improve their productivity, and reduce the stress associated with forgetting tasks or missing deadlines.
@@ -106,7 +101,9 @@ Task Master is more than just a to-do list; it's a comprehensive task management
 At its core, Task Master boasts a structured yet intuitive design that guides users through task management with ease. The application operates on a straightforward, menu-driven interface, allowing for quick navigation between adding, viewing, updating, and deleting tasks. Each task is uniquely identified, ensuring that users can easily manage their tasks without confusion. This structured approach ensures that users can focus more on accomplishing their tasks and less on how to manage them.
 
 ### The Skeleton
-For the thorough planning and organization of Task Master's components and functionalities, tool ['draw.io'](https://www.drawio.com/) was employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
+For the thorough planning and organization of Task Master's components and functionalities, the tool ['draw.io'](https://www.drawio.com/) was employed to create a detailed visual diagram. This served as a foundational blueprint throughout the development process, guiding the creation of a user-friendly interface that is functional. By visually mapping out the application's design and flow, I ensured that Task Master meets user expectations in terms of usability and performance.
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### User stories
 
@@ -140,9 +137,9 @@ For the thorough planning and organization of Task Master's components and funct
 
     * *Achieved by*: A streamlined "Update Task" functionality, allowing users to selectively modify task details while receiving confirmation upon successful updates.
 
-
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
+</details>
 ---
 
 ## Design
@@ -177,7 +174,7 @@ Employed for error messages or alerts, red is utilized to immediately draw the u
 
 #### White
 
-White, is crucial for general text and information, providing a clear, readable contrast against other colors. It serves as the foundation for the application's visual design, balancing vibrant colours and maintaining readability and a clean aesthetic.
+White, is crucial for general text and information, providing a clear, readable contrast against other colours. It serves as the foundation for the application's visual design, balancing vibrant colours and maintaining readability and a clean aesthetic.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -185,11 +182,15 @@ White, is crucial for general text and information, providing a clear, readable 
 
 As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and I am committed to improving these aspects in future updates.
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 ### Am I Responsive 
 
 A Command Line Interface app isn't inherently aimed at responsiveness in the context of varying screen sizes and interactive web design because it is primarily designed for interaction through a terminal or command prompt, not a graphical user interface or web browsers. The teaser image from "Am I Responsive" highlights this contrast by showing the app's interface in various device frames, illustrating that a CLI app's user experience and layout do not adapt like a web application designed with responsive web design principles.
 
 ![x](documentation/images/amiresponsive.webp)
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
 
@@ -203,11 +204,15 @@ Effortlessly add, edit, and organize tasks in a centralized Google Worksheet, en
 
 ![x](/documentation/images/landingpage.webp)
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 **Dynamic Task Addition and Editing**
 
 Easily add new tasks or modify existing ones, including details such as task descriptions, priorities, and due dates, for precise task management. 
 
 ![x](/documentation/images/add-task.webp)
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 **Unique Task ID Generation**
 
@@ -215,17 +220,23 @@ I implemented the `generate_task_id` function to ensure each task is uniquely id
 
 ![x](/documentation/images/gen-id.webp)
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 **Prioritization and Deadlines**
 
 Assign priority levels and set due dates for each task, enabling you to manage your workload effectively and focus on what matters most. 
 
 ![x](/documentation/images/prio.webp)
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 **Submenu**
 
 The application's menu system is designed to streamline user navigation, offering a simple, intuitive interface that allows users to effortlessly add, manage, and track tasks, making task management both efficient and user-friendly.
 
 ![x](/documentation/images/submenu.webp)
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 **Efficient Task Listing**
 
@@ -243,6 +254,8 @@ View all tasks at a glance or filter them by priority or due date, providing a c
 
 ![x](/documentation/images/sort-due-latest.webp)
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 **Task Completion Tracking**
 
 Mark tasks as done, offering a satisfying way to track your progress and maintain motivation. 
@@ -259,17 +272,23 @@ Mark tasks as done, offering a satisfying way to track your progress and maintai
 
 ![x](/documentation/images/update-post.webp) 
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 #### Flexible Access and Data Persistence
 
 With tasks stored in Google Sheets, access your task list from any device, ensuring that your data is always there when you need it. Security and privacy are paramount, and I've taken measures to ensure data security, including the use of secure API keys and restricted spreadsheet access. 
 
 ![x](/documentation/images/spreadsheet.webp)
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 #### Secure and Easy Exit
 
 Confidently exit the application, knowing that all your tasks are safely stored in Google Sheets, ready for your next session. 
 
 ![x](/documentation/images/exit.webp)
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 #### Swift Screen Clearing
 
@@ -288,80 +307,86 @@ These are common error types managed during both the task addition and updating 
 
 * Validation Errors, occur when user input does not meet predefined criteria, such as due dates in the past or incorrect formats for input fields. These errors prompt the user to re-enter data correctly.
 * Empty Input Errors are triggered when the user submits an empty string for a required field. The application alerts the user that input is necessary to proceed.
-* API Errors are also handled but not shown in the image, Example of an API error is when there's an issue communicating with external services, like Google Sheets. Users are informed that the operation couldn't be completed and are asked to try again later.
+* API Errors are also handled but not shown in the image, an example of an API error is when there's an issue communicating with external services, like Google Sheets. Users are informed that the operation couldn't be completed and are asked to try again later.
 
 **Error handling when adding a task**
 
 ![x](/documentation/images/add-task-error.webp),  
 
-**Error management when updating a task**
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
+**Error handling when updating a task**
 
 ![x](/documentation/images/update-task-error.webp)
 
+*<span style="color: blue;">[Back to Content](#content)</span>*
+
 **Delete Task & Error handling**
 
-![x](/documentation/images/delete-task-error.webp)
+![x](/documentation/images/delete-err.webp)
+
+*<span style="color: blue;">[Back to Content](#content)</span>*
 
 ## Future Features
 
 There is a lot one can do to enhance this application, I want to highlight these (in no specific priority order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
 
-1.  User-specific Login
+*  User-specific Login
 
-* Implement a secure login mechanism to allow individual users to access their unique task lists.
+   * Implement a secure login mechanism to allow individual users to access their unique task lists.
 
-* This feature will enable personalization of the task management experience, ensuring users can manage their tasks privately and securely.
+   * This feature will enable personalization of the task management experience, ensuring users can manage their tasks privately and securely.
 
-2. Multi-User Support
+* Multi-User Support
 
-* Develop functionalities that support multiple users, allowing for collaborative task management and assignment among team members or family.
+   * Develop functionalities that support multiple users, allowing for collaborative task management and assignment among team members or family.
 
-* By facilitating shared task lists and assignments, this feature will expand the application's usability in collaborative settings, making it more versatile and applicable to a broader range of use cases.
+   * By facilitating shared task lists and assignments, this feature will expand the application's usability in collaborative settings, making it more versatile and applicable to a broader range of use cases.
 
-3. Integration with Calendar Applications
+* Integration with Calendar Applications
 
-* Allow users to sync their to-do list items with their preferred calendar applications (e.g., Google Calendar, Microsoft Outlook).
+   * Allow users to sync their to-do list items with their preferred calendar applications (e.g., Google Calendar, Microsoft Outlook).
 
-* Users can see their tasks alongside their appointments, providing a comprehensive view of their schedules.
+   * Users can see their tasks alongside their appointments, providing a comprehensive view of their schedules.
 
-3. Collaborative Task Management
+* Collaborative Task Management
 
-* Add features that enable users to share lists with others, assign tasks, and track progress collaboratively.
+   * Add features that enable users to share lists with others, assign tasks, and track progress collaboratively.
 
-* Facilitates teamwork and shared task management, making the app suitable for both personal and professional use.
+   * Facilitates teamwork and shared task management, making the app suitable for both personal and professional use.
 
-4. Natural Language Processing (NLP) for Task Entry
+* Natural Language Processing (NLP) for Task Entry
 
-* Utilize NLP to allow users to add tasks in natural language, which the app can then parse into structured task entries.
+   * Utilize NLP to allow users to add tasks in natural language, which the app can then parse into structured task entries.
 
-* Simplifies the process of adding new tasks, making the application more intuitive and user-friendly.
+   * Simplifies the process of adding new tasks, making the application more intuitive and user-friendly.
 
-5. Analytics and Productivity Insights
+* Analytics and Productivity Insights
 
-* Offer analytics features that give users insights into their task completion patterns, and productivity trends, and suggest optimizations.
+   * Offer analytics features that give users insights into their task completion patterns, and productivity trends, and suggest optimizations.
 
-* Helps users understand their productivity habits and make informed adjustments to improve efficiency.
+   * Helps users understand their productivity habits and make informed adjustments to improve efficiency.
 
-6. Refactoring code to Object-Oriented Programming
+* Refactoring code to Object-Oriented Programming
 
-* Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviours into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
+   * Refactor the existing procedural codebase to utilize OOP principles, such as encapsulating related data and behaviours into objects and classes. This involves identifying logical components within the application and organizing them into classes, with methods for handling operations and properties for storing data.
 
-* By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
+   * By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
 
-7. Splitting code into several script.
+* Splitting code into several scripts.
 
-*  Increase the code organization and maintainability by refactoring the current monolithic codebase into a modular structure, dividing it into several script files based on functionality. Proposed structure:
+   *  Increase the code organization and maintainability by refactoring the current monolithic codebase into a modular structure, dividing it into several script files based on functionality. 
+   
+   Proposed structure:
+      
+         /project_root
+            /task_master.py         # Main application script.
+            /config.py              # Configuration settings.
+            /sheets_integration.py  # Google Sheets integration functions.
+            /utils.py               # Utility functions.
+         
 
-``` plaintext 
-/project_root
-    /task_master.py         # Main application script.
-    /config.py              # Configuration settings.
-    /sheets_integration.py  # Google Sheets integration functions.
-    /utils.py               # Utility functions.
-```
-
-* By organizing the code into distinct modules, future developers can easily navigate the project, understand its structure, and contribute more effectively. This approach minimizes merge conflicts and facilitates parallel development, allowing team members to work on different aspects of the project simultaneously. Updating, debugging, and extending the application becomes more manageable when the codebase is modular, as changes in one module are less likely to impact others unexpectedly. This approach also aligns with best practices in software development.
-
+   * By organizing the code into distinct modules, future developers can easily navigate the project, understand its structure, and contribute more effectively. This approach minimizes merge conflicts and facilitates parallel development, allowing team members to work on different aspects of the project simultaneously. Updating, debugging, and extending the application becomes more manageable when the codebase is modular, as changes in one module are less likely to impact others unexpectedly. This approach also aligns with best practices in software development.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -385,7 +410,6 @@ There is a lot one can do to enhance this application, I want to highlight these
 * [Markup Validation Service](https://validator.w3.org/) - Used to check code ensuring that my HTML is error-free and adheres to the latest web standards.
 * [PEP8](https://peps.python.org/pep-0008/): Style Guide for Python Code.
 
-
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ---
@@ -403,6 +427,8 @@ To follow best practice, a flowchart was created for the app's logic, and mapped
 The primary functions used in this application are designed to streamline the task management process, making it intuitive and efficient for users to interact with their tasks. 
 
 The application is built with a focus on procedural programming, leveraging a series of functions to handle the core logic and interactions with the Google Sheets API. While incorporating robust error handling to ensure a smooth and reliable user experience.
+
+The design and implementation of these functions are geared towards simplifying task management, ensuring that users can easily add, view, update, and delete tasks. By leveraging Google Sheets as a backend, the application also offers real-time data persistence and accessibility from any device.
 
 Below is an outline of some key functions within the application and the specific roles they play:
 
@@ -438,15 +464,15 @@ Enables modifications to existing tasks, including updates to task descriptions,
 
 Facilitates the deletion of tasks from the Google Sheet, with comprehensive error handling to manage invalid task IDs or connectivity problems, enabling users to efficiently remove completed or outdated tasks.
 
+#### `def clear_terminal()`
 
-The design and implementation of these functions are geared towards simplifying task management, ensuring that users can easily add, view, update, and delete tasks. By leveraging Google Sheets as a backend, the application also offers real-time data persistence and accessibility from any device.
+This function clears the command line interface, providing a clean slate for the user. It's particularly useful for maintaining a clutter-free terminal view when navigating through different tasks or after performing operations like adding, updating, or viewing tasks.
 
 ### Error Handling Strategy
 
 Error handling in the application is not confined to a single function but is woven throughout the application's logic. This approach ensures that users are provided with clear, actionable feedback in case of input errors, connectivity issues, or API limitations. Whether it's a validation error for a due date or an API limit being reached, the application strives to inform users of the issue and guide them towards resolving it. This not only enhances the user experience but also contributes to the application's overall reliability and robustness.
 
 By integrating error handling directly into the core functions and operations, the application can gracefully manage exceptions, maintain consistent performance, and ensure data integrity. This careful consideration of error handling is a testament to the application's design philosophy, prioritizing user satisfaction and operational reliability.
-
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -462,13 +488,11 @@ Following Python packages and/or external imported packages were used:
 To install use: ```pip install -name of package-```
 To generate a list of installed Python packages use:  ```pip freeze```
 
-
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Programming paradigm
 
-Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward small to medium sized project - a task manager (To-Do-list) application. I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
-
+Procedural Programming and Object-Oriented Programming (OOP) represent two separate methodologies for coding, each with its unique approach to code organization and structure. For my project, which is a straightforward small to medium-sized project - a task manager (To-do-list) application. I opted for the procedural programming method. This method emphasizes the creation of functions or procedures that manipulate data, making it suitable for a basic application. Additionally, at this stage in my education, I find procedural programming easier to grasp, as it employs a more linear method of programming.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -532,7 +556,7 @@ The game was developed in VS Code, stored in GitHub as the local repository, and
 	  Impact on Deployment: Heroku reads this file to understand which packages and versions to install in the deployment environment.Ensures consistency between local and deployed environments, reducing deployment failures and runtime errors.
 	  
 11. **requirements**
-   - To install necessary requirements for this project (where applicable), use the following command:
+   - To install the requirements for this project (where applicable), use the following command:
      ```pip3 install -r requirements.txt```
 	 
 12. **Own packages**
@@ -560,7 +584,6 @@ The game was developed in VS Code, stored in GitHub as the local repository, and
    - Alternatively:
      You can opt for Automatic Deployment directly from the Heroku app interface.
 
-
 *<span style="color: blue;">[Back to Content](#content)</span>*   
 
 ### Local Deployment
@@ -571,7 +594,6 @@ For either method, you will need to install any applicable packages found within
 - ```pip3 install -r requirements.txt```.
 
 If using any confidential credentials, such as `CREDS.json` or `env.py` data, you'll have to manually incorporate these into your new project as well.
-
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -588,7 +610,6 @@ To clone the project repository:
 	- `git clone https://github.com/JaqiKal/task-master`
 7. Press Enter to create your local clone.
 
-
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Forking
@@ -599,13 +620,11 @@ Forking the GitHub Repository allows us to create a duplicate of the original re
 2. At the top of the Repository (not the top of the page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
-
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 ### Local VS Deployment
 
 At the time of writing, there is no difference between the local version and the version deployed on Heroku.
-
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
@@ -646,8 +665,7 @@ I would like to thank!
 * My mentor [Jubril Akolade](https://github.com/jubrillionaire/)
 * The whole team at [Code Institute Slack community](https://code-institute-room.slack.com) for their teaching and support.
 * To all engaged fellow students at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
-* My immediate and extended family, as well as my friends, support and cheer me on!
-* Kera Cudmore[x](https://github.com/kera-cudmore) for her excellent readme example.
-
+* My immediate and extended family, as well as my friends, who support and cheer me on!
+* [Kera Cudmore](https://github.com/kera-cudmore) for her excellent readme example.
 
 *<span style="color: blue;">[Back to Content](#content)</span>*

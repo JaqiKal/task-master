@@ -24,7 +24,7 @@ Visit the deployed application at [Heroku](https://task-maestro-fc8139fbc4e1.her
 - - -
 ## Testing overview & environment
 
-Testing was ongoing throughout the entire development. I utilised the CI Python Linter tool and GITPOD terminal output whilst building to pinpoint and troubleshoot any issues as I went along. The validation process adhered to the guidelines outlined in PEP8. The majority of warnings stemmed from redundant or missing whitespace, as well as instances of redundant backslashes and insufficient indentation. These issues have been addressed and rectified accordingly.
+Testing was ongoing throughout the entire development. I used the CI Python Linter tool and GITPOD terminal output whilst building to pinpoint and troubleshoot any issues as I went along. The validation process adhered to the guidelines outlined in PEP8. The majority of warnings stemmed from redundant or missing whitespace, as well as instances of redundant backslashes and insufficient indentation. These issues have been addressed and rectified accordingly.
 
 ### Test environment
 
@@ -259,6 +259,8 @@ The revised code adds a step to verify that each task ID entered by the user exi
 
 * When users quickly enter selections in the Task Master application, an issue arises where input can overlap with existing text on the console. This problem seems to stem from the way the application handles asynchronous input and output operations, leading to a situation where the console output does not synchronize correctly with user inputs. As a result, the user experience is negatively impacted, with the terminal display becoming cluttered and confusing. This issue will be addressed and corrected in future updates. 
 
+![x](/documentation/images/overlap.webp)
+
 * Currently, the Task Master application operates without user-specific login functionality, limiting its ability to support multiple users simultaneously. This presents a challenge for environments where task management needs to be personalized or shared among team members. 
 
 * If the application frequently interacts with Google Sheets, reaching API rate limits could lead to temporary disruptions. 
@@ -268,8 +270,6 @@ The revised code adds a step to verify that each task ID entered by the user exi
 * As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and am committed to improving these aspects in future updates.
 
 * In developing the app, I employed Pylint (v2023.10.1) which flagged the use of a broad try-except block with "Catching too general exception Exception." Despite the general advice against catching broad exceptions, I opted for this method for several reasons, fully aware of the best practices. This decision balances robustness and user-friendliness, ensuring that users are shielded from raw Python errors with more accessible error messages. It's particularly vital for managing unforeseen errors from external dependencies like Google Sheets API, where issues like API limits can arise. Recognizing the challenge of covering all potential errors from various sources, this approach serves as a safeguard against unhandled crashes, enhancing user experience. I'm committed to evolving this strategy as the application and its error handling capabilities develop.
-
-![x](/documentation/images/overlap.webp)
 
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
