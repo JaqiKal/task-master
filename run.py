@@ -14,7 +14,6 @@ Date: March 2024
 
 # Amended from: www.geeksforgeeks.org/clear-screen-python/
 import os
-
 # Amended from: www.geeksforgeeks.org/python-datetime-module/
 import datetime
 # Amended from: Code Institute project love_sandwiches
@@ -212,30 +211,47 @@ def get_valid_due_date():
                 f"{Style.RESET_ALL}\n")
             continue
 
-        # Amended from: www.w3schools.com/python/python_try_except.asp
-        try:
-            # Amended from:
-            # geeksforgeeks.org/python-datetime-strptime-function/
-            due_date = datetime.datetime.strptime(
-                due_date_str, "%y-%m-%d"
-            ).date()
+        # Split the input string by '-' and check if year, month, and day
+        # components are of the expected length
+        parts = due_date_str.split("-")
+        if (len(parts) == 3 and
+           len(parts[0]) == 2 and
+           len(parts[1]) == 2 and
+           len(parts[2]) == 2):
+            # Amended from: www.w3schools.com/python/python_try_except.asp
+            try:
+                # Amended from:
+                # geeksforgeeks.org/python-datetime-strptime-function/
+                due_date = datetime.datetime.strptime(
+                    due_date_str, "%y-%m-%d"
+                ).date()
 
-            if due_date < datetime.date.today():
+                if due_date < datetime.date.today():
+                    print(
+                        f"{Fore.RED}{Style.BRIGHT}"
+                        "Error: The due date must be in the future.\n"
+                        "Please try again."
+                        f"{Style.RESET_ALL}\n"
+                    )
+                else:
+                    # Return the valid due date string
+                    return due_date_str
+            except ValueError:
                 print(
                     f"{Fore.RED}{Style.BRIGHT}"
-                    "Error: The due date must be in the future.\n"
-                    "Please try again."
+                    "Error: Invalid date format.\n"
+                    "Please use YY-MM-DD."
                     f"{Style.RESET_ALL}\n"
-                )
-            else:
-                return due_date_str  # Return the valid due date string
-        except ValueError:
+                    )
+        else:
+            # If the input does not match the expected component lengths
             print(
                 f"{Fore.RED}{Style.BRIGHT}"
-                "Error: Invalid date format.\n"
-                "Please use YY-MM-DD."
+                "Error: Date format must be YY-MM-DD with\n"
+                "two digits for year, month, and day.\n"
+                "Please try again."
                 f"{Style.RESET_ALL}\n"
-                )
+            )
 
 
 def add_row_to_sheet():

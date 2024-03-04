@@ -298,6 +298,10 @@ These are common error types managed during both the task addition and updating 
 
 ![x](/documentation/images/update-task-error.webp)
 
+**Delete Task & Error handling**
+
+![x](/documentation/images/delete-task-error.webp)
+
 ## Future Features
 
 There is a lot one can do to enhance this application, I want to highlight these (in no specific priority order). These features stand out because they address critical aspects of task management and personal productivity—integration with existing tools, collaboration, ease of use, and actionable insights. Implementing these would significantly enhance the application's value, making it a more versatile and indispensable tool for users.
@@ -344,7 +348,7 @@ There is a lot one can do to enhance this application, I want to highlight these
 
 * By refactoring to OOP, the application's structure becomes more modular, maintainable, and scalable. It allows for easier extension and modification of the codebase, as changes to one part of the system are less likely to affect others. It could also lead to more readable and organized code, improving the overall quality of the application.
 
-7. Splitting code inte several script.
+7. Splitting code into several script.
 
 *  Increase the code organization and maintainability by refactoring the current monolithic codebase into a modular structure, dividing it into several script files based on functionality. Proposed structure:
 
@@ -454,7 +458,6 @@ Following Python packages and/or external imported packages were used:
 * [datetime](https://www.geeksforgeeks.org/python-datetime-module/#python-datetime-module) - Basic date and time type. Python Datetime module comes built into Python, so there is no need to install it externally. 
 * [gspread](https://pypi.org/project/gspread/) - Google Spreadsheets Python API
 * [PrettyTable](https://pypi.org/project/prettytable/) -  A simple Python library for easily displaying tabular data in a visually appealing ASCII table format
-* [textwrap](https//:docs.python.org/3/library/textwrap.html) - Text wrapping and filling
 
 To install use: ```pip install -name of package-```
 To generate a list of installed Python packages use:  ```pip freeze```
@@ -640,10 +643,11 @@ For this project, no external media was used for the creation of this project.
 
 I would like to thank! 
 
-* My mentor [Jubril Akolade](https://github.com/jubrillionaire/) for his help and advice throughout the project.
+* My mentor [Jubril Akolade](https://github.com/jubrillionaire/)
 * The whole team at [Code Institute Slack community](https://code-institute-room.slack.com) for their teaching and support.
 * To all engaged fellow students at all channels and a special shout out to slack channel [community sweden](https://app.slack.com/client/T0L30B202/C03J2BCURV3).
 * My immediate and extended family, as well as my friends, support and cheer me on!
+* Kera Cudmore[x](https://github.com/kera-cudmore) for her excellent readme example.
 
 
 *<span style="color: blue;">[Back to Content](#content)</span>*

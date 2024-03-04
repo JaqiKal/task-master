@@ -225,6 +225,22 @@ To address this issue, I've refactored the code to ensure that users are now loo
 
 ![x](/documentation/images/bug04-s.webp)
 
+### Bug-05
+
+ PrettyTable output overflow, when entering a long string of empty characters.
+ 
+ ### Solution Bug-05
+
+ Code has been modified to strip leading and trailing spaces from the input text before wrapping. It checks if the stripped text is empty and returns an empty list if so, ensuring that long empty strings are handled more gracefully. 
+
+### Bug-06
+
+In the "update task" functionality, when adding a new due date, the system accepts the input in the YY-M-D format, which is inconsistent with the desired YY-MM-DD format.
+
+### Solution Bug-06
+
+ Implement validation by splitting the input string by - to separate year, month, and day components. Then, check if each component meets the expected length: two digits for the year, two digits for the month, and two digits for the day. If the input does not conform to these expectations, introduce a new error message to inform the user. This ensures the due date is strictly in the YY-MM-DD format, enhancing data consistency and preventing format-related errors. This solution  standardizes date input across the application, promoting uniformity and reducing potential confusion for users.
+
 *<span style="color: blue;">[Back to Content](#content)</span>*
 
 - - -
@@ -235,11 +251,11 @@ To address this issue, I've refactored the code to ensure that users are now loo
 
 * When users quickly enter selections in the Task Master application, an issue arises where input can overlap with existing text on the console. This problem seems to stem from the way the application handles asynchronous input and output operations, leading to a situation where the console output does not synchronize correctly with user inputs. As a result, the user experience is negatively impacted, with the terminal display becoming cluttered and confusing. This issue will be addressed and corrected in future updates. 
 
-* Currently, the Task Master application operates without user-specific login functionality, limiting its ability to support multiple users simultaneously. This presents a challenge for environments where task management needs to be personalized or shared among team members. To address this, future updates are planned to introduce the following enhancements:
+* Currently, the Task Master application operates without user-specific login functionality, limiting its ability to support multiple users simultaneously. This presents a challenge for environments where task management needs to be personalized or shared among team members. 
 
 * If the application frequently interacts with Google Sheets, reaching API rate limits could lead to temporary disruptions. 
 
-* The application currently does not implement user-specific authentication for accessing the Google Sheets backend
+* The application currently does not implement user-specific authentication for accessing the Google Sheets backend.
 
 * As of the current version, the Task Master application has not been comprehensively evaluated for accessibility features, including screen reader compatibility, colour contrast, and keyboard navigation, which are crucial for users with disabilities. I recognize the importance of making the application accessible to all users and am committed to improving these aspects in future updates.
 
