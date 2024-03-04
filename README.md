@@ -484,6 +484,7 @@ Following Python packages and/or external imported packages were used:
 * [datetime](https://www.geeksforgeeks.org/python-datetime-module/#python-datetime-module) - Basic date and time type. Python Datetime module comes built into Python, so there is no need to install it externally. 
 * [gspread](https://pypi.org/project/gspread/) - Google Spreadsheets Python API
 * [PrettyTable](https://pypi.org/project/prettytable/) -  A simple Python library for easily displaying tabular data in a visually appealing ASCII table format
+* [colorama](https://pypi.org/project/colorama/) - Makes ANSI escape character sequences (for producing colored terminal text and cursor positioning) work under MS Windows.
 
 To install use: ```pip install -name of package-```
 To generate a list of installed Python packages use:  ```pip freeze```
